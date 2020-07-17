@@ -1,0 +1,39 @@
+{
+  "name": "@blobaa/attestation-protocol-ts",
+  "version": "1.0.0",
+  "description": "An implementation of the Attestation Protocol written in TypeScript",
+  "author": "atz3n",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blobaa/attestation-protocol-ts"
+  },
+  "main": "dist/src/index.js",
+  "scripts": {
+    "test": "npm run test-browser && npm run test-node",
+    "test-node": "jest --testEnvironment=node",
+    "test-browser": "jest --testEnvironment=jsdom",
+    "build": "rm -rf dist && tsc",
+    "test-build-node": "jest --rootDir=dist --testEnvironment=node",
+    "test-build-browser": "jest --rootDir=dist --testEnvironment=jsdom",
+    "lint": "eslint ./ --ext .ts",
+    "fix-lint": "eslint ./ --fix --ext .ts"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.14",
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-prefer-arrow": "^1.1.7",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.3"
+  },
+  "dependencies": {
+    "@blobaa/ardor-ts": "^2.4.2"
+  }
+}
