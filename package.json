@@ -1,12 +1,12 @@
 {
-  "name": "@blobaa/attestation-protocol-ts",
+  "name": "@blobaa/did-resolver-ts",
   "version": "1.0.0",
-  "description": "An implementation of the Attestation Protocol written in TypeScript",
+  "description": "An implementation of the Blobaa DID method written in TypeScript",
   "author": "atz3n",
-  "license": "AGPL-3.0-or-later",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blobaa/attestation-protocol-ts"
+    "url": "https://github.com/blobaa/did-resolver-ts"
   },
   "main": "dist/src/index.js",
   "scripts": {
@@ -34,6 +34,6 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@blobaa/ardor-ts": "^2.4.2"
+    "@blobaa/ardor-ts": "^2.6.1"
   }
 }
