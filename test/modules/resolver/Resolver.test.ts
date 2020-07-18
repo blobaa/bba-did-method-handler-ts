@@ -5,7 +5,6 @@ import config from "../../config";
 import RequestMock, { SetAccountPropertyCallback, UploadTaggedDataCallback } from "../../mocks/RequestMock";
 
 
-
 describe("Resolver module tests", () => {
 
     test("createDID testnet success", async () => {
@@ -46,7 +45,7 @@ describe("Resolver module tests", () => {
         const didMethod = didElements[1];
         const didNetwork = didElements[2];
         const didTxHash = didElements[3];
-        
+
         expect(didPrefix).toBe("did");
         expect(didMethod).toBe("baa");
         expect(didNetwork).toBe("t");

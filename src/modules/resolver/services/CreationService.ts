@@ -48,7 +48,7 @@ export default class CreationService implements ICreationService {
         didFields.networkType = params.isTestnetDid ? DIDNetworkType.TESTNET : DIDNetworkType.MAINNET;
         didFields.fullHash = propertyResponse.fullHash;
         const did = didFields.createDidString();
-        
+
         return { did };
     }
 }
