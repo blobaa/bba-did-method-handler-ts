@@ -1,0 +1,42 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: 
+      - master
+    
+jobs:
+  run-tests:
+
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v1
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Authenticate with GitHub package registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Lint project
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests for Node.js
+        run: npm run test-build-node
+
+      - name: Run tests for browser
+        run: npm run test-build-browser
