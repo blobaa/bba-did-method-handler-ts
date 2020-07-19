@@ -17,7 +17,8 @@
     "test-build-node": "jest --rootDir=dist --testEnvironment=node",
     "test-build-browser": "jest --rootDir=dist --testEnvironment=jsdom",
     "lint": "eslint ./ --ext .ts",
-    "fix-lint": "eslint ./ --fix --ext .ts"
+    "fix-lint": "eslint ./ --fix --ext .ts",
+    "testrun": "npm run build && node dist/playground/index.js"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",

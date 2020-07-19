@@ -54,16 +54,21 @@ export type UpdateDIDPayloadParams = {
 export type UpdateDIDPayloadResponse = BroadcastTransactionResponse;
 
 
+export type UpdateDIDControllerParams = {
+    fee?: number;
+}
+
+export type UpdateDIDControllerResponse = BroadcastTransactionResponse;
+
+
 export type RevokeDIDParams = {
-
+    fee?: number;
 }
-export type RevokeDIDResponse = {
 
-}
+export type RevokeDIDResponse = BroadcastTransactionResponse;
 
 
 export type ResolveDIDParams = {
-
 }
 
 export type ResolveDIDResponse = {
@@ -73,7 +78,7 @@ export type ResolveDIDResponse = {
 export interface IResolution {
     createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>;
     updateDIDPayload(url: string, params: UpdateDIDPayloadParams): Promise<UpdateDIDPayloadResponse>;
-    // updateDIDController(url: string, params: UpdateDIDParams): Promise<UpdateDIDResponse>;
+    updateDIDController(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse>;
     revokeDID(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse>;
     resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse>;
 }
