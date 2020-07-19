@@ -1,5 +1,8 @@
 import { CreateDIDParams, CreateDIDResponse, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDPayloadParams, UpdateDIDPayloadResponse } from "../types";
 
+/*eslint-disable-next-line @typescript-eslint/no-explicit-any*/
+export type objectAny = {[name: string]: any};
+
 
 export interface ICreationService {
     run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>;

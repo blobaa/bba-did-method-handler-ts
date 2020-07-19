@@ -1,5 +1,9 @@
 
 const config = {
+    test: {
+        createDID: false,
+        resolveDID: true,
+    },
     node: {
         url: {
             testnet: "https://testardor.jelurida.com",

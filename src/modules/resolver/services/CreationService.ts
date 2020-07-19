@@ -2,9 +2,9 @@ import { account, ChainId, IRequest, SetAccountPropertyParams, UploadTaggedDataP
 import { DATA_CLOUD_NAME, DID_ID_LENGTH } from "../../../constants";
 import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, State } from "../../../types";
 import { ICreationService } from "../../internal-types";
-import DataFields from "./utils/DataField";
-import DIDFields from "./utils/DIDFields";
-import Nonce from "./utils/Nonce";
+import DataFields from "./../../lib/DataField";
+import DIDFields from "./../../lib/DIDFields";
+import Nonce from "./../../lib/Nonce";
 
 
 export default class CreationService implements ICreationService {

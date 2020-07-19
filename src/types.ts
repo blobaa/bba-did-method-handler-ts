@@ -11,6 +11,15 @@ export type Error = {
 export enum ErrorCode {
     NO_ERROR = -1,
     UNKNOWN = 500,
+
+    CONNECTION_ERROR,                   // 501
+    NODE_ERROR,                         // 502
+
+    WRONG_NUMBER_OF_DID_FIELDS,         // 503
+    INVALID_DID_NETWORK_TYPE,           // 504
+    INVALID_DID_IDENTIFIER,             // 505
+    INVALID_DID_METHOD,                 // 506
+    INVALID_DID_METHOD_SPECIFIC_IDENTIFIER  // 507
 }
 
 
@@ -69,6 +78,7 @@ export type RevokeDIDResponse = BroadcastTransactionResponse;
 
 
 export type ResolveDIDParams = {
+    did: string;
 }
 
 export type ResolveDIDResponse = {

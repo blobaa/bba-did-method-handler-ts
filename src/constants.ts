@@ -1,4 +1,3 @@
-import { Error, ErrorCode } from "../src/types";
 
 export const PROTOCOL_VERSION = "001";
 
@@ -19,8 +18,5 @@ export const DATA_CLOUD_NAME = "blobaa-did-document-payload";
 export const DID_PREFIX = "did";
 export const DID_METHOD_IDENTIFIER = "baa";
 export const DID_FIELD_SEPARATOR = ":";
-
-export const noError: Error = {
-    code: ErrorCode.NO_ERROR,
-    description: "No error occurred. Everything went well."
-};
+export const NUMBER_OF_DID_SHORT_FIELDS = 3;
+export const NUMBER_OF_DID_LONG_FIELDS = NUMBER_OF_DID_SHORT_FIELDS + 1;

@@ -1,6 +1,6 @@
 
-import { DATA_FIELD_SEPARATOR, DUMMY_ACCOUNT_RS, PROTOCOL_IDENTIFIER, PROTOCOL_VERSION } from "../../../../constants";
-import { PayloadStorageType, State } from "../../../../types";
+import { DATA_FIELD_SEPARATOR, DUMMY_ACCOUNT_RS, PROTOCOL_IDENTIFIER, PROTOCOL_VERSION } from "../../constants";
+import { PayloadStorageType, State } from "../../types";
 
 
 export default class DataFields {
