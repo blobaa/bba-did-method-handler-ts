@@ -1,3 +1,5 @@
+import { BroadcastTransactionResponse } from "@blobaa/ardor-ts";
+
 /*eslint-disable-next-line @typescript-eslint/no-explicit-any*/
 export type objectAny = {[name: string]: any};
 
@@ -42,13 +44,14 @@ export type CreateDIDResponse = {
 }
 
 
-export type UpdateDIDParams = {
-
+export type UpdateDIDPayloadParams = {
+    newPayload: objectAny;
+    passphrase: string;
+    did: string;
+    fee?: number;
 }
 
-export type UpdateDIDResponse = {
-
-}
+export type UpdateDIDPayloadResponse = BroadcastTransactionResponse;
 
 
 export type RevokeDIDParams = {
@@ -69,7 +72,8 @@ export type ResolveDIDResponse = {
 
 export interface IResolution {
     createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>;
-    updateDID(url: string, params: UpdateDIDParams): Promise<UpdateDIDResponse>;
+    updateDIDPayload(url: string, params: UpdateDIDPayloadParams): Promise<UpdateDIDPayloadResponse>;
+    // updateDIDController(url: string, params: UpdateDIDParams): Promise<UpdateDIDResponse>;
     revokeDID(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse>;
     resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse>;
 }
