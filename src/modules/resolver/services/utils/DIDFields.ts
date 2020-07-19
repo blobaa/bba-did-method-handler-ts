@@ -18,10 +18,11 @@ export default class DIDFields {
 
 
     public createDidString = (): string => {
+        const networkType = this.networkType === DIDNetworkType.MAINNET ? "" : DIDNetworkType.TESTNET + DID_FIELD_SEPARATOR;
         let DidString = "";
         DidString += this.prefix + DID_FIELD_SEPARATOR;
         DidString += this.method + DID_FIELD_SEPARATOR;
-        DidString += this.networkType + DID_FIELD_SEPARATOR;
+        DidString += networkType;
         DidString += this.fullHash;
 
         return DidString;

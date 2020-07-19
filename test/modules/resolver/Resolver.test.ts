@@ -52,4 +52,33 @@ describe("Resolver module tests", () => {
         expect(didTxHash).toBe(config.dummyHash.property);
     });
 
+
+    test("createDID testnet success", async () => {
+        const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => {
+            return config.dummyHash.dataCloud;
+        };
+
+        const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => {
+            return config.dummyHash.property;
+        };
+
+        const testResolver = new Resolver(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
+
+
+        const didParams: CreateDIDParams = {
+            payload: config.dummyPayload,
+            passphrase: config.account.alice.secret
+        };
+
+        const response = await testResolver.createDID(config.node.url.testnet, didParams);
+        const didElements = response.did.split(":");
+        const didPrefix = didElements[0];
+        const didMethod = didElements[1];
+        const didTxHash = didElements[2];
+
+        expect(didPrefix).toBe("did");
+        expect(didMethod).toBe("baa");
+        expect(didTxHash).toBe(config.dummyHash.property);
+    });
+
 });

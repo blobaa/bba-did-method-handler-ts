@@ -3,7 +3,7 @@ import { ICreationService } from "../../internal-types";
 import { CreateDIDParams, CreateDIDResponse } from "../../../types";
 
 
-export default class DIDCreateMethodController {
+export default class DIDCreateController {
     private readonly service: ICreationService;
 
 

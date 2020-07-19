@@ -1,6 +1,6 @@
 import { IRequest, Request } from "@blobaa/ardor-ts";
 import { IResolution, CreateDIDParams, UpdateDIDParams, RevokeDIDParams, ResolveDIDParams, CreateDIDResponse, UpdateDIDResponse, RevokeDIDResponse, ResolveDIDResponse } from "../../types";
-import DIDCreateMethodController from "./controllers/DIDCreateMethodController";
+import DIDCreateController from "./controllers/DIDCreateController";
 import CreationService from "./services/CreationService";
 
 
@@ -14,7 +14,7 @@ export default class MethodHandler implements IResolution {
 
 
     public async createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse> {
-        const controller = new DIDCreateMethodController(new CreationService(this.request));
+        const controller = new DIDCreateController(new CreationService(this.request));
         return await controller.run(url, params);
     }
 
