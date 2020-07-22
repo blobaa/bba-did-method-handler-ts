@@ -86,7 +86,7 @@ describe("Resolver module tests", () => {
     if (config.test.resolveDID) {
         test("resolveDID DID string format errors", async () => {
             const didParams: ResolveDIDParams = {
-                did: "dd:baa:t:a0df4681005d8a309f3413b965c6d0d8a139c0535f9b3e473bbe04f3723b2a26"
+                did: "dd:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
             try {
                 await resolver.resolveDID(config.node.url.testnet, didParams);
@@ -98,7 +98,7 @@ describe("Resolver module tests", () => {
             }
 
 
-            didParams.did = "did:aa:t:a0df4681005d8a309f3413b965c6d0d8a139c0535f9b3e473bbe04f3723b2a26";
+            didParams.did = "did:aa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
                 await resolver.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
@@ -109,7 +109,7 @@ describe("Resolver module tests", () => {
             }
 
 
-            didParams.did = "did:baa:i:a0df4681005d8a309f3413b965c6d0d8a139c0535f9b3e473bbe04f3723b2a26";
+            didParams.did = "did:baa:i:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
                 await resolver.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
@@ -120,7 +120,7 @@ describe("Resolver module tests", () => {
             }
 
 
-            didParams.did = "did:baa:t:r0df4681005d8a309f3413b965c6d0d8a139c0535f9b3e473bbe04f3723b2a26";
+            didParams.did = "did:baa:t:ica5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
                 await resolver.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
@@ -131,7 +131,18 @@ describe("Resolver module tests", () => {
             }
 
 
-            didParams.did = "did:baa:t:a0df4681005d8a309f3413b965c6d0d8a139c0535f9b3e473bbe04f3723b2a2";
+            didParams.did = "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565";
+            try {
+                await resolver.resolveDID(config.node.url.testnet, didParams);
+                fail("should not reach here");
+            } catch (e) {
+                const error = e as Error;
+                expect(error.code).toBe(ErrorCode.INVALID_DID_METHOD_SPECIFIC_IDENTIFIER);
+                expect(error.description).toBeDefined();
+            }
+
+
+            didParams.did = "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565fe";
             try {
                 await resolver.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
@@ -146,8 +157,13 @@ describe("Resolver module tests", () => {
 
         test("resolveDID success", async () => {
             const didParams: ResolveDIDParams = {
-                did: "did:baa:t:9cf2a30791da079f90ae6e32bb1f71919f2af47b3ff3895fc008fb7b93be8112"
+                did: config.did.normal
             };
+            // const resp = await resolver.resolveDID(config.node.url.testnet, didParams);
+            // console.log(resp);
+
+
+            didParams.did = config.did.rotated;
             const resp = await resolver.resolveDID(config.node.url.testnet, didParams);
             console.log(resp);
         });

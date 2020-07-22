@@ -42,6 +42,11 @@ const config = {
     },
     dummyPayload: {
         dummyVar: "dummy-value"
+    },
+    did: {
+        dummy: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+        normal: "did:baa:t:0335f47981b5524ec7e441392961e383ec2cf2381c12fb0119a6782a00387868",
+        rotated: "did:baa:t:6f49df11f1f7908b36593e014d3df14062a1d08fd43d3516aa8802aa8782ee8d"
     }
 };
 

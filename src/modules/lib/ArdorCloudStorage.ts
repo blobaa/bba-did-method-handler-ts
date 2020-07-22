@@ -58,7 +58,7 @@ export class ArdorCloudStorage implements IPayloadStorage {
         const name = response.attachment.name;
         const issuer = response.senderRS;
 
-        if (this.isPayloadTransaction(data, name)) {
+        if (!this.isDIDPayload(data, name)) {
             const error = ErrorHelper.createError(ErrorCode.PAYLOAD_NOT_FOUND);
             return Promise.reject(error);
         }
@@ -77,8 +77,8 @@ export class ArdorCloudStorage implements IPayloadStorage {
         }
     }
 
-    private isPayloadTransaction(data: string | undefined, name: string | undefined): boolean {
-        return (!data || !name || name !== DATA_CLOUD_NAME);
+    private isDIDPayload(data: string | undefined, name: string | undefined): boolean {
+        return (data && name && name === DATA_CLOUD_NAME) ? true : false;
     }
 
     private isPayloadSelfSet(accounts: string[], issuer: string): boolean {

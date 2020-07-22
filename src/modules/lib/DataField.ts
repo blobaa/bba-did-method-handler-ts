@@ -46,7 +46,7 @@ export default class DataFields {
     }
 
 
-    public setDidId(id: string): string {
+    private setDidId(id: string): string {
         return id.startsWith(PROTOCOL_IDENTIFIER) ? id : PROTOCOL_IDENTIFIER + id;
     }
 

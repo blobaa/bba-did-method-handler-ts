@@ -34,7 +34,7 @@ export default class ErrorHelper {
         };
 
         const _params = params || [];
-
+        console.log("TODO: create meaningful errors");
         switch (errorCode) {
 
             case ErrorCode.WRONG_NUMBER_OF_DID_FIELDS: {
@@ -58,7 +58,7 @@ export default class ErrorHelper {
                 return error;
             }
             case ErrorCode.DID_RESOLUTION_ERROR: {
-                error.description = "Cannot resolve DID Document. " + _params[0];
+                error.description = "Could not resolve DID.";
                 return error;
             }
             case ErrorCode.WRONG_NUMBER_OF_DATA_FIELDS: {

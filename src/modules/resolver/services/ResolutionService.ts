@@ -23,7 +23,7 @@ export default class ResolutionService implements IResolutionService {
         }
 
         const attestation = new Attestation(this.request);
-        const info = await attestation.parseTrustChain(url, { chain: ChainId.IGNIS, fullHash: did.fullHash });
+        const info = await attestation.parseTrustChain(url, ChainId.IGNIS, did.fullHash);
 
 
         let payloadStorage = {} as IPayloadStorage;
@@ -32,7 +32,7 @@ export default class ResolutionService implements IResolutionService {
         }
 
         const payload = await payloadStorage.getData(info.dataFields.payloadReference);
-        console.log(payload);
+
 
         return new Promise(resolve => resolve({ fullHash: "", requestProcessingTime: 0 }));
     }
