@@ -105,6 +105,10 @@ export default class ErrorHelper {
                 error.description = "Invalid DID Document payload.";
                 return error;
             }
+            case ErrorCode.TOO_MANY_ROTATION_HOPS: {
+                error.description = "Too many rotation hops.";
+                return error;
+            }
             default:
                 return { code: ErrorCode.UNKNOWN, description: "An unknown error occurred." };
         }

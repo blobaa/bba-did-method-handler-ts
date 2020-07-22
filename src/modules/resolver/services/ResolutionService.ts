@@ -33,7 +33,10 @@ export default class ResolutionService implements IResolutionService {
 
         const payload = await payloadStorage.getData(info.dataFields.payloadReference);
 
+        /* check payload */
+        console.log(payload);
 
-        return new Promise(resolve => resolve({ fullHash: "", requestProcessingTime: 0 }));
+
+        return { fullHash: "", requestProcessingTime: 0 };
     }
 }

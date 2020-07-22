@@ -20,3 +20,5 @@ export const DID_METHOD_IDENTIFIER = "baa";
 export const DID_FIELD_SEPARATOR = ":";
 export const NUMBER_OF_DID_SHORT_FIELDS = 3;
 export const NUMBER_OF_DID_LONG_FIELDS = NUMBER_OF_DID_SHORT_FIELDS + 1;
+
+export const MAX_ROTATION_HOPS = 20;

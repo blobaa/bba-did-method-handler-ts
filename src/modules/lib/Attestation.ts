@@ -1,5 +1,5 @@
 import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, IRequest, Transaction } from "@blobaa/ardor-ts";
-import { ACCOUNT_PREFIX } from "../../constants";
+import { ACCOUNT_PREFIX, MAX_ROTATION_HOPS } from "../../constants";
 import { ErrorCode, State } from "../../types";
 import DataFields from "./DataField";
 import ErrorHelper from "./ErrorHelper";
@@ -34,8 +34,8 @@ export class Attestation {
                 accounts.push(transaction.senderRS);
                 isFirstIteration = false;
             } else {
-                accounts.push(ACCOUNT_PREFIX + dataFields.redirectAccount);
-                const newAccount = accounts[rotationHops];
+                const newAccount = ACCOUNT_PREFIX + dataFields.redirectAccount;
+                accounts.push(newAccount);
                 transaction = await this.getDIDKeyRotatedAttestationTransaction(url, chainId, newAccount, timestamp, dataFields.didId);
             }
 
@@ -50,16 +50,13 @@ export class Attestation {
                 return Promise.reject(ErrorHelper.createError(ErrorCode.DID_INACTIVE));
             }
 
+            if (rotationHops === MAX_ROTATION_HOPS) {
+                return Promise.reject(ErrorHelper.createError(ErrorCode.TOO_MANY_ROTATION_HOPS));
+            }
 
             rotationHops++;
-            if (rotationHops === 4) {
-                break;
-            }
         } while (dataFields.state === State.DEPRECATED);
 
-        console.log("FINISH");
-        console.log(dataFields);
-        console.log(accounts);
         return { accounts, dataFields };
     }
 
