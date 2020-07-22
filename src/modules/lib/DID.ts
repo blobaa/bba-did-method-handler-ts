@@ -3,13 +3,13 @@ import { DIDNetworkType, Error, ErrorCode } from "../../types";
 import ErrorHelper, { noError } from "./ErrorHelper";
 
 
-export default class DIDFields {
+export default class DID {
     public prefix = DID_PREFIX;
     public method = DID_METHOD_IDENTIFIER;
     public networkType = DIDNetworkType.MAINNET;
     public fullHash = "";
 
-    constructor(didFields?: DIDFields) {
+    constructor(didFields?: DID) {
         this.prefix = (didFields && didFields.prefix) || DID_PREFIX;
         this.method = (didFields && didFields.method) || DID_METHOD_IDENTIFIER;
         this.networkType = (didFields && didFields.networkType) || DIDNetworkType.MAINNET;

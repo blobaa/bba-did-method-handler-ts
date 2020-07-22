@@ -1,7 +1,9 @@
-import { IRequest, ChainId } from "@blobaa/ardor-ts";
-import { ResolveDIDParams, ResolveDIDResponse, ErrorCode } from "../../../types";
-import { IResolutionService } from "../../internal-types";
-import DIDFields from "../../lib/DIDFields";
+import { ChainId, IRequest } from "@blobaa/ardor-ts";
+import { ErrorCode, PayloadStorageType, ResolveDIDParams, ResolveDIDResponse } from "../../../types";
+import { IPayloadStorage, IResolutionService } from "../../internal-types";
+import { ArdorCloudStorage } from "../../lib/ArdorCloudStorage";
+import { Attestation } from "../../lib/Attestation";
+import DID from "../../lib/DID";
 
 
 export default class ResolutionService implements IResolutionService {
@@ -14,13 +16,24 @@ export default class ResolutionService implements IResolutionService {
 
 
     public async run(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse> {
-        const didFields = new DIDFields();
-        const error = didFields.consumeDIDString(params.did);
+        const did = new DID();
+        const error = did.consumeDIDString(params.did);
         if (error.code !== ErrorCode.NO_ERROR) {
             return Promise.reject(error);
         }
-        // const resp = await this.request.getTransaction(url, { chain: ChainId.IGNIS, fullHash: params.did });
-        // console.log(resp);
+
+        const attestation = new Attestation(this.request);
+        const info = await attestation.parseTrustChain(url, { chain: ChainId.IGNIS, fullHash: did.fullHash });
+
+
+        let payloadStorage = {} as IPayloadStorage;
+        if (info.dataFields.payloadStorageType === PayloadStorageType.ARDOR_CLOUD_STORAGE) {
+            payloadStorage = new ArdorCloudStorage(this.request, ChainId.IGNIS, url, info.accounts);
+        }
+
+        const payload = await payloadStorage.getData(info.dataFields.payloadReference);
+        console.log(payload);
+
         return new Promise(resolve => resolve({ fullHash: "", requestProcessingTime: 0 }));
     }
 }

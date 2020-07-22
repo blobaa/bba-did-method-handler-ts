@@ -142,6 +142,15 @@ describe("Resolver module tests", () => {
             }
 
         });
+
+
+        test("resolveDID success", async () => {
+            const didParams: ResolveDIDParams = {
+                did: "did:baa:t:9cf2a30791da079f90ae6e32bb1f71919f2af47b3ff3895fc008fb7b93be8112"
+            };
+            const resp = await resolver.resolveDID(config.node.url.testnet, didParams);
+            console.log(resp);
+        });
     }
 
 });

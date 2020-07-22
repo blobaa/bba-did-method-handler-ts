@@ -23,3 +23,9 @@ export interface IResolutionService {
 export interface IRevocationService {
     run(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse>;
 }
+
+
+export interface IPayloadStorage {
+    getData(reference: string): Promise<objectAny>;
+    storeData(data: objectAny): Promise<string>;
+}

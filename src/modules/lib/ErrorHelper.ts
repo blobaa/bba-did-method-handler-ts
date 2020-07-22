@@ -57,6 +57,54 @@ export default class ErrorHelper {
                 error.description = "Invalid DID method specific identifier.";
                 return error;
             }
+            case ErrorCode.DID_RESOLUTION_ERROR: {
+                error.description = "Cannot resolve DID Document. " + _params[0];
+                return error;
+            }
+            case ErrorCode.WRONG_NUMBER_OF_DATA_FIELDS: {
+                error.description = "Wrong number of data fields. The data field string must contain exactly " + _params[0] + " '" + _params[1] + "' characters.";
+                return error;
+            }
+            case ErrorCode.WRONG_VERSION_LENGTH: {
+                error.description = "Wrong version length. Version data field must consist of 3 character.";
+                return error;
+            }
+            case ErrorCode.WRONG_VERSION: {
+                error.description = "Wrong version. Version must be " + _params[0] + ".";
+                return error;
+            }
+            case ErrorCode.WRONG_STATE_TYPE_LENGTH: {
+                error.description = "Wrong state type length. State type data field must consist of 1 character.";
+                return error;
+            }
+            case ErrorCode.UNKNOWN_STATE_TYPE: {
+                error.description = "Unknown state type.";
+                return error;
+            }
+            case ErrorCode.WRONG_REDIRECT_ACCOUNT_LENGTH: {
+                error.description = "Wrong redirect account length. Redirect account type data field must consist of " + _params[0] + "character.";
+                return error;
+            }
+            case ErrorCode.INVALID_REDIRECT_ACCOUNT: {
+                error.description = "Invalid redirect account. The redirect account is not a valid Ardor account.";
+                return error;
+            }
+            case ErrorCode.PAYLOAD_REFERENCE_TOO_LONG: {
+                error.description = "Payload is too long. Has to be less than " + _params[0] + " character.";
+                return error;
+            }
+            case ErrorCode.INVALID_PROPERTY_NAME: {
+                error.description = "Invalid property name.";
+                return error;
+            }
+            case ErrorCode.PAYLOAD_NOT_FOUND: {
+                error.description = "DID Document payload not found.";
+                return error;
+            }
+            case ErrorCode.INVALID_PAYLOAD: {
+                error.description = "Invalid DID Document payload.";
+                return error;
+            }
             default:
                 return { code: ErrorCode.UNKNOWN, description: "An unknown error occurred." };
         }

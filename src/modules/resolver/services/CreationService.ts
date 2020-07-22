@@ -2,8 +2,9 @@ import { account, ChainId, IRequest, SetAccountPropertyParams, UploadTaggedDataP
 import { DATA_CLOUD_NAME, DID_ID_LENGTH } from "../../../constants";
 import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, State } from "../../../types";
 import { ICreationService } from "../../internal-types";
+import DID from "../../lib/DID";
+import { ArdorCloudStorage } from "../../lib/ArdorCloudStorage";
 import DataFields from "./../../lib/DataField";
-import DIDFields from "./../../lib/DIDFields";
 import Nonce from "./../../lib/Nonce";
 
 
@@ -17,19 +18,12 @@ export default class CreationService implements ICreationService {
 
 
     public async run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse> {
-        const cloudParams: UploadTaggedDataParams = {
-            chain: ChainId.IGNIS,
-            name: DATA_CLOUD_NAME,
-            data: JSON.stringify(params.payload),
-            secretPhrase: params.passphrase
-        };
-
-        const cloudResponse = await this.request.uploadTaggedData(url, cloudParams);
+        const cloudStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url);
+        const reference = await cloudStorage.storeData(params.payload);
 
 
-        const payloadReferenceObject = { fullHash: cloudResponse.fullHash };
         const dataFields = new DataFields();
-        dataFields.payloadReference = JSON.stringify(payloadReferenceObject);
+        dataFields.payloadReference = reference;
         dataFields.didId = Nonce.generate(DID_ID_LENGTH);
         dataFields.state = State.ACTIVE;
 
@@ -44,7 +38,7 @@ export default class CreationService implements ICreationService {
         const propertyResponse = await this.request.setAccountProperty(url, propertyParams);
 
 
-        const didFields = new DIDFields();
+        const didFields = new DID();
         didFields.networkType = params.isTestnetDid ? DIDNetworkType.TESTNET : DIDNetworkType.MAINNET;
         didFields.fullHash = propertyResponse.fullHash;
         const did = didFields.createDidString();
