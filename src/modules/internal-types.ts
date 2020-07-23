@@ -1,4 +1,4 @@
-import { CreateDIDParams, CreateDIDResponse, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDPayloadParams, UpdateDIDPayloadResponse } from "../types";
+import { CreateDIDParams, CreateDIDResponse, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../types";
 
 /*eslint-disable-next-line @typescript-eslint/no-explicit-any*/
 export type objectAny = {[name: string]: any};
@@ -9,7 +9,7 @@ export interface ICreationService {
 }
 
 export interface IUpdatePayloadService {
-    run(url: string, params: UpdateDIDPayloadParams): Promise<UpdateDIDPayloadResponse>;
+    run(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse>;
 }
 
 export interface IUpdateControllerService {

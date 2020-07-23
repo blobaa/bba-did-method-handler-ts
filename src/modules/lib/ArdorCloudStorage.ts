@@ -5,7 +5,7 @@ import { ErrorCode } from "../../types";
 import ErrorHelper from "./ErrorHelper";
 
 
-export class ArdorCloudStorage implements IPayloadStorage {
+export default class ArdorCloudStorage implements IPayloadStorage {
     private url = "";
     private chainId: ChainId;
     private accounts = [""];

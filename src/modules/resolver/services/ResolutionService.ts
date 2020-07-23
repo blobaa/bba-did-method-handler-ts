@@ -1,8 +1,8 @@
 import { ChainId, IRequest } from "@blobaa/ardor-ts";
 import { ErrorCode, PayloadStorageType, ResolveDIDParams, ResolveDIDResponse } from "../../../types";
 import { IPayloadStorage, IResolutionService } from "../../internal-types";
-import { ArdorCloudStorage } from "../../lib/ArdorCloudStorage";
-import { Attestation } from "../../lib/Attestation";
+import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
+import Attestation from "../../lib/Attestation";
 import DID from "../../lib/DID";
 
 

@@ -1,8 +1,8 @@
 import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { DID_ID_LENGTH } from "../../../constants";
-import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, State } from "../../../types";
-import { ICreationService } from "../../internal-types";
-import { ArdorCloudStorage } from "../../lib/ArdorCloudStorage";
+import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, PayloadStorageType, State } from "../../../types";
+import { ICreationService, IPayloadStorage } from "../../internal-types";
+import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import DID from "../../lib/DID";
 import DataFields from "./../../lib/DataField";
 import Nonce from "./../../lib/Nonce";
@@ -18,8 +18,13 @@ export default class CreationService implements ICreationService {
 
 
     public async run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse> {
-        const cloudStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
-        const reference = await cloudStorage.storeData(params.payload);
+        const payloadStorageType = PayloadStorageType.ARDOR_CLOUD_STORAGE;
+
+        let payloadStorage = {} as IPayloadStorage;
+        if (payloadStorageType === PayloadStorageType.ARDOR_CLOUD_STORAGE) {
+            payloadStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
+        }
+        const reference = await payloadStorage.storeData(params.payload);
 
 
         const dataFields = new DataFields();

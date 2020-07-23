@@ -1,5 +1,5 @@
 import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, IRequest, Transaction } from "@blobaa/ardor-ts";
-import { ACCOUNT_PREFIX, MAX_ROTATION_HOPS } from "../../constants";
+import { ACCOUNT_PREFIX, MAX_ROTATION_HOPS, TRANSACTION_TIME_WINDOW } from "../../constants";
 import { ErrorCode, State } from "../../types";
 import DataFields from "./DataField";
 import ErrorHelper from "./ErrorHelper";
@@ -11,7 +11,7 @@ export type AttestationInfo = {
 }
 
 
-export class Attestation {
+export default class Attestation {
     private readonly request: IRequest;
 
 
@@ -69,7 +69,7 @@ export class Attestation {
         const params: GetBlockchainTransactionsParams = {
             chain: chainId,
             account,
-            timestamp,
+            timestamp: timestamp - TRANSACTION_TIME_WINDOW,
             type: ChildTransactionType.ACCOUNT_PROPERTY,
             subType: ChildTransactionSubtype.ACCOUNT_PROPERTY__SET
         };

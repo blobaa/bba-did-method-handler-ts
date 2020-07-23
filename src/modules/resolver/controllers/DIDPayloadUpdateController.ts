@@ -1,5 +1,5 @@
 import { chainCurrency, ChainCurrencyType } from "@blobaa/ardor-ts";
-import { UpdateDIDPayloadParams, UpdateDIDPayloadResponse } from "../../../types";
+import { UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../../types";
 import { IUpdatePayloadService } from "../../internal-types";
 
 
@@ -12,7 +12,7 @@ export default class DIDPayloadUpdateController {
     }
 
 
-    public async run(url: string, params: UpdateDIDPayloadParams): Promise<UpdateDIDPayloadResponse> {
+    public async run(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse> {
         if (params.fee) {
             params.feeNQT = chainCurrency.convertToBaseUnit(params.fee, ChainCurrencyType.IGNIS);
             delete params.fee;

@@ -33,6 +33,8 @@ export enum ErrorCode {
     UNKNOWN_STATE_TYPE,
     WRONG_REDIRECT_ACCOUNT_LENGTH,
     INVALID_REDIRECT_ACCOUNT,
+    WRONG_PAYLOAD_STORAGE_TYPE_LENGTH,
+    UNKNOWN_PAYLOAD_STORAGE_TYPE,
     PAYLOAD_REFERENCE_TOO_LONG,
     INVALID_PROPERTY_NAME,
     TOO_MANY_ROTATION_HOPS,
@@ -78,7 +80,7 @@ export type CreateDIDResponse = {
 }
 
 
-export type UpdateDIDPayloadParams = {
+export type UpdateDIDDocumentParams = {
     newPayload: objectAny;
     passphrase: string;
     did: string;
@@ -86,7 +88,7 @@ export type UpdateDIDPayloadParams = {
     [name: string]: secureAny;
 }
 
-export type UpdateDIDPayloadResponse = BroadcastTransactionResponse;
+export type UpdateDIDDocumentResponse = BroadcastTransactionResponse;
 
 
 export type UpdateDIDControllerParams = {
@@ -121,7 +123,7 @@ export type ResolveDIDResponse = {
 
 export interface IResolution {
     createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>;
-    updateDIDPayload(url: string, params: UpdateDIDPayloadParams): Promise<UpdateDIDPayloadResponse>;
+    updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse>;
     updateDIDController(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse>;
     revokeDID(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse>;
     resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse>;

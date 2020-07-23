@@ -1,5 +1,5 @@
 import { IRequest, Request } from "@blobaa/ardor-ts";
-import { CreateDIDParams, CreateDIDResponse, IResolution, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDPayloadParams, UpdateDIDPayloadResponse } from "../../types";
+import { CreateDIDParams, CreateDIDResponse, IResolution, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../types";
 import RequestWrapper from "../lib/RequestWrapper";
 import DIDControllerUpdateController from "./controllers/DIDControllerUpdateController";
 import DIDCreateController from "./controllers/DIDCreateController";
@@ -34,7 +34,7 @@ export default class MethodHandler implements IResolution {
     }
 
 
-    public async updateDIDPayload(url: string, params: UpdateDIDPayloadParams): Promise<UpdateDIDPayloadResponse> {
+    public async updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse> {
         const controller = new DIDPayloadUpdateController(new PayloadUpdateService(this.request));
         return await controller.run(url, params);
     }

@@ -104,6 +104,11 @@ export default class DataFields {
             return error;
         }
 
+        error = this.checkRedirectAccount(_dataFields[DataField.REDIRECT_ACCOUNT]);
+        if (error.code !== ErrorCode.NO_ERROR) {
+            return error;
+        }
+
         error = this.checkPayloadReference(payloadReference);
         if (error.code !== ErrorCode.NO_ERROR) {
             return error;
@@ -147,6 +152,19 @@ export default class DataFields {
         }
         if (!account.checkAccountRs(accountPrefix + redirectAccount) && redirectAccount !== DUMMY_ACCOUNT_RS) {
             const error = ErrorHelper.createError(ErrorCode.INVALID_REDIRECT_ACCOUNT);
+            return error;
+        }
+        return noError;
+    }
+
+
+    public checkPayloadStorageType(payloadStorageType: string): Error {
+        if (payloadStorageType.length !== 1) {
+            const error = ErrorHelper.createError(ErrorCode.WRONG_PAYLOAD_STORAGE_TYPE_LENGTH);
+            return error;
+        }
+        if (payloadStorageType !== PayloadStorageType.ARDOR_CLOUD_STORAGE) {
+            const error = ErrorHelper.createError(ErrorCode.UNKNOWN_PAYLOAD_STORAGE_TYPE);
             return error;
         }
         return noError;

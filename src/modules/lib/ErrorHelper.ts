@@ -99,6 +99,14 @@ export default class ErrorHelper {
                 error.description = "New and current controller accounts are equal.";
                 return error;
             }
+            case ErrorCode.UNKNOWN_PAYLOAD_STORAGE_TYPE: {
+                error.description = "Unknown payload storage type.";
+                return error;
+            }
+            case ErrorCode.WRONG_PAYLOAD_STORAGE_TYPE_LENGTH: {
+                error.description = "Wrong payload storage type length. Payload storage type data field must consist of 1 character.";
+                return error;
+            }
             default:
                 return { code: ErrorCode.UNKNOWN, description: "An unknown error occurred." };
         }
