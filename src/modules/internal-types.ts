@@ -26,6 +26,6 @@ export interface IRevocationService {
 
 
 export interface IPayloadStorage {
-    getData(reference: string): Promise<objectAny>;
+    retrieveData(reference: string): Promise<objectAny>;
     storeData(data: objectAny): Promise<string>;
 }

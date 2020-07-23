@@ -31,7 +31,7 @@ export default class ResolutionService implements IResolutionService {
             payloadStorage = new ArdorCloudStorage(this.request, ChainId.IGNIS, url, info.accounts);
         }
 
-        const payload = await payloadStorage.getData(info.dataFields.payloadReference);
+        const payload = await payloadStorage.retrieveData(info.dataFields.payloadReference);
 
         /* check payload */
         console.log(payload);
