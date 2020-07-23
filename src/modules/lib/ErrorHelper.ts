@@ -92,7 +92,11 @@ export default class ErrorHelper {
                 return error;
             }
             case ErrorCode.WRONG_CONTROLLER_ACCOUNT: {
-                error.description = "Wrong controller Account. " + "Account " + _params[0] + "does not control DID. Current controller is " + _params[1] + ".";
+                error.description = "Wrong controller account. " + "Account " + _params[0] + " is not controller of DID. Current controller is " + _params[1] + ".";
+                return error;
+            }
+            case ErrorCode.SAME_CONTROLLER_ACCOUNTS: {
+                error.description = "New and current controller accounts are equal.";
                 return error;
             }
             default:

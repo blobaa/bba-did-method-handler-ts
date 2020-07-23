@@ -1,6 +1,6 @@
 
 import { account } from "@blobaa/ardor-ts";
-import { DATA_FIELD_SEPARATOR, DUMMY_ACCOUNT_RS, PROTOCOL_IDENTIFIER, PROTOCOL_VERSION, NUMBER_OF_DATA_FIELDS, ACCOUNT_PREFIX, REDIRECT_ACCOUNT_CHARACTER_LENGTH, MAX_PAYLOAD_LENGTH, DID_PREFIX } from "../../constants";
+import { ACCOUNT_PREFIX, DATA_FIELD_SEPARATOR, DID_PREFIX, DUMMY_ACCOUNT_RS, MAX_PAYLOAD_LENGTH, NUMBER_OF_DATA_FIELDS, PROTOCOL_IDENTIFIER, PROTOCOL_VERSION, REDIRECT_ACCOUNT_CHARACTER_LENGTH } from "../../constants";
 import { Error, ErrorCode, PayloadStorageType, State } from "../../types";
 import ErrorHelper, { noError } from "./ErrorHelper";
 
@@ -16,10 +16,10 @@ enum DataField {
 
 export default class DataFields {
     private _didId = "";
+    private _redirectAccount = DUMMY_ACCOUNT_RS
 
     public version = PROTOCOL_VERSION;
     public state = State.INACTIVE;
-    public redirectAccount = DUMMY_ACCOUNT_RS;
     public payloadStorageType = PayloadStorageType.ARDOR_CLOUD_STORAGE;
     public payloadReference = "";
 
@@ -40,14 +40,19 @@ export default class DataFields {
     }
     /*eslint-enable @typescript-eslint/explicit-function-return-type*/
 
-
     set didId(value: string) {
-        this._didId = this.setDidId(value);
+        this._didId = value.startsWith(PROTOCOL_IDENTIFIER) ? value : PROTOCOL_IDENTIFIER + value;
     }
 
 
-    private setDidId(id: string): string {
-        return id.startsWith(PROTOCOL_IDENTIFIER) ? id : PROTOCOL_IDENTIFIER + id;
+    /*eslint-disable @typescript-eslint/explicit-function-return-type*/
+    get redirectAccount() {
+        return this._redirectAccount;
+    }
+    /*eslint-enable @typescript-eslint/explicit-function-return-type*/
+
+    set redirectAccount(value: string) {
+        this._redirectAccount = value.startsWith(ACCOUNT_PREFIX) ? value.substring(ACCOUNT_PREFIX.length) : value;
     }
 
 

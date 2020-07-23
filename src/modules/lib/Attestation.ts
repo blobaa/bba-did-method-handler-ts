@@ -66,11 +66,10 @@ export class Attestation {
 
     private async getDIDKeyRotatedAttestationTransaction( url: string, chainId: ChainId, account: string,
                                                            timestamp: number, didId: string ): Promise<Transaction> {
-        console.log("TODO: Change timestamp!"); // self attestation after delegation
         const params: GetBlockchainTransactionsParams = {
             chain: chainId,
             account,
-            timestamp: timestamp - 100000,
+            timestamp,
             type: ChildTransactionType.ACCOUNT_PROPERTY,
             subType: ChildTransactionSubtype.ACCOUNT_PROPERTY__SET
         };
@@ -78,8 +77,7 @@ export class Attestation {
 
         const transaction = this.extractDIDPropertyTransactions(response.transactions, didId)[0];
         if (!transaction) {
-            const error = ErrorHelper.createError(ErrorCode.DID_RESOLUTION_ERROR);
-            return Promise.reject(error);
+            return Promise.reject(ErrorHelper.createError(ErrorCode.DID_RESOLUTION_ERROR));
         }
 
         return transaction;

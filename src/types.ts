@@ -42,7 +42,8 @@ export enum ErrorCode {
     PAYLOAD_NOT_FOUND,
     INVALID_PAYLOAD,
 
-    WRONG_CONTROLLER_ACCOUNT
+    WRONG_CONTROLLER_ACCOUNT,
+    SAME_CONTROLLER_ACCOUNTS
 }
 
 
@@ -96,7 +97,10 @@ export type UpdateDIDControllerParams = {
     [name: string]: secureAny;
 }
 
-export type UpdateDIDControllerResponse = BroadcastTransactionResponse;
+export type UpdateDIDControllerResponse = {
+    newControllerAccount: string;
+    oldControllerAccount: string;
+};
 
 
 export type RevokeDIDParams = {
