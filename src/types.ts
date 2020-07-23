@@ -70,9 +70,9 @@ export enum DIDNetworkType {
 export type CreateDIDParams = {
     payload: objectAny;
     passphrase: string;
-    fee?: number;
     isTestnetDid?: boolean;
-    [name: string]: secureAny;
+    fee?: number;
+    feeNQT?: number;
 }
 
 export type CreateDIDResponse = {
@@ -85,7 +85,7 @@ export type UpdateDIDDocumentParams = {
     passphrase: string;
     did: string;
     fee?: number;
-    [name: string]: secureAny;
+    feeNQT?: number;
 }
 
 export type UpdateDIDDocumentResponse = BroadcastTransactionResponse;
@@ -96,7 +96,7 @@ export type UpdateDIDControllerParams = {
     newPassphrase: string;
     did: string;
     fee?: number;
-    [name: string]: secureAny;
+    feeNQT?: number;
 }
 
 export type UpdateDIDControllerResponse = {
@@ -109,7 +109,7 @@ export type DeactivateDIDParams = {
     did: string;
     passphrase: string;
     fee?: number;
-    [name: string]: secureAny;
+    feeNQT?: number;
 }
 
 export type DeactivateDIDResponse = {
