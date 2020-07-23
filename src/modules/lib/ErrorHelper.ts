@@ -107,6 +107,10 @@ export default class ErrorHelper {
                 error.description = "Wrong payload storage type length. Payload storage type data field must consist of 1 character.";
                 return error;
             }
+            case ErrorCode.DID_DEACTIVATED: {
+                error.description = "DID is deactivated.";
+                return error;
+            }
             default:
                 return { code: ErrorCode.UNKNOWN, description: "An unknown error occurred." };
         }

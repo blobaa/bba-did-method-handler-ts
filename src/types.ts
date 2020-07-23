@@ -39,7 +39,7 @@ export enum ErrorCode {
     INVALID_PROPERTY_NAME,
     TOO_MANY_ROTATION_HOPS,
 
-    DID_INACTIVE,
+    DID_DEACTIVATED,
 
     PAYLOAD_NOT_FOUND,
     INVALID_PAYLOAD,
@@ -105,12 +105,16 @@ export type UpdateDIDControllerResponse = {
 };
 
 
-export type RevokeDIDParams = {
+export type DeactivateDIDParams = {
+    did: string;
+    passphrase: string;
     fee?: number;
     [name: string]: secureAny;
 }
 
-export type RevokeDIDResponse = BroadcastTransactionResponse;
+export type DeactivateDIDResponse = {
+    deactivatedDid: string;
+};
 
 
 export type ResolveDIDParams = {
@@ -125,6 +129,6 @@ export interface IResolution {
     createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>;
     updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse>;
     updateDIDController(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse>;
-    revokeDID(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse>;
+    deactivateDID(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse>;
     resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse>;
 }

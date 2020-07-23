@@ -1,5 +1,5 @@
 import { chainCurrency, ChainCurrencyType } from "@blobaa/ardor-ts";
-import { RevokeDIDParams, RevokeDIDResponse } from "../../../types";
+import { DeactivateDIDParams, DeactivateDIDResponse } from "../../../types";
 import { IRevocationService } from "../../internal-types";
 
 
@@ -12,7 +12,7 @@ export default class DIDRevokeController {
     }
 
 
-    public async run(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse> {
+    public async run(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse> {
         if (params.fee) {
             params.feeNQT = chainCurrency.convertToBaseUnit(params.fee, ChainCurrencyType.IGNIS);
             delete params.fee;

@@ -1,4 +1,4 @@
-import { CreateDIDParams, CreateDIDResponse, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../types";
+import { CreateDIDParams, CreateDIDResponse, ResolveDIDParams, ResolveDIDResponse, DeactivateDIDParams, DeactivateDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../types";
 
 /*eslint-disable-next-line @typescript-eslint/no-explicit-any*/
 export type objectAny = {[name: string]: any};
@@ -21,7 +21,7 @@ export interface IResolutionService {
 }
 
 export interface IRevocationService {
-    run(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse>;
+    run(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse>;
 }
 
 

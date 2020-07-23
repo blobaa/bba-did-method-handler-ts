@@ -1,5 +1,5 @@
 import { IRequest, Request } from "@blobaa/ardor-ts";
-import { CreateDIDParams, CreateDIDResponse, IResolution, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../types";
+import { CreateDIDParams, CreateDIDResponse, IResolution, ResolveDIDParams, ResolveDIDResponse, DeactivateDIDParams, DeactivateDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../types";
 import RequestWrapper from "../lib/RequestWrapper";
 import DIDControllerUpdateController from "./controllers/DIDControllerUpdateController";
 import DIDCreateController from "./controllers/DIDCreateController";
@@ -46,7 +46,7 @@ export default class MethodHandler implements IResolution {
     }
 
 
-    public async revokeDID(url: string, params: RevokeDIDParams): Promise<RevokeDIDResponse> {
+    public async deactivateDID(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse> {
         const controller = new DIDRevokeController(new RevocationService(this.request));
         return await controller.run(url, params);
     }

@@ -47,7 +47,7 @@ export default class Attestation {
 
 
             if (dataFields.state === State.INACTIVE) {
-                return Promise.reject(ErrorHelper.createError(ErrorCode.DID_INACTIVE));
+                return Promise.reject(ErrorHelper.createError(ErrorCode.DID_DEACTIVATED));
             }
 
             if (rotationHops === MAX_ROTATION_HOPS) {
@@ -121,7 +121,7 @@ export default class Attestation {
         }
 
         if (!this.isAttestationActive(dataFields.state)) {
-            throw ErrorHelper.createError(ErrorCode.DID_INACTIVE);
+            throw ErrorHelper.createError(ErrorCode.DID_DEACTIVATED);
         }
 
         return dataFields;
