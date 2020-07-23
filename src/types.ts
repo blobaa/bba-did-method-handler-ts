@@ -1,5 +1,3 @@
-import { BroadcastTransactionResponse } from "@blobaa/ardor-ts";
-
 /*eslint-disable-next-line @typescript-eslint/no-explicit-any*/
 export type secureAny = any; // same as any, but used when it's intended and secure
 
@@ -88,8 +86,9 @@ export type UpdateDIDDocumentParams = {
     feeNQT?: number;
 }
 
-export type UpdateDIDDocumentResponse = BroadcastTransactionResponse;
-
+export type UpdateDIDDocumentResponse = {
+    newDidDocument: objectAny;
+}
 
 export type UpdateDIDControllerParams = {
     passphrase: string;
@@ -122,7 +121,7 @@ export type ResolveDIDParams = {
 }
 
 export type ResolveDIDResponse = {
-
+    didDocument: objectAny;
 }
 
 export interface IResolution {

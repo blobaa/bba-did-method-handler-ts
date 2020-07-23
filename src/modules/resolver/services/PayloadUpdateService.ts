@@ -62,6 +62,6 @@ export default class PayloadUpdateService implements IUpdatePayloadService {
         await this.request.setAccountProperty(url, propertyParams);
 
 
-        return new Promise(resolve => resolve({ fullHash: "", requestProcessingTime: 0 }));
+        return { newDidDocument: {} };
     }
 }

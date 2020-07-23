@@ -37,6 +37,6 @@ export default class ResolutionService implements IResolutionService {
         console.log(payload);
 
 
-        return { fullHash: "", requestProcessingTime: 0 };
+        return { didDocument: {} };
     }
 }

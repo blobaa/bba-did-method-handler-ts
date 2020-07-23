@@ -155,17 +155,22 @@ describe("Resolver module tests", () => {
         });
 
 
-        test("resolveDID success", async () => {
+        test("resolveDID error", async () => {
             const didParams: ResolveDIDParams = {
                 did: config.did.normal
             };
-            // const resp = await resolver.resolveDID(config.node.url.testnet, didParams);
-            // console.log(resp);
 
+            const testResolver = new Resolver(new RequestMock());
 
             didParams.did = config.did.rotated;
-            const resp = await resolver.resolveDID(config.node.url.testnet, didParams);
-            console.log(resp);
+            try {
+                await testResolver.resolveDID(config.node.url.testnet, didParams);
+                fail("should not reach here");
+            } catch (e) {
+                const error = e as Error;
+                expect(error.code).toBe(ErrorCode.DID_RESOLUTION_ERROR);
+                expect(error.description).toBeDefined();
+            }
         });
     }
 
