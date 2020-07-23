@@ -1,4 +1,3 @@
-import { objectAny } from "../internal-types";
 import { Error, ErrorCode } from "../../types";
 
 
@@ -9,23 +8,6 @@ export const noError: Error = {
 
 
 export default class ErrorHelper {
-
-    public static getError(error: objectAny): Error {
-        if (error.syscall) {
-            return {
-                code: ErrorCode.CONNECTION_ERROR,
-                description: "Connection error. Could not connect to node."
-            };
-        }
-        if (error.errorCode) {
-            return {
-                code: ErrorCode.NODE_ERROR,
-                description: error.errorDescription
-            };
-        }
-        return error as Error;
-    }
-
 
     public static createError(errorCode: ErrorCode, params?: string[]): Error {
         const error: Error = {
@@ -107,6 +89,10 @@ export default class ErrorHelper {
             }
             case ErrorCode.TOO_MANY_ROTATION_HOPS: {
                 error.description = "Too many rotation hops.";
+                return error;
+            }
+            case ErrorCode.WRONG_CONTROLLER_ACCOUNT: {
+                error.description = "Wrong controller Account. " + "Account " + _params[0] + "does not control DID. Current controller is " + _params[1] + ".";
                 return error;
             }
             default:

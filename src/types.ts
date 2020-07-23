@@ -1,7 +1,10 @@
 import { BroadcastTransactionResponse } from "@blobaa/ardor-ts";
 
 /*eslint-disable-next-line @typescript-eslint/no-explicit-any*/
-export type objectAny = {[name: string]: any};
+export type secureAny = any; // same as any, but used when it's intended and secure
+
+export type objectAny = {[name: string]: secureAny};
+
 
 export type Error = {
     code: ErrorCode;
@@ -37,7 +40,9 @@ export enum ErrorCode {
     DID_INACTIVE,
 
     PAYLOAD_NOT_FOUND,
-    INVALID_PAYLOAD
+    INVALID_PAYLOAD,
+
+    WRONG_CONTROLLER_ACCOUNT
 }
 
 
@@ -64,6 +69,7 @@ export type CreateDIDParams = {
     passphrase: string;
     fee?: number;
     isTestnetDid?: boolean;
+    [name: string]: secureAny;
 }
 
 export type CreateDIDResponse = {
@@ -76,13 +82,18 @@ export type UpdateDIDPayloadParams = {
     passphrase: string;
     did: string;
     fee?: number;
+    [name: string]: secureAny;
 }
 
 export type UpdateDIDPayloadResponse = BroadcastTransactionResponse;
 
 
 export type UpdateDIDControllerParams = {
+    passphrase: string;
+    newPassphrase: string;
+    did: string;
     fee?: number;
+    [name: string]: secureAny;
 }
 
 export type UpdateDIDControllerResponse = BroadcastTransactionResponse;
@@ -90,6 +101,7 @@ export type UpdateDIDControllerResponse = BroadcastTransactionResponse;
 
 export type RevokeDIDParams = {
     fee?: number;
+    [name: string]: secureAny;
 }
 
 export type RevokeDIDResponse = BroadcastTransactionResponse;

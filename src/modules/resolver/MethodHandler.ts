@@ -1,5 +1,6 @@
 import { IRequest, Request } from "@blobaa/ardor-ts";
 import { CreateDIDParams, CreateDIDResponse, IResolution, ResolveDIDParams, ResolveDIDResponse, RevokeDIDParams, RevokeDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDPayloadParams, UpdateDIDPayloadResponse } from "../../types";
+import RequestWrapper from "../lib/RequestWrapper";
 import DIDControllerUpdateController from "./controllers/DIDControllerUpdateController";
 import DIDCreateController from "./controllers/DIDCreateController";
 import DIDPayloadUpdateController from "./controllers/DIDPayloadUpdateController";
@@ -17,7 +18,7 @@ export default class MethodHandler implements IResolution {
 
 
     constructor(request = new Request()) {
-        this.request = request;
+        this.request = new RequestWrapper(request);
     }
 
 

@@ -14,7 +14,8 @@ export default class DIDControllerUpdateController {
 
     public async run(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse> {
         if (params.fee) {
-            params.fee = chainCurrency.convertToBaseUnit(params.fee, ChainCurrencyType.IGNIS);
+            params.feeNQT = chainCurrency.convertToBaseUnit(params.fee, ChainCurrencyType.IGNIS);
+            delete params.fee;
         }
         return await this.service.run(url, params);
     }

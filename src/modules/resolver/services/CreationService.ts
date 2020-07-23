@@ -1,9 +1,9 @@
-import { account, ChainId, IRequest, SetAccountPropertyParams, UploadTaggedDataParams } from "@blobaa/ardor-ts";
-import { DATA_CLOUD_NAME, DID_ID_LENGTH } from "../../../constants";
+import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
+import { DID_ID_LENGTH } from "../../../constants";
 import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, State } from "../../../types";
 import { ICreationService } from "../../internal-types";
-import DID from "../../lib/DID";
 import { ArdorCloudStorage } from "../../lib/ArdorCloudStorage";
+import DID from "../../lib/DID";
 import DataFields from "./../../lib/DataField";
 import Nonce from "./../../lib/Nonce";
 
@@ -18,7 +18,7 @@ export default class CreationService implements ICreationService {
 
 
     public async run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse> {
-        const cloudStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url);
+        const cloudStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         const reference = await cloudStorage.storeData(params.payload);
 
 
@@ -32,7 +32,8 @@ export default class CreationService implements ICreationService {
             property: dataFields.didId,
             value: dataFields.createDataFieldsString(),
             recipient: account.convertPassphraseToAccountRs(params.passphrase),
-            secretPhrase: params.passphrase
+            secretPhrase: params.passphrase,
+            feeNQT: params.feeNQT
         };
 
         const propertyResponse = await this.request.setAccountProperty(url, propertyParams);

@@ -11,16 +11,18 @@ export class ArdorCloudStorage implements IPayloadStorage {
     private accounts = [""];
     private secretPhrase = "";
     private request: IRequest;
+    private feeNQT?: number;
 
 
-    constructor(request: IRequest, secretPhrase: string, chainId: ChainId, url: string) // constructor 1
-    constructor(request: IRequest, chainId: ChainId, url: string, account: string[]) // constructor 2
+    constructor(request: IRequest, secretPhrase: string, chainId: ChainId, url: string, feeNQT?: number) // constructor 1 (storeData)
+    constructor(request: IRequest, chainId: ChainId, url: string, account: string[]) // constructor 2 (retrieveData)
 
-    constructor(request: IRequest, secretPhraseOrChainId: string | ChainId, chainIdOrUrl: ChainId | string, urlOrAccounts: string | string[]) {
+    constructor(request: IRequest, secretPhraseOrChainId: string | ChainId, chainIdOrUrl: ChainId | string, urlOrAccounts: string | string[], feeNQT?: number) {
         if (typeof secretPhraseOrChainId === "string") { // constructor 1
             this.secretPhrase = secretPhraseOrChainId;
             this.chainId = chainIdOrUrl as ChainId;
             this.url = urlOrAccounts as string;
+            this.feeNQT = feeNQT;
         } else { // constructor 2
             this.chainId = secretPhraseOrChainId as ChainId;
             this.url = chainIdOrUrl as string;
@@ -35,7 +37,8 @@ export class ArdorCloudStorage implements IPayloadStorage {
             chain: this.chainId,
             name: DATA_CLOUD_NAME,
             data: JSON.stringify(data),
-            secretPhrase: this.secretPhrase
+            secretPhrase: this.secretPhrase,
+            feeNQT: this.feeNQT
         };
 
         const response = await this.request.uploadTaggedData(this.url, params);
@@ -43,7 +46,7 @@ export class ArdorCloudStorage implements IPayloadStorage {
     }
 
 
-    public async getData(reference: string): Promise<objectAny> {
+    public async retrieveData(reference: string): Promise<objectAny> {
         const params: GetTransactionParams = {
             chain: this.chainId,
             fullHash: reference
