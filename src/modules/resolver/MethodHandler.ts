@@ -9,8 +9,8 @@ import DIDRevokeController from "./controllers/DIDRevokeController";
 import CreationService from "./services/CreationService";
 import ResolutionService from "./services/ResolutionService";
 import RevocationService from "./services/RevocationService";
-import UpdateControllerService from "./services/UpdateControllerService";
-import UpdatePayloadService from "./services/UpdatePayloadService";
+import ControllerUpdateService from "./services/ControllerUpdateService";
+import PayloadUpdateService from "./services/PayloadUpdateService";
 
 
 export default class MethodHandler implements IResolution {
@@ -35,13 +35,13 @@ export default class MethodHandler implements IResolution {
 
 
     public async updateDIDPayload(url: string, params: UpdateDIDPayloadParams): Promise<UpdateDIDPayloadResponse> {
-        const controller = new DIDPayloadUpdateController(new UpdatePayloadService(this.request));
+        const controller = new DIDPayloadUpdateController(new PayloadUpdateService(this.request));
         return await controller.run(url, params);
     }
 
 
     public async updateDIDController(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse> {
-        const controller = new DIDControllerUpdateController(new UpdateControllerService(this.request));
+        const controller = new DIDControllerUpdateController(new ControllerUpdateService(this.request));
         return await controller.run(url, params);
     }
 

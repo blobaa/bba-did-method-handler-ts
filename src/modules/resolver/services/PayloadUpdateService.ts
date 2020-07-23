@@ -3,7 +3,7 @@ import { UpdateDIDPayloadParams, UpdateDIDPayloadResponse } from "../../../types
 import { IUpdatePayloadService } from "../../internal-types";
 
 
-export default class UpdatePayloadService implements IUpdatePayloadService {
+export default class PayloadUpdateService implements IUpdatePayloadService {
     private readonly request: IRequest;
 
 
