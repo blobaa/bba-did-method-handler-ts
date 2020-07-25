@@ -35,6 +35,7 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@blobaa/ardor-ts": "^2.6.3"
+    "@blobaa/ardor-ts": "^2.6.3",
+    "crypto-ld": "^3.8.0"
   }
 }
