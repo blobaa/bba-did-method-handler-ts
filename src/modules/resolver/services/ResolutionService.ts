@@ -1,9 +1,10 @@
 import { ChainId, IRequest } from "@blobaa/ardor-ts";
-import { ErrorCode, DIDDocStorageType, ResolveDIDParams, ResolveDIDResponse } from "../../../types";
-import { IDIDDocumentStorage, IDIDResolutionService } from "../../internal-types";
+import { DIDDocStorageType, ErrorCode, ResolveDIDParams, ResolveDIDResponse } from "../../../types";
+import { IDataStorage, IDIDResolutionService } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import Attestation from "../../lib/Attestation";
 import DID from "../../lib/DID";
+import ErrorHelper from "../../lib/ErrorHelper";
 
 
 export default class ResolutionService implements IDIDResolutionService {
@@ -26,17 +27,18 @@ export default class ResolutionService implements IDIDResolutionService {
         const info = await attestation.parseTrustChain(url, ChainId.IGNIS, did.fullHash);
 
 
-        let payloadStorage = {} as IDIDDocumentStorage;
-        if (info.dataFields.payloadStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
-            payloadStorage = new ArdorCloudStorage(this.request, ChainId.IGNIS, url, info.accounts);
+        let documentStorage = {} as IDataStorage;
+        if (info.dataFields.documentStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
+            documentStorage = new ArdorCloudStorage(this.request, ChainId.IGNIS, url, info.accounts);
         }
 
-        const payload = await payloadStorage.retrieveData(info.dataFields.payloadReference);
 
-        /* check payload */
-        console.log(payload);
-
-
-        return { didDocument: {} };
+        const data = await documentStorage.retrieveData(info.dataFields.documentReference);
+        try {
+            const document = JSON.parse(data);
+            return { didDocument: document };
+        } catch (e) {
+            return Promise.reject(ErrorHelper.createError(ErrorCode.INVALID_DIDDOC));
+        }
     }
 }
