@@ -3,14 +3,14 @@ import { CreateDIDParams, CreateDIDResponse, IResolution, ResolveDIDParams, Reso
 import RequestWrapper from "../lib/RequestWrapper";
 import DIDControllerUpdateController from "./controllers/DIDControllerUpdateController";
 import DIDCreateController from "./controllers/DIDCreateController";
-import DIDPayloadUpdateController from "./controllers/DIDPayloadUpdateController";
+import DIDDocumentUpdateController from "./controllers/DIDDocumentUpdateController";
 import DIDResolveController from "./controllers/DIDResolveController";
 import DIDRevokeController from "./controllers/DIDRevokeController";
 import CreationService from "./services/CreationService";
 import ResolutionService from "./services/ResolutionService";
 import RevocationService from "./services/RevocationService";
 import ControllerUpdateService from "./services/ControllerUpdateService";
-import PayloadUpdateService from "./services/PayloadUpdateService";
+import DocumentUpdateService from "./services/DocumentUpdateService";
 
 
 export default class MethodHandler implements IResolution {
@@ -35,7 +35,7 @@ export default class MethodHandler implements IResolution {
 
 
     public async updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse> {
-        const controller = new DIDPayloadUpdateController(new PayloadUpdateService(this.request));
+        const controller = new DIDDocumentUpdateController(new DocumentUpdateService(this.request));
         return await controller.run(url, params);
     }
 

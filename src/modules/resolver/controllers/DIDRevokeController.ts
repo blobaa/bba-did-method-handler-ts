@@ -1,13 +1,13 @@
 import { chainCurrency, ChainCurrencyType } from "@blobaa/ardor-ts";
 import { DeactivateDIDParams, DeactivateDIDResponse } from "../../../types";
-import { IRevocationService } from "../../internal-types";
+import { IDIDRevocationService } from "../../internal-types";
 
 
 export default class DIDRevokeController {
-    private readonly service: IRevocationService;
+    private readonly service: IDIDRevocationService;
 
 
-    constructor(service: IRevocationService) {
+    constructor(service: IDIDRevocationService) {
         this.service = service;
     }
 

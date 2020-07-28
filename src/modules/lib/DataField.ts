@@ -1,7 +1,7 @@
 
 import { account } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX, DATA_FIELD_SEPARATOR, DID_PREFIX, DUMMY_ACCOUNT_RS, MAX_PAYLOAD_LENGTH, NUMBER_OF_DATA_FIELDS, PROTOCOL_IDENTIFIER, PROTOCOL_VERSION, REDIRECT_ACCOUNT_CHARACTER_LENGTH } from "../../constants";
-import { Error, ErrorCode, PayloadStorageType, State } from "../../types";
+import { Error, ErrorCode, DIDDocStorageType, State } from "../../types";
 import ErrorHelper, { noError } from "./ErrorHelper";
 
 
@@ -9,8 +9,8 @@ enum DataField {
     VERSION,
     STATE,
     REDIRECT_ACCOUNT,
-    PAYLOAD_STORAGE_TYPE,
-    PAYLOAD
+    DIDDOC_STORAGE_TYPE,
+    DIDDOCUMENT
 }
 
 
@@ -20,7 +20,7 @@ export default class DataFields {
 
     public version = PROTOCOL_VERSION;
     public state = State.INACTIVE;
-    public payloadStorageType = PayloadStorageType.ARDOR_CLOUD_STORAGE;
+    public payloadStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
     public payloadReference = "";
 
 
@@ -29,7 +29,7 @@ export default class DataFields {
         this.version = (dataFields && dataFields.version) || PROTOCOL_VERSION;
         this.state = (dataFields && dataFields.state) || State.INACTIVE;
         this.redirectAccount = (dataFields && dataFields.redirectAccount) || DUMMY_ACCOUNT_RS;
-        this.payloadStorageType = (dataFields && dataFields.payloadStorageType) || PayloadStorageType.ARDOR_CLOUD_STORAGE;
+        this.payloadStorageType = (dataFields && dataFields.payloadStorageType) || DIDDocStorageType.ARDOR_CLOUD_STORAGE;
         this.payloadReference = (dataFields && dataFields.payloadReference) || "";
     }
 
@@ -67,13 +67,13 @@ export default class DataFields {
         this.version = dataFields[DataField.VERSION];
         this.state = State.INACTIVE;
         this.redirectAccount = DUMMY_ACCOUNT_RS;
-        this.payloadStorageType = PayloadStorageType.ARDOR_CLOUD_STORAGE;
+        this.payloadStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
         this.payloadReference = "";
 
         this.version = dataFields[DataField.VERSION];
         this.state = dataFields[DataField.STATE] as State;
         this.redirectAccount = dataFields[DataField.REDIRECT_ACCOUNT];
-        this.payloadStorageType = dataFields[DataField.PAYLOAD_STORAGE_TYPE] as PayloadStorageType;
+        this.payloadStorageType = dataFields[DataField.DIDDOC_STORAGE_TYPE] as DIDDocStorageType;
         this.payloadReference = dataFields.slice(NUMBER_OF_DATA_FIELDS - 1).join(DATA_FIELD_SEPARATOR);
 
         return noError;
@@ -160,11 +160,11 @@ export default class DataFields {
 
     public checkPayloadStorageType(payloadStorageType: string): Error {
         if (payloadStorageType.length !== 1) {
-            const error = ErrorHelper.createError(ErrorCode.WRONG_PAYLOAD_STORAGE_TYPE_LENGTH);
+            const error = ErrorHelper.createError(ErrorCode.WRONG_DIDDOC_STORAGE_TYPE_LENGTH);
             return error;
         }
-        if (payloadStorageType !== PayloadStorageType.ARDOR_CLOUD_STORAGE) {
-            const error = ErrorHelper.createError(ErrorCode.UNKNOWN_PAYLOAD_STORAGE_TYPE);
+        if (payloadStorageType !== DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
+            const error = ErrorHelper.createError(ErrorCode.UNKNOWN_DIDDOC_STORAGE_TYPE);
             return error;
         }
         return noError;
@@ -173,7 +173,7 @@ export default class DataFields {
 
     public checkPayloadReference(payload: string): Error {
         if (payload.length > MAX_PAYLOAD_LENGTH) {
-            const error = ErrorHelper.createError(ErrorCode.PAYLOAD_REFERENCE_TOO_LONG, [ "" + MAX_PAYLOAD_LENGTH ]);
+            const error = ErrorHelper.createError(ErrorCode.DIDDOC_REFERENCE_TOO_LONG, [ "" + MAX_PAYLOAD_LENGTH ]);
             return error;
         }
         return noError;

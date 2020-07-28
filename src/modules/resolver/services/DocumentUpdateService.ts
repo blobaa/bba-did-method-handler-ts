@@ -1,14 +1,14 @@
-import { IRequest, ChainId, account, SetAccountPropertyParams } from "@blobaa/ardor-ts";
-import { UpdateDIDDocumentParams, UpdateDIDDocumentResponse, ErrorCode, PayloadStorageType } from "../../../types";
-import { IUpdatePayloadService, IPayloadStorage } from "../../internal-types";
-import DID from "../../lib/DID";
-import Attestation from "../../lib/Attestation";
-import ErrorHelper from "../../lib/ErrorHelper";
+import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
+import { DIDDocStorageType, ErrorCode, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../../types";
+import { IDIDDocumentStorage, IDIDDocumentUpdateService } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
+import Attestation from "../../lib/Attestation";
 import DataFields from "../../lib/DataField";
+import DID from "../../lib/DID";
+import ErrorHelper from "../../lib/ErrorHelper";
 
 
-export default class PayloadUpdateService implements IUpdatePayloadService {
+export default class DocumentUpdateService implements IDIDDocumentUpdateService {
     private readonly request: IRequest;
 
 
@@ -39,12 +39,12 @@ export default class PayloadUpdateService implements IUpdatePayloadService {
         }
 
 
-        let payloadStorage = {} as IPayloadStorage;
-        if (info.dataFields.payloadStorageType === PayloadStorageType.ARDOR_CLOUD_STORAGE) {
-            payloadStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
+        let documentStorage = {} as IDIDDocumentStorage;
+        if (info.dataFields.payloadStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
+            documentStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         }
 
-        const reference = await payloadStorage.storeData(params.newPayload);
+        const reference = await documentStorage.storeData(params.newDidDocument);
 
 
         const dataFields = new DataFields(info.dataFields);
@@ -62,6 +62,6 @@ export default class PayloadUpdateService implements IUpdatePayloadService {
         await this.request.setAccountProperty(url, propertyParams);
 
 
-        return { newDidDocument: {} };
+        return { newDidDocument: params.newDidDocument };
     }
 }

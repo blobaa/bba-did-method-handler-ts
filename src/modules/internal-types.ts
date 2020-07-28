@@ -4,28 +4,28 @@ import { CreateDIDParams, CreateDIDResponse, ResolveDIDParams, ResolveDIDRespons
 export type objectAny = {[name: string]: any};
 
 
-export interface ICreationService {
+export interface IDIDCreationService {
     run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>;
 }
 
-export interface IUpdatePayloadService {
+export interface IDIDDocumentUpdateService {
     run(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse>;
 }
 
-export interface IUpdateControllerService {
+export interface IDIDControllerUpdateService {
     run(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse>;
 }
 
-export interface IResolutionService {
+export interface IDIDResolutionService {
     run(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse>;
 }
 
-export interface IRevocationService {
+export interface IDIDRevocationService {
     run(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse>;
 }
 
 
-export interface IPayloadStorage {
+export interface IDIDDocumentStorage {
     retrieveData(reference: string): Promise<objectAny>;
-    storeData(data: objectAny): Promise<string>;
+    storeData(data: string): Promise<string>;
 }

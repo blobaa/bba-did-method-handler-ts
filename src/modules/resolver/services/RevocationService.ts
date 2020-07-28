@@ -1,13 +1,13 @@
 import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { ErrorCode, DeactivateDIDParams, DeactivateDIDResponse, State } from "../../../types";
-import { IRevocationService } from "../../internal-types";
+import { IDIDRevocationService } from "../../internal-types";
 import Attestation from "../../lib/Attestation";
 import DataFields from "../../lib/DataField";
 import DID from "../../lib/DID";
 import ErrorHelper from "../../lib/ErrorHelper";
 
 
-export default class RevocationService implements IRevocationService {
+export default class RevocationService implements IDIDRevocationService {
     private readonly request: IRequest;
 
 

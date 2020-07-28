@@ -1,12 +1,12 @@
 import { ChainId, IRequest } from "@blobaa/ardor-ts";
-import { ErrorCode, PayloadStorageType, ResolveDIDParams, ResolveDIDResponse } from "../../../types";
-import { IPayloadStorage, IResolutionService } from "../../internal-types";
+import { ErrorCode, DIDDocStorageType, ResolveDIDParams, ResolveDIDResponse } from "../../../types";
+import { IDIDDocumentStorage, IDIDResolutionService } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import Attestation from "../../lib/Attestation";
 import DID from "../../lib/DID";
 
 
-export default class ResolutionService implements IResolutionService {
+export default class ResolutionService implements IDIDResolutionService {
     private readonly request: IRequest;
 
 
@@ -26,8 +26,8 @@ export default class ResolutionService implements IResolutionService {
         const info = await attestation.parseTrustChain(url, ChainId.IGNIS, did.fullHash);
 
 
-        let payloadStorage = {} as IPayloadStorage;
-        if (info.dataFields.payloadStorageType === PayloadStorageType.ARDOR_CLOUD_STORAGE) {
+        let payloadStorage = {} as IDIDDocumentStorage;
+        if (info.dataFields.payloadStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
             payloadStorage = new ArdorCloudStorage(this.request, ChainId.IGNIS, url, info.accounts);
         }
 

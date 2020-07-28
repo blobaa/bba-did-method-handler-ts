@@ -1,13 +1,13 @@
 import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { ErrorCode, State, UpdateDIDControllerParams, UpdateDIDControllerResponse } from "../../../types";
-import { IUpdateControllerService } from "../../internal-types";
+import { IDIDControllerUpdateService } from "../../internal-types";
 import Attestation from "../../lib/Attestation";
 import DataFields from "../../lib/DataField";
 import DID from "../../lib/DID";
 import ErrorHelper from "../../lib/ErrorHelper";
 
 
-export default class ControllerUpdateService implements IUpdateControllerService {
+export default class ControllerUpdateService implements IDIDControllerUpdateService {
     private readonly request: IRequest;
 
 

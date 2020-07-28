@@ -71,20 +71,20 @@ export default class ErrorHelper {
                 error.description = "Invalid redirect account. The redirect account is not a valid Ardor account.";
                 return error;
             }
-            case ErrorCode.PAYLOAD_REFERENCE_TOO_LONG: {
-                error.description = "Payload is too long. Has to be less than " + _params[0] + " character.";
+            case ErrorCode.DIDDOC_REFERENCE_TOO_LONG: {
+                error.description = "DID Document reference is too long. Has to be less than " + _params[0] + " character.";
                 return error;
             }
             case ErrorCode.INVALID_PROPERTY_NAME: {
                 error.description = "Invalid property name.";
                 return error;
             }
-            case ErrorCode.PAYLOAD_NOT_FOUND: {
-                error.description = "DID Document payload not found.";
+            case ErrorCode.DIDDOC_NOT_FOUND: {
+                error.description = "DID Document not found.";
                 return error;
             }
-            case ErrorCode.INVALID_PAYLOAD: {
-                error.description = "Invalid DID Document payload.";
+            case ErrorCode.INVALID_DIDDOC: {
+                error.description = "Invalid DID Document.";
                 return error;
             }
             case ErrorCode.TOO_MANY_ROTATION_HOPS: {
@@ -99,12 +99,12 @@ export default class ErrorHelper {
                 error.description = "New and current controller accounts are equal.";
                 return error;
             }
-            case ErrorCode.UNKNOWN_PAYLOAD_STORAGE_TYPE: {
-                error.description = "Unknown payload storage type.";
+            case ErrorCode.UNKNOWN_DIDDOC_STORAGE_TYPE: {
+                error.description = "Unknown DID Document storage type.";
                 return error;
             }
-            case ErrorCode.WRONG_PAYLOAD_STORAGE_TYPE_LENGTH: {
-                error.description = "Wrong payload storage type length. Payload storage type data field must consist of 1 character.";
+            case ErrorCode.WRONG_DIDDOC_STORAGE_TYPE_LENGTH: {
+                error.description = "Wrong DID Document storage type length. Document storage type data field must consist of 1 character.";
                 return error;
             }
             case ErrorCode.DID_DEACTIVATED: {

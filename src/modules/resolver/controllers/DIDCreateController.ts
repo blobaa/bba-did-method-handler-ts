@@ -1,13 +1,13 @@
 import { chainCurrency, ChainCurrencyType } from "@blobaa/ardor-ts";
-import { ICreationService } from "../../internal-types";
+import { IDIDCreationService } from "../../internal-types";
 import { CreateDIDParams, CreateDIDResponse } from "../../../types";
 
 
 export default class DIDCreateController {
-    private readonly service: ICreationService;
+    private readonly service: IDIDCreationService;
 
 
-    constructor(service: ICreationService) {
+    constructor(service: IDIDCreationService) {
         this.service = service;
     }
 

@@ -1,12 +1,12 @@
 import { ResolveDIDParams, ResolveDIDResponse } from "../../../types";
-import { IResolutionService } from "../../internal-types";
+import { IDIDResolutionService } from "../../internal-types";
 
 
 export default class DIDResolveController {
-    private readonly service: IResolutionService;
+    private readonly service: IDIDResolutionService;
 
 
-    constructor(service: IResolutionService) {
+    constructor(service: IDIDResolutionService) {
         this.service = service;
     }
 

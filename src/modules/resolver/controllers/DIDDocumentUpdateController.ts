@@ -1,13 +1,13 @@
 import { chainCurrency, ChainCurrencyType } from "@blobaa/ardor-ts";
 import { UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../../types";
-import { IUpdatePayloadService } from "../../internal-types";
+import { IDIDDocumentUpdateService } from "../../internal-types";
 
 
-export default class DIDPayloadUpdateController {
-    private readonly service: IUpdatePayloadService;
+export default class DIDDocumentUpdateController {
+    private readonly service: IDIDDocumentUpdateService;
 
 
-    constructor(service: IUpdatePayloadService) {
+    constructor(service: IDIDDocumentUpdateService) {
         this.service = service;
     }
 

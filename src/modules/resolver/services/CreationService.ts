@@ -1,14 +1,14 @@
 import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { DID_ID_LENGTH } from "../../../constants";
-import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, PayloadStorageType, State } from "../../../types";
-import { ICreationService, IPayloadStorage } from "../../internal-types";
+import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, DIDDocStorageType, State } from "../../../types";
+import { IDIDCreationService, IDIDDocumentStorage } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import DID from "../../lib/DID";
 import DataFields from "./../../lib/DataField";
 import Nonce from "./../../lib/Nonce";
 
 
-export default class CreationService implements ICreationService {
+export default class CreationService implements IDIDCreationService {
     private readonly request: IRequest;
 
 
@@ -18,13 +18,13 @@ export default class CreationService implements ICreationService {
 
 
     public async run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse> {
-        const payloadStorageType = PayloadStorageType.ARDOR_CLOUD_STORAGE;
+        const payloadStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
 
-        let payloadStorage = {} as IPayloadStorage;
-        if (payloadStorageType === PayloadStorageType.ARDOR_CLOUD_STORAGE) {
-            payloadStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
+        let documentStorage = {} as IDIDDocumentStorage;
+        if (payloadStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
+            documentStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         }
-        const reference = await payloadStorage.storeData(params.payload);
+        const reference = await documentStorage.storeData(params.didDocument);
 
 
         const dataFields = new DataFields();
@@ -49,6 +49,6 @@ export default class CreationService implements ICreationService {
         didFields.fullHash = propertyResponse.fullHash;
         const did = didFields.createDidString();
 
-        return { did };
+        return { did, didDocument: params.didDocument };
     }
 }

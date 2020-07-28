@@ -1,11 +1,11 @@
 import { ChainId, GetTransactionParams, IRequest, UploadTaggedDataParams, GetTransactionResponse } from "@blobaa/ardor-ts";
 import { DATA_CLOUD_NAME } from "../../constants";
-import { IPayloadStorage, objectAny } from "../internal-types";
+import { IDIDDocumentStorage, objectAny } from "../internal-types";
 import { ErrorCode } from "../../types";
 import ErrorHelper from "./ErrorHelper";
 
 
-export default class ArdorCloudStorage implements IPayloadStorage {
+export default class ArdorCloudStorage implements IDIDDocumentStorage {
     private url = "";
     private chainId: ChainId;
     private accounts = [""];
@@ -32,11 +32,11 @@ export default class ArdorCloudStorage implements IPayloadStorage {
     }
 
 
-    public async storeData(data: objectAny): Promise<string> {
+    public async storeData(data: string): Promise<string> {
         const params: UploadTaggedDataParams = {
             chain: this.chainId,
             name: DATA_CLOUD_NAME,
-            data: JSON.stringify(data),
+            data,
             secretPhrase: this.secretPhrase,
             feeNQT: this.feeNQT
         };
@@ -62,12 +62,12 @@ export default class ArdorCloudStorage implements IPayloadStorage {
         const issuer = response.senderRS;
 
         if (!this.isDIDPayload(data, name)) {
-            const error = ErrorHelper.createError(ErrorCode.PAYLOAD_NOT_FOUND);
+            const error = ErrorHelper.createError(ErrorCode.DIDDOC_NOT_FOUND);
             return Promise.reject(error);
         }
 
         if (!this.isPayloadSelfSet(this.accounts, issuer)) {
-            const error = ErrorHelper.createError(ErrorCode.INVALID_PAYLOAD);
+            const error = ErrorHelper.createError(ErrorCode.INVALID_DIDDOC);
             return Promise.reject(error);
         }
 
@@ -75,7 +75,7 @@ export default class ArdorCloudStorage implements IPayloadStorage {
             const dataObject = JSON.parse(data);
             return dataObject;
         } catch (e) {
-            const error = ErrorHelper.createError(ErrorCode.INVALID_PAYLOAD);
+            const error = ErrorHelper.createError(ErrorCode.INVALID_DIDDOC);
             return Promise.reject(error);
         }
     }

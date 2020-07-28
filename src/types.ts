@@ -31,16 +31,16 @@ export enum ErrorCode {
     UNKNOWN_STATE_TYPE,
     WRONG_REDIRECT_ACCOUNT_LENGTH,
     INVALID_REDIRECT_ACCOUNT,
-    WRONG_PAYLOAD_STORAGE_TYPE_LENGTH,
-    UNKNOWN_PAYLOAD_STORAGE_TYPE,
-    PAYLOAD_REFERENCE_TOO_LONG,
+    WRONG_DIDDOC_STORAGE_TYPE_LENGTH,
+    UNKNOWN_DIDDOC_STORAGE_TYPE,
+    DIDDOC_REFERENCE_TOO_LONG,
     INVALID_PROPERTY_NAME,
     TOO_MANY_ROTATION_HOPS,
 
     DID_DEACTIVATED,
 
-    PAYLOAD_NOT_FOUND,
-    INVALID_PAYLOAD,
+    DIDDOC_NOT_FOUND,
+    INVALID_DIDDOC,
 
     WRONG_CONTROLLER_ACCOUNT,
     SAME_CONTROLLER_ACCOUNTS
@@ -54,7 +54,7 @@ export enum State {
 }
 
 
-export enum PayloadStorageType {
+export enum DIDDocStorageType {
     ARDOR_CLOUD_STORAGE = "c"
 }
 
@@ -66,7 +66,7 @@ export enum DIDNetworkType {
 
 
 export type CreateDIDParams = {
-    payload: objectAny;
+    didDocument: string;
     passphrase: string;
     isTestnetDid?: boolean;
     fee?: number;
@@ -75,11 +75,12 @@ export type CreateDIDParams = {
 
 export type CreateDIDResponse = {
     did: string;
+    didDocument: string;
 }
 
 
 export type UpdateDIDDocumentParams = {
-    newPayload: objectAny;
+    newDidDocument: string;
     passphrase: string;
     did: string;
     fee?: number;
@@ -87,7 +88,7 @@ export type UpdateDIDDocumentParams = {
 }
 
 export type UpdateDIDDocumentResponse = {
-    newDidDocument: objectAny;
+    newDidDocument: string;
 }
 
 export type UpdateDIDControllerParams = {
@@ -121,7 +122,7 @@ export type ResolveDIDParams = {
 }
 
 export type ResolveDIDResponse = {
-    didDocument: objectAny;
+    didDocument: string;
 }
 
 export interface IResolution {
