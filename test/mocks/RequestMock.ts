@@ -3,8 +3,8 @@ import { GetBlockchainTransactionsParams, GetTransactionParams, GetTransactionRe
 
 export type SetAccountPropertyCallback = (params: SetAccountPropertyParams) => string;
 export type UploadTaggedDataCallback = (params: UploadTaggedDataParams) => string;
-export type GetTransactionCallback = (params: GetTransactionParams) => { transaction: Transaction };
-export type GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => { transaction: Transaction[] };
+export type GetTransactionCallback = (params: GetTransactionParams) => Transaction;
+export type GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => Transaction[];
 
 
 export default class RequestMock extends Request {
@@ -34,11 +34,11 @@ export default class RequestMock extends Request {
     }
 
     private defaultGetTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
-        return { transaction: {} as Transaction };
+        return {} as Transaction;
     }
 
     private defaultGetBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {
-        return { transaction: [{}] as Transaction[] };
+        return [] as Transaction[];
     }
 
 
@@ -60,12 +60,12 @@ export default class RequestMock extends Request {
 
     public getTransaction(url: string, params: GetTransactionParams): Promise<GetTransactionResponse> {
         const callbackReturn = this.getTransactionCallback(params);
-        return Promise.resolve(callbackReturn.transaction);
+        return Promise.resolve(callbackReturn);
     }
 
 
     public getBlockchainTransactions(url: string, params: GetBlockchainTransactionsParams): Promise<GetBlockchainTransactionsResponse> {
         const callbackReturn = this.getBcTransactionsCallback(params);
-        return Promise.resolve({ transactions: callbackReturn.transaction, requestProcessingTime: 0 });
+        return Promise.resolve({ transactions: callbackReturn, requestProcessingTime: 0 });
     }
 }
