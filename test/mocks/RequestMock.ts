@@ -1,71 +1,71 @@
-import { GetAccountPropertiesParams, GetAccountPropertiesResponse, Request, SetAccountPropertyParams, SetAccountPropertyResponse, UploadTaggedDataParams, UploadTaggedDataResponse } from "@blobaa/ardor-ts";
+import { GetBlockchainTransactionsParams, GetTransactionParams, GetTransactionResponse, Request, SetAccountPropertyParams, SetAccountPropertyResponse, Transaction, UploadTaggedDataParams, UploadTaggedDataResponse, GetBlockchainTransactionsResponse } from "@blobaa/ardor-ts";
 
 
 export type SetAccountPropertyCallback = (params: SetAccountPropertyParams) => string;
-export type GetAccountPropertyCallback = (params: GetAccountPropertiesParams) => { context: string; dataFieldsString: string };
 export type UploadTaggedDataCallback = (params: UploadTaggedDataParams) => string;
+export type GetTransactionCallback = (params: GetTransactionParams) => { transaction: Transaction };
+export type GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => { transaction: Transaction[] };
 
 
 export default class RequestMock extends Request {
-    private readonly defaultResponse = { requestProcessingTime: 0, fullHash: "dummy" };
-
     private setAccPropCallback: SetAccountPropertyCallback;
-    private getAccPropCallback: GetAccountPropertyCallback;
     private uploadDataCallback: UploadTaggedDataCallback;
+    private getTransactionCallback: GetTransactionCallback;
+    private getBcTransactionsCallback: GetBlockchainTransactionCallback;
 
 
     constructor(setAccPropCallback?: SetAccountPropertyCallback,
                 uploadTaggedDataCallback?: UploadTaggedDataCallback,
-                getAccPropCallback?: GetAccountPropertyCallback) {
+                getTransactionCallback?: GetTransactionCallback,
+                getBcTransactionsCallback?: GetBlockchainTransactionCallback) {
         super();
-        this.getAccPropCallback = getAccPropCallback || this.defaultGetAccPropCallback;
         this.setAccPropCallback = setAccPropCallback || this.defaultSetAccPropCallback;
         this.uploadDataCallback = uploadTaggedDataCallback || this.defaultUploadDataCallback;
+        this.getTransactionCallback = getTransactionCallback || this.defaultGetTransactionCallback;
+        this.getBcTransactionsCallback = getBcTransactionsCallback || this.defaultGetBcTransactionsCallback;
     }
 
-    private defaultGetAccPropCallback: GetAccountPropertyCallback = (params: GetAccountPropertiesParams) => { return { context: "", dataFieldsString: "" } }
-    private defaultSetAccPropCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => { return "" }
-    private defaultUploadDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => { return "" }
-
-
-    public getAccountProperties = (url: string, params: GetAccountPropertiesParams): Promise<GetAccountPropertiesResponse> => {
-        const callbackReturn = this.getAccPropCallback(params);
-        return Promise.resolve(this.assembleAccountPropertyResponse(callbackReturn.context, callbackReturn.dataFieldsString));
+    private defaultSetAccPropCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => {
+        return "";
     }
 
-    private assembleAccountPropertyResponse = (property: string, value: string): GetAccountPropertiesResponse => {
-        const resp = {
-            recipientRS: "",
-            recipient: "",
-            requestProcessingTime: 0,
-            /*eslint-disable @typescript-eslint/no-explicit-any*/
-            properties: [] as any
-            /*eslint-enable @typescript-eslint/no-explicit-any*/
-        };
-        if (value !== "none") {
-            resp.properties.push({
-                setterRS: "",
-                property,
-                setter: "",
-                value
-            });
-        }
-        return resp as GetAccountPropertiesResponse;
+    private defaultUploadDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => {
+        return "";
+    }
+
+    private defaultGetTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
+        return { transaction: {} as Transaction };
+    }
+
+    private defaultGetBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {
+        return { transaction: [{}] as Transaction[] };
     }
 
 
-    public setAccountProperty = (url: string, params: SetAccountPropertyParams): Promise<SetAccountPropertyResponse> => {
+    public setAccountProperty(url: string, params: SetAccountPropertyParams): Promise<SetAccountPropertyResponse> {
         const callbackReturn = this.setAccPropCallback(params);
         return Promise.resolve(this.assembleBroadcastResponse(callbackReturn));
     }
 
-    private assembleBroadcastResponse = (fullHash = "", requestProcessingTime = 0): { requestProcessingTime: number; fullHash: string } => {
+    private assembleBroadcastResponse(fullHash = "", requestProcessingTime = 0): { requestProcessingTime: number; fullHash: string } {
         return { requestProcessingTime, fullHash };
     }
 
 
-    public uploadTaggedData = (url: string, params: UploadTaggedDataParams): Promise<UploadTaggedDataResponse> => {
+    public uploadTaggedData(url: string, params: UploadTaggedDataParams): Promise<UploadTaggedDataResponse> {
         const callbackReturn = this.uploadDataCallback(params);
         return Promise.resolve(this.assembleBroadcastResponse(callbackReturn));
+    }
+
+
+    public getTransaction(url: string, params: GetTransactionParams): Promise<GetTransactionResponse> {
+        const callbackReturn = this.getTransactionCallback(params);
+        return Promise.resolve(callbackReturn.transaction);
+    }
+
+
+    public getBlockchainTransactions(url: string, params: GetBlockchainTransactionsParams): Promise<GetBlockchainTransactionsResponse> {
+        const callbackReturn = this.getBcTransactionsCallback(params);
+        return Promise.resolve({ transactions: callbackReturn.transaction, requestProcessingTime: 0 });
     }
 }
