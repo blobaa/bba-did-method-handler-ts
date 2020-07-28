@@ -20,8 +20,8 @@ export default class DataFields {
 
     public version = PROTOCOL_VERSION;
     public state = State.INACTIVE;
-    public payloadStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
-    public payloadReference = "";
+    public documentStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
+    public documentReference = "";
 
 
     constructor(dataFields?: DataFields) {
@@ -29,8 +29,8 @@ export default class DataFields {
         this.version = (dataFields && dataFields.version) || PROTOCOL_VERSION;
         this.state = (dataFields && dataFields.state) || State.INACTIVE;
         this.redirectAccount = (dataFields && dataFields.redirectAccount) || DUMMY_ACCOUNT_RS;
-        this.payloadStorageType = (dataFields && dataFields.payloadStorageType) || DIDDocStorageType.ARDOR_CLOUD_STORAGE;
-        this.payloadReference = (dataFields && dataFields.payloadReference) || "";
+        this.documentStorageType = (dataFields && dataFields.documentStorageType) || DIDDocStorageType.ARDOR_CLOUD_STORAGE;
+        this.documentReference = (dataFields && dataFields.documentReference) || "";
     }
 
 
@@ -67,14 +67,14 @@ export default class DataFields {
         this.version = dataFields[DataField.VERSION];
         this.state = State.INACTIVE;
         this.redirectAccount = DUMMY_ACCOUNT_RS;
-        this.payloadStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
-        this.payloadReference = "";
+        this.documentStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
+        this.documentReference = "";
 
         this.version = dataFields[DataField.VERSION];
         this.state = dataFields[DataField.STATE] as State;
         this.redirectAccount = dataFields[DataField.REDIRECT_ACCOUNT];
-        this.payloadStorageType = dataFields[DataField.DIDDOC_STORAGE_TYPE] as DIDDocStorageType;
-        this.payloadReference = dataFields.slice(NUMBER_OF_DATA_FIELDS - 1).join(DATA_FIELD_SEPARATOR);
+        this.documentStorageType = dataFields[DataField.DIDDOC_STORAGE_TYPE] as DIDDocStorageType;
+        this.documentReference = dataFields.slice(NUMBER_OF_DATA_FIELDS - 1).join(DATA_FIELD_SEPARATOR);
 
         return noError;
     }
@@ -196,8 +196,8 @@ export default class DataFields {
         dataFieldString += this.version + DATA_FIELD_SEPARATOR;
         dataFieldString += this.state + DATA_FIELD_SEPARATOR;
         dataFieldString += this.redirectAccount + DATA_FIELD_SEPARATOR;
-        dataFieldString += this.payloadStorageType + DATA_FIELD_SEPARATOR;
-        dataFieldString += this.payloadReference;
+        dataFieldString += this.documentStorageType + DATA_FIELD_SEPARATOR;
+        dataFieldString += this.documentReference;
 
         return dataFieldString;
     }

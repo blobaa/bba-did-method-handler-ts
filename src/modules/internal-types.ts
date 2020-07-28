@@ -25,7 +25,7 @@ export interface IDIDRevocationService {
 }
 
 
-export interface IDIDDocumentStorage {
-    retrieveData(reference: string): Promise<objectAny>;
+export interface IDataStorage {
+    retrieveData(reference: string): Promise<string>;
     storeData(data: string): Promise<string>;
 }

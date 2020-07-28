@@ -22,28 +22,28 @@ export enum ErrorCode {
     INVALID_DID_METHOD,                 // 506
     INVALID_DID_METHOD_SPECIFIC_IDENTIFIER,  // 507
 
-    DID_RESOLUTION_ERROR,
+    DID_RESOLUTION_ERROR,               // 508
 
-    WRONG_NUMBER_OF_DATA_FIELDS,
-    WRONG_VERSION_LENGTH,
-    WRONG_VERSION,
-    WRONG_STATE_TYPE_LENGTH,
-    UNKNOWN_STATE_TYPE,
-    WRONG_REDIRECT_ACCOUNT_LENGTH,
-    INVALID_REDIRECT_ACCOUNT,
-    WRONG_DIDDOC_STORAGE_TYPE_LENGTH,
-    UNKNOWN_DIDDOC_STORAGE_TYPE,
-    DIDDOC_REFERENCE_TOO_LONG,
-    INVALID_PROPERTY_NAME,
-    TOO_MANY_ROTATION_HOPS,
+    WRONG_NUMBER_OF_DATA_FIELDS,        // 509
+    WRONG_VERSION_LENGTH,               // 510
+    WRONG_VERSION,                      // 511
+    WRONG_STATE_TYPE_LENGTH,            // 512
+    UNKNOWN_STATE_TYPE,                 // 513
+    WRONG_REDIRECT_ACCOUNT_LENGTH,      // 514
+    INVALID_REDIRECT_ACCOUNT,           // 515
+    WRONG_DIDDOC_STORAGE_TYPE_LENGTH,   // 516
+    UNKNOWN_DIDDOC_STORAGE_TYPE,        // 517
+    DIDDOC_REFERENCE_TOO_LONG,          // 518
+    INVALID_PROPERTY_NAME,              // 519
+    TOO_MANY_ROTATION_HOPS,             // 520
 
-    DID_DEACTIVATED,
+    DID_DEACTIVATED,                    // 521
 
-    DIDDOC_NOT_FOUND,
-    INVALID_DIDDOC,
+    DIDDOC_NOT_FOUND,                   // 522
+    INVALID_DIDDOC,                     // 523
 
-    WRONG_CONTROLLER_ACCOUNT,
-    SAME_CONTROLLER_ACCOUNTS
+    WRONG_CONTROLLER_ACCOUNT,           // 524
+    SAME_CONTROLLER_ACCOUNTS            // 525
 }
 
 
@@ -80,7 +80,7 @@ export type CreateDIDResponse = {
 
 
 export type UpdateDIDDocumentParams = {
-    newDidDocument: string;
+    newDidDocument: objectAny;
     passphrase: string;
     did: string;
     fee?: number;
@@ -88,7 +88,7 @@ export type UpdateDIDDocumentParams = {
 }
 
 export type UpdateDIDDocumentResponse = {
-    newDidDocument: string;
+    newDidDocument: objectAny;
 }
 
 export type UpdateDIDControllerParams = {
@@ -122,7 +122,7 @@ export type ResolveDIDParams = {
 }
 
 export type ResolveDIDResponse = {
-    didDocument: string;
+    didDocument: objectAny;
 }
 
 export interface IResolution {

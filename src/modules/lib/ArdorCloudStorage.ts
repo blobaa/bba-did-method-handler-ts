@@ -1,11 +1,11 @@
 import { ChainId, GetTransactionParams, IRequest, UploadTaggedDataParams, GetTransactionResponse } from "@blobaa/ardor-ts";
 import { DATA_CLOUD_NAME } from "../../constants";
-import { IDIDDocumentStorage, objectAny } from "../internal-types";
+import { IDataStorage, objectAny } from "../internal-types";
 import { ErrorCode } from "../../types";
 import ErrorHelper from "./ErrorHelper";
 
 
-export default class ArdorCloudStorage implements IDIDDocumentStorage {
+export default class ArdorCloudStorage implements IDataStorage {
     private url = "";
     private chainId: ChainId;
     private accounts = [""];
@@ -46,7 +46,7 @@ export default class ArdorCloudStorage implements IDIDDocumentStorage {
     }
 
 
-    public async retrieveData(reference: string): Promise<objectAny> {
+    public async retrieveData(reference: string): Promise<string> {
         const params: GetTransactionParams = {
             chain: this.chainId,
             fullHash: reference
@@ -56,35 +56,29 @@ export default class ArdorCloudStorage implements IDIDDocumentStorage {
         return this.extractData(response);
     }
 
-    private extractData(response: GetTransactionResponse): Promise<objectAny> {
+    private extractData(response: GetTransactionResponse): Promise<string> {
         const data = response.attachment.data;
         const name = response.attachment.name;
         const issuer = response.senderRS;
 
-        if (!this.isDIDPayload(data, name)) {
+        if (!this.isMethodData(data, name)) {
             const error = ErrorHelper.createError(ErrorCode.DIDDOC_NOT_FOUND);
             return Promise.reject(error);
         }
 
-        if (!this.isPayloadSelfSet(this.accounts, issuer)) {
+        if (!this.isDataSelfSet(this.accounts, issuer)) {
             const error = ErrorHelper.createError(ErrorCode.INVALID_DIDDOC);
             return Promise.reject(error);
         }
 
-        try {
-            const dataObject = JSON.parse(data);
-            return dataObject;
-        } catch (e) {
-            const error = ErrorHelper.createError(ErrorCode.INVALID_DIDDOC);
-            return Promise.reject(error);
-        }
+        return data;
     }
 
-    private isDIDPayload(data: string | undefined, name: string | undefined): boolean {
+    private isMethodData(data: string | undefined, name: string | undefined): boolean {
         return (data && name && name === DATA_CLOUD_NAME) ? true : false;
     }
 
-    private isPayloadSelfSet(accounts: string[], issuer: string): boolean {
+    private isDataSelfSet(accounts: string[], issuer: string): boolean {
         let isSelfSet = false;
         this.accounts.forEach((account) => {
             if (account === issuer) {

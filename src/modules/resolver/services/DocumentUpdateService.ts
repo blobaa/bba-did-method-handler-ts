@@ -1,6 +1,6 @@
 import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { DIDDocStorageType, ErrorCode, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../../types";
-import { IDIDDocumentStorage, IDIDDocumentUpdateService } from "../../internal-types";
+import { IDataStorage, IDIDDocumentUpdateService } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import Attestation from "../../lib/Attestation";
 import DataFields from "../../lib/DataField";
@@ -39,8 +39,8 @@ export default class DocumentUpdateService implements IDIDDocumentUpdateService 
         }
 
 
-        let documentStorage = {} as IDIDDocumentStorage;
-        if (info.dataFields.payloadStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
+        let documentStorage = {} as IDataStorage;
+        if (info.dataFields.documentStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
             documentStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         }
 
@@ -48,7 +48,7 @@ export default class DocumentUpdateService implements IDIDDocumentUpdateService 
 
 
         const dataFields = new DataFields(info.dataFields);
-        dataFields.payloadReference = reference;
+        dataFields.documentReference = reference;
 
         const propertyParams: SetAccountPropertyParams = {
             chain: ChainId.IGNIS,
