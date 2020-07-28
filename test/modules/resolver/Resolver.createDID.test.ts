@@ -10,7 +10,7 @@ if (config.test.createDID) {
         test("createDID testnet success", async () => {
             const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => {
                 expect(params.chain).toBe(ChainId.IGNIS);
-                expect(params.data).toBe(JSON.stringify(config.dummyDidDocument.doc1));
+                expect(params.data).toBe(config.dummyDidDocument.doc1);
                 expect(params.name).toBe("blobaa-did-document-payload");
                 expect(params.secretPhrase).toBe(config.account.alice.secret);
                 return config.dummyHash.dataCloud;
@@ -40,6 +40,7 @@ if (config.test.createDID) {
             };
 
             const response = await testResolver.createDID(config.node.url.testnet, didParams);
+
             const didElements = response.did.split(":");
             const didPrefix = didElements[0];
             const didMethod = didElements[1];
@@ -50,6 +51,8 @@ if (config.test.createDID) {
             expect(didMethod).toBe("baa");
             expect(didNetwork).toBe("t");
             expect(didTxHash).toBe(config.dummyHash.property);
+
+            expect(response.didDocument).toBe(config.dummyDidDocument.doc1);
         });
 
 
@@ -79,6 +82,8 @@ if (config.test.createDID) {
             expect(didPrefix).toBe("did");
             expect(didMethod).toBe("baa");
             expect(didTxHash).toBe(config.dummyHash.property);
+
+            expect(response.didDocument).toBe(config.dummyDidDocument.doc1);
         });
     });
 } else {

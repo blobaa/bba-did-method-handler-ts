@@ -1,7 +1,7 @@
 
 const config = {
     test: {
-        createDID: false,
+        createDID: true,
         resolveDID: true,
     },
     node: {
