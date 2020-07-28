@@ -27,11 +27,7 @@ export default class RequestWrapper implements IRequest {
 
 
     public async getAccountProperties(url: string, params: GetAccountPropertiesParams): Promise<GetAccountPropertiesResponse> {
-        try {
-            return await this.request.getAccountProperties(url, params);
-        } catch (error) {
-            return Promise.reject(this.getError(error));
-        }
+        throw new Error("Method not implemented.");
     }
 
 
