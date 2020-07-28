@@ -10,10 +10,10 @@ if (config.test.createDID) {
         test("createDID testnet success", async () => {
             const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => {
                 expect(params.chain).toBe(ChainId.IGNIS);
-                expect(params.data).toBe(config.dummyDidDocument.doc1);
+                expect(params.data).toBe(JSON.stringify(config.didDocument.doc1));
                 expect(params.name).toBe("blobaa-did-document-payload");
                 expect(params.secretPhrase).toBe(config.account.alice.secret);
-                return config.dummyHash.dataCloud;
+                return config.hash.dataCloud;
             };
 
             const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => {
@@ -27,14 +27,14 @@ if (config.test.createDID) {
                 expect(didPropertyPrefix).toBe("did://");
                 expect(didId.length).toBe(20);
 
-                return config.dummyHash.property;
+                return config.hash.property;
             };
 
             const testResolver = new Resolver(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
 
 
             const didParams: CreateDIDParams = {
-                didDocument: config.dummyDidDocument.doc1,
+                didDocument: config.didDocument.doc1,
                 passphrase: config.account.alice.secret,
                 isTestnetDid: true
             };
@@ -50,26 +50,26 @@ if (config.test.createDID) {
             expect(didPrefix).toBe("did");
             expect(didMethod).toBe("baa");
             expect(didNetwork).toBe("t");
-            expect(didTxHash).toBe(config.dummyHash.property);
+            expect(didTxHash).toBe(config.hash.property);
 
-            expect(response.didDocument).toBe(config.dummyDidDocument.doc1);
+            expect(response.didDocument).toBe(config.didDocument.doc1);
         });
 
 
         test("createDID success", async () => {
             const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => {
-                return config.dummyHash.dataCloud;
+                return config.hash.dataCloud;
             };
 
             const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => {
-                return config.dummyHash.property;
+                return config.hash.property;
             };
 
             const testResolver = new Resolver(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
 
 
             const didParams: CreateDIDParams = {
-                didDocument: config.dummyDidDocument.doc1,
+                didDocument: config.didDocument.doc1,
                 passphrase: config.account.alice.secret
             };
 
@@ -81,9 +81,9 @@ if (config.test.createDID) {
 
             expect(didPrefix).toBe("did");
             expect(didMethod).toBe("baa");
-            expect(didTxHash).toBe(config.dummyHash.property);
+            expect(didTxHash).toBe(config.hash.property);
 
-            expect(response.didDocument).toBe(config.dummyDidDocument.doc1);
+            expect(response.didDocument).toBe(config.didDocument.doc1);
         });
     });
 } else {
