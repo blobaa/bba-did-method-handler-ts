@@ -1,7 +1,7 @@
-import { ChainId, GetTransactionParams, IRequest, UploadTaggedDataParams, GetTransactionResponse } from "@blobaa/ardor-ts";
+import { ChainId, GetTransactionParams, GetTransactionResponse, IRequest, UploadTaggedDataParams } from "@blobaa/ardor-ts";
 import { DATA_CLOUD_NAME } from "../../constants";
-import { IDataStorage, objectAny } from "../internal-types";
 import { ErrorCode } from "../../types";
+import { IDataStorage } from "../internal-types";
 import ErrorHelper from "./ErrorHelper";
 
 

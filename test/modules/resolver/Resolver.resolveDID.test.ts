@@ -1,7 +1,7 @@
-import { GetTransactionParams, Transaction, GetBlockchainTransactionsParams, ChainId, ChildTransactionType, ChildTransactionSubtype } from "@blobaa/ardor-ts";
+import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, GetTransactionParams } from "@blobaa/ardor-ts";
 import { Error, ErrorCode, ResolveDIDParams, Resolver, resolver } from "../../../src/index";
 import config from "../../config";
-import RequestMock, { GetTransactionCallback, GetBlockchainTransactionCallback } from "../../mocks/RequestMock";
+import RequestMock, { GetBlockchainTransactionCallback, GetTransactionCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
