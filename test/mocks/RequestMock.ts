@@ -1,4 +1,5 @@
 import { GetBlockchainTransactionsParams, GetTransactionParams, GetTransactionResponse, Request, SetAccountPropertyParams, SetAccountPropertyResponse, Transaction, UploadTaggedDataParams, UploadTaggedDataResponse, GetBlockchainTransactionsResponse } from "@blobaa/ardor-ts";
+import DefaultTransaction from "../modules/lib/DefaultTransaction";
 
 
 export type SetAccountPropertyCallback = (params: SetAccountPropertyParams) => string;
@@ -34,11 +35,11 @@ export default class RequestMock extends Request {
     }
 
     private defaultGetTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
-        return {} as Transaction;
+        return DefaultTransaction.create();
     }
 
     private defaultGetBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {
-        return [] as Transaction[];
+        return [];
     }
 
 
