@@ -44,7 +44,7 @@ export default class DocumentUpdateService implements IDIDDocumentUpdateService 
             documentStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         }
 
-        const reference = await documentStorage.storeData(params.newDidDocument);
+        const reference = await documentStorage.storeData(JSON.stringify(params.newDidDocument));
 
 
         const dataFields = new DataFields(info.dataFields);
