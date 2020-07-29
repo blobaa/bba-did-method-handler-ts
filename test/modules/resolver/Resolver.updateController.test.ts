@@ -1,9 +1,9 @@
 import { ChainId, GetTransactionParams, SetAccountPropertyParams } from "@blobaa/ardor-ts";
-import { Resolver, UpdateDIDControllerParams } from "../../../src/index";
+import { ACCOUNT_PREFIX } from "../../../src/constants";
+import { Error, Resolver, UpdateDIDControllerParams, ErrorCode } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
-import { ACCOUNT_PREFIX } from "../../../src/constants";
 
 
 if (config.test.updateDIDController) {
@@ -73,14 +73,50 @@ if (config.test.updateDIDController) {
             };
 
             const response = await testResolver.updateDIDController(config.node.url.testnet, didParams);
-            expect(response.newControllerAccount).toEqual(config.account.bob.address);
-            expect(response.oldControllerAccount).toEqual(config.account.alice.address);
-            expect(response.did).toEqual("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
+            expect(response.newControllerAccount).toBe(config.account.bob.address);
+            expect(response.oldControllerAccount).toBe(config.account.alice.address);
+            expect(response.did).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
         });
 
 
-        /* TODO: add more failing tests */
+        test("updateDIDController wrong controller error", async () => {
+            const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
+                const transaction = DefaultTransaction.create();
 
+                expect(params.chain).toBe(ChainId.IGNIS);
+                expect(params.fullHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
+
+                transaction.attachment = {
+                    property: "did://dUZPPiukfaKyLuAaGUcZ",
+                    value: "001|a|0000-0000-0000-00000|c|1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340"
+                };
+                transaction.senderRS = config.account.charlie.address;
+                transaction.recipientRS = config.account.charlie.address;
+                transaction.block = "10";
+                transaction.blockTimestamp = 1000;
+
+                return transaction;
+            };
+
+
+            const testResolver = new Resolver(new RequestMock(undefined, undefined, getTransactionCallback));
+
+
+            const didParams: UpdateDIDControllerParams = {
+                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                passphrase: config.account.alice.secret,
+                newPassphrase: config.account.bob.secret
+            };
+
+            try {
+                await testResolver.updateDIDController(config.node.url.testnet, didParams);
+                fail("should not reach here");
+            } catch (e) {
+                const error = e as Error;
+                expect(error.code).toBe(ErrorCode.WRONG_CONTROLLER_ACCOUNT);
+                expect(error.description).toBeTruthy();
+            }
+        });
     });
 } else {
     test("dummy", () => {
