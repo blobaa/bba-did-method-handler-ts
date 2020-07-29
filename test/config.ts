@@ -3,7 +3,8 @@ const config = {
     test: {
         createDID: true,
         resolveDID: true,
-        updateDIDController: true
+        updateDIDController: true,
+        updateDIDDocument: true
     },
     node: {
         url: {
