@@ -1,7 +1,7 @@
 {
   "name": "@blobaa/did-resolver-ts",
   "version": "1.0.0",
-  "description": "An implementation of the Blobaa DID method written in TypeScript",
+  "description": "An implementation of the baa DID method written in TypeScript",
   "author": "atz3n",
   "license": "MIT",
   "repository": {
@@ -35,6 +35,6 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@blobaa/ardor-ts": "^2.6.3"
+    "@blobaa/ardor-ts": "^2.6.4"
   }
 }
