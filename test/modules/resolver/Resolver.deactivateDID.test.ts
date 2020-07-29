@@ -9,8 +9,7 @@ if (config.test.deactivateDID) {
     describe("Resolver deactivateDID method tests", () => {
 
         test("deactivateDID success", async () => {
-            const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
-                // 1. get account property
+            const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => { // 1. get account property
                 const transaction = DefaultTransaction.create();
                 expect(params.chain).toBe(ChainId.IGNIS);
                 expect(params.fullHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");

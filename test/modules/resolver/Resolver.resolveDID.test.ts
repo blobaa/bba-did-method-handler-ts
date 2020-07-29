@@ -45,8 +45,7 @@ if (config.test.resolveDID) {
 
 
             let checkedForUpdate = false;
-            const getBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {
-                // 2. get updated did attestations
+            const getBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {// 2. get updated did attestations
                 expect(params.account).toBe(config.account.alice.address);
                 expect(params.chain).toBe(ChainId.IGNIS);
                 expect(params.type).toBe(ChildTransactionType.ACCOUNT_PROPERTY);
@@ -207,8 +206,7 @@ if (config.test.resolveDID) {
             };
 
 
-            const getBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {
-                // 2. get updated did attestations
+            const getBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {// 2. get updated did attestations
                 const transactions: Transaction[] = [];
                 transactions.push(DefaultTransaction.create());
 
