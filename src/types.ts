@@ -88,6 +88,7 @@ export type UpdateDIDDocumentParams = {
 }
 
 export type UpdateDIDDocumentResponse = {
+    did: string;
     newDidDocument: objectAny;
 }
 
@@ -100,6 +101,7 @@ export type UpdateDIDControllerParams = {
 }
 
 export type UpdateDIDControllerResponse = {
+    did: string;
     newControllerAccount: string;
     oldControllerAccount: string;
 };
@@ -122,6 +124,7 @@ export type ResolveDIDParams = {
 }
 
 export type ResolveDIDResponse = {
+    did: string;
     didDocument: objectAny;
 }
 

@@ -62,6 +62,6 @@ export default class DocumentUpdateService implements IDIDDocumentUpdateService 
         await this.request.setAccountProperty(url, propertyParams);
 
 
-        return { newDidDocument: params.newDidDocument };
+        return { newDidDocument: params.newDidDocument, did: params.did };
     }
 }

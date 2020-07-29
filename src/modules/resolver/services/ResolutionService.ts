@@ -36,7 +36,7 @@ export default class ResolutionService implements IDIDResolutionService {
         const data = await documentStorage.retrieveData(info.dataFields.documentReference);
         try {
             const document = JSON.parse(data);
-            return { didDocument: document };
+            return { didDocument: document, did: params.did };
         } catch (e) {
             return Promise.reject(ErrorHelper.createError(ErrorCode.INVALID_DIDDOC));
         }

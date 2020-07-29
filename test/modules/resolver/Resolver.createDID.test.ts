@@ -8,15 +8,17 @@ if (config.test.createDID) {
     describe("Resolver createDID method tests", () => {
 
         test("createDID testnet success", async () => {
-            const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => {
+            const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => { // 1. set did document
                 expect(params.chain).toBe(ChainId.IGNIS);
                 expect(params.data).toBe(JSON.stringify(config.didDocument.doc1));
                 expect(params.name).toBe("blobaa-did-document-payload");
                 expect(params.secretPhrase).toBe(config.account.alice.secret);
-                return config.hash.dataCloud;
+
+                return "1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340";
             };
 
-            const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => {
+
+            const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => { // 2. self attest account
                 expect(params.chain).toBe(ChainId.IGNIS);
                 expect(params.secretPhrase).toBe(config.account.alice.secret);
                 expect(params.recipient).toBe(config.account.alice.address);
@@ -27,8 +29,9 @@ if (config.test.createDID) {
                 expect(didPropertyPrefix).toBe("did://");
                 expect(didId.length).toBe(20);
 
-                return config.hash.property;
+                return "5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             };
+
 
             const testResolver = new Resolver(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
 
@@ -50,7 +53,7 @@ if (config.test.createDID) {
             expect(didPrefix).toBe("did");
             expect(didMethod).toBe("baa");
             expect(didNetwork).toBe("t");
-            expect(didTxHash).toBe(config.hash.property);
+            expect(didTxHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
 
             expect(response.didDocument).toBe(config.didDocument.doc1);
         });
@@ -58,11 +61,11 @@ if (config.test.createDID) {
 
         test("createDID success", async () => {
             const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => {
-                return config.hash.dataCloud;
+                return "1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340";
             };
 
             const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => {
-                return config.hash.property;
+                return "5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             };
 
             const testResolver = new Resolver(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
@@ -81,7 +84,7 @@ if (config.test.createDID) {
 
             expect(didPrefix).toBe("did");
             expect(didMethod).toBe("baa");
-            expect(didTxHash).toBe(config.hash.property);
+            expect(didTxHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
 
             expect(response.didDocument).toBe(config.didDocument.doc1);
         });

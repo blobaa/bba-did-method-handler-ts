@@ -44,7 +44,7 @@ export default class ControllerUpdateService implements IDIDControllerUpdateServ
         await this.updateControllerAccount(url, ChainId.IGNIS, params, info.dataFields);
 
 
-        return { newControllerAccount , oldControllerAccount: currentControllerAccount };
+        return { newControllerAccount , oldControllerAccount: currentControllerAccount, did: params.did };
     }
 
     private async updateControllerAccount(url: string, chainId: ChainId.IGNIS, params: UpdateDIDControllerParams, dataFields: DataFields): Promise<void> {

@@ -1,7 +1,7 @@
 import { account, ChainId, IRequest, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { DID_ID_LENGTH } from "../../../constants";
-import { CreateDIDParams, CreateDIDResponse, DIDNetworkType, DIDDocStorageType, State } from "../../../types";
-import { IDIDCreationService, IDataStorage } from "../../internal-types";
+import { CreateDIDParams, CreateDIDResponse, DIDDocStorageType, DIDNetworkType, State } from "../../../types";
+import { IDataStorage, IDIDCreationService } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import DID from "../../lib/DID";
 import DataFields from "./../../lib/DataField";

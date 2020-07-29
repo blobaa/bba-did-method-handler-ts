@@ -3,6 +3,7 @@ const config = {
     test: {
         createDID: true,
         resolveDID: true,
+        updateDIDController: true
     },
     node: {
         url: {
@@ -27,7 +28,7 @@ const config = {
             address: "ARDOR-DN2R-M98S-KHN4-8ASUT",
             secret: "naked thread reason wonder open wife princess least crowd lick nightmare trouble"
         },
-        erin: {
+        erwin: {
             address: "ARDOR-3U2L-ZZJ2-MFT8-AVR3J",
             secret: "grew void simple flirt actually depress leg sick coward garden pride comfort"
         },
@@ -35,10 +36,6 @@ const config = {
             address: "ARDOR-568B-CVYX-LQUN-GT6KG",
             secret: "somehow haunt memory forever pull mouth stage sink depress couch desperate waste"
         }
-    },
-    hash: {
-        dataCloud: "1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340",
-        property: "d870c95990be4cdb3d10703507932c17bf40bc67c71018d100123e2c49963e72"
     },
     didDocument: {
         doc1: {
@@ -49,10 +46,6 @@ const config = {
             var21: "dummy-variable-21",
             var22: "dummy-variable-22"
         },
-    },
-    did: {
-        property: "did://dUZPPiukfaKyLuAaGUcZ",
-        string: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
     }
 };
 

@@ -68,6 +68,7 @@ if (config.test.resolveDID) {
 
             const response = await testResolver.resolveDID(config.node.url.testnet, didParams);
             expect(response.didDocument).toEqual(config.didDocument.doc1);
+            expect(response.did).toEqual("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
             expect(checkedForUpdate).toBeTruthy();
         });
 
@@ -343,7 +344,7 @@ if (config.test.resolveDID) {
 
 
             const didParams: ResolveDIDParams = {
-                did: config.did.string
+                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
             try {
