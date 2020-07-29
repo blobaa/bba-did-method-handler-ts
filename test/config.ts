@@ -4,7 +4,8 @@ const config = {
         createDID: true,
         resolveDID: true,
         updateDIDController: true,
-        updateDIDDocument: true
+        updateDIDDocument: true,
+        deactivateDID: true
     },
     node: {
         url: {
