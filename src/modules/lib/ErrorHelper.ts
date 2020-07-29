@@ -16,9 +16,8 @@ export default class ErrorHelper {
         };
 
         const _params = params || [];
-        console.log("TODO: create meaningful errors");
-        switch (errorCode) {
 
+        switch (errorCode) {
             case ErrorCode.WRONG_NUMBER_OF_DID_FIELDS: {
                 error.description = "Wrong number of did fields.";
                 return error;
