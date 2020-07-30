@@ -1,26 +1,52 @@
-# Blobaa DID Method Specification v1.0
+# did-resolver-ts
 
-## Method-specific DID syntax
+A DID resolver for the baa DID method.
 
-The following ABNF defines the blobaa-specific DID scheme:
+This library implements the blobaa (baa) DID method specification.
 
-```ABNF
-blobaa-did = "did:baa:" blboaa-identifier
-blobaa-identifier = [ ardor-network ":" ] ardor-tx-hash
-ardor-network = "m" / "t"
-ardor-tx-hash = 64HEXDIG
+
+## Table of Contents
+
+- [did-resolver-ts](#did-resolver-ts)
+  - [Table of Contents](#table-of-contents)
+  - [Background](#background)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [API](#api)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+
+## Background
+
+TBD
+
+
+## Install
+
+```
+npm install @blobaa/did-resolver-ts
 ```
 
 
+## Usage
 
-did:bba:m:f30e8cff75e5111da9943c123733d697120914bbef1b5010732ad409cbf29ee2
-
-
-https://tools.ietf.org/html/rfc5234
-
-http://cryptocoinjs.com/modules/misc/bs58/
+TBD
 
 
+## API
 
-## Props
+TBD
+
+
+## Contributing
+
+PRs accepted.
+
+If editing the Readme, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
+
+
+## License
+
+[MIT](./LICENSE) © Attila Aldemir
 
