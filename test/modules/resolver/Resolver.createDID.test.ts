@@ -37,7 +37,7 @@ if (config.test.createDID) {
 
 
             const didParams: CreateDIDParams = {
-                didDocument: config.didDocument.doc2.resolved,
+                didDocumentTemplate: config.didDocument.doc2.resolved,
                 passphrase: config.account.alice.secret,
                 isTestnetDid: true
             };
@@ -72,7 +72,7 @@ if (config.test.createDID) {
 
 
             const didParams: CreateDIDParams = {
-                didDocument: config.didDocument.doc1.cleaned,
+                didDocumentTemplate: config.didDocument.doc1.cleaned,
                 passphrase: config.account.alice.secret
             };
 

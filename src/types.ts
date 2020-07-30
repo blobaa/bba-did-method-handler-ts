@@ -66,7 +66,7 @@ export enum DIDNetworkType {
 
 
 export type CreateDIDParams = {
-    didDocument: objectAny;
+    didDocumentTemplate: objectAny;
     passphrase: string;
     isTestnetDid?: boolean;
     fee?: number;
@@ -80,7 +80,7 @@ export type CreateDIDResponse = {
 
 
 export type UpdateDIDDocumentParams = {
-    newDidDocument: objectAny;
+    newDidDocumentTemplate: objectAny;
     passphrase: string;
     did: string;
     fee?: number;

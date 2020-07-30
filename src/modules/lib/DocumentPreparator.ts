@@ -1,7 +1,7 @@
 import { objectAny } from "@blobaa/ardor-ts";
 
 
-export default class PreparedDocument {
+export default class DocumentPreparator {
     private document: objectAny = {};
 
 

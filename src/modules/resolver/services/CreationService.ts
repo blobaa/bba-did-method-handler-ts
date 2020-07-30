@@ -4,7 +4,7 @@ import { CreateDIDParams, CreateDIDResponse, DIDDocStorageType, DIDNetworkType, 
 import { IDataStorage, IDIDCreationService } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import DID from "../../lib/DID";
-import PreparedDocument from "../../lib/PreparedDocument";
+import DocumentPreparator from "../../lib/DocumentPreparator";
 import DataFields from "./../../lib/DataField";
 import Nonce from "./../../lib/Nonce";
 
@@ -19,8 +19,8 @@ export default class CreationService implements IDIDCreationService {
 
 
     public async run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse> {
-        const preparedDocument = new PreparedDocument(params.didDocument);
-        preparedDocument.clean();
+        const documentPreparator = new DocumentPreparator(params.didDocumentTemplate);
+        documentPreparator.clean();
 
 
         let documentStorage = {} as IDataStorage;
@@ -29,7 +29,7 @@ export default class CreationService implements IDIDCreationService {
             documentStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         }
 
-        const reference = await documentStorage.storeData(JSON.stringify(preparedDocument.getDocument()));
+        const reference = await documentStorage.storeData(JSON.stringify(documentPreparator.getDocument()));
 
 
         const dataFields = new DataFields();
@@ -55,7 +55,7 @@ export default class CreationService implements IDIDCreationService {
         const did = didFields.createDidString();
 
 
-        preparedDocument.addDID(did);
-        return { did, didDocument: preparedDocument.getDocument() };
+        documentPreparator.addDID(did);
+        return { did, didDocument: documentPreparator.getDocument() };
     }
 }

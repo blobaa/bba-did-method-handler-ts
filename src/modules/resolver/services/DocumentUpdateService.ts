@@ -6,7 +6,7 @@ import Attestation from "../../lib/Attestation";
 import DataFields from "../../lib/DataField";
 import DID from "../../lib/DID";
 import ErrorHelper from "../../lib/ErrorHelper";
-import PreparedDocument from "../../lib/PreparedDocument";
+import DocumentPreparator from "../../lib/DocumentPreparator";
 
 
 export default class DocumentUpdateService implements IDIDDocumentUpdateService {
@@ -40,8 +40,8 @@ export default class DocumentUpdateService implements IDIDDocumentUpdateService 
         }
 
 
-        const preparedDocument = new PreparedDocument(params.newDidDocument);
-        preparedDocument.clean();
+        const documentPreparator = new DocumentPreparator(params.newDidDocumentTemplate);
+        documentPreparator.clean();
 
 
         let documentStorage = {} as IDataStorage;
@@ -49,7 +49,7 @@ export default class DocumentUpdateService implements IDIDDocumentUpdateService 
             documentStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         }
 
-        const reference = await documentStorage.storeData(JSON.stringify(preparedDocument.getDocument()));
+        const reference = await documentStorage.storeData(JSON.stringify(documentPreparator.getDocument()));
 
 
         const dataFields = new DataFields(info.dataFields);
@@ -67,7 +67,7 @@ export default class DocumentUpdateService implements IDIDDocumentUpdateService 
         await this.request.setAccountProperty(url, propertyParams);
 
 
-        preparedDocument.addDID(params.did);
-        return { newDidDocument: preparedDocument.getDocument(), did: params.did };
+        documentPreparator.addDID(params.did);
+        return { newDidDocument: documentPreparator.getDocument(), did: params.did };
     }
 }

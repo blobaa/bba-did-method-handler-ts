@@ -54,7 +54,7 @@ if (config.test.updateDIDDocument) {
             const didParams: UpdateDIDDocumentParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 passphrase: config.account.alice.secret,
-                newDidDocument: config.didDocument.doc2.cleaned
+                newDidDocumentTemplate: config.didDocument.doc2.cleaned
             };
 
             const response = await testResolver.updateDIDDocument(config.node.url.testnet, didParams);
@@ -90,7 +90,7 @@ if (config.test.updateDIDDocument) {
             const didParams: UpdateDIDDocumentParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 passphrase: config.account.alice.secret,
-                newDidDocument: config.didDocument.doc2.cleaned
+                newDidDocumentTemplate: config.didDocument.doc2.cleaned
             };
 
             try {
