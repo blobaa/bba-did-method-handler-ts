@@ -1,0 +1,65 @@
+name: Npm Publishing
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v1
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+    
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Lint project
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests for Node.js
+        run: npm run test-build-node
+
+      - name: Run tests for browser
+        run: npm run test-build-browser
+        
+        
+  publish-npmjs:
+    needs: run-tests
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v1
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+        
+      - name: Get package version
+        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+          
+      - name: Set up package version
+        run: npm --no-git-tag-version --allow-same-version version $RELEASE_VERSION
+   
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+      
+      - name: Create and publish package
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
