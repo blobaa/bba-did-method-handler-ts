@@ -2,7 +2,7 @@
 
 A DID resolver for the baa DID method.
 
-This library implements the blobaa (baa) DID method specification.
+This library implements the blobaa (baa) DID method [specification](https://github.com/blobaa/did-resolver-ts/blob/master/docs/blobaa-did-spec.md).
 
 
 ## Table of Contents
@@ -12,11 +12,11 @@ This library implements the blobaa (baa) DID method specification.
   - [Background](#background)
   - [Install](#install)
   - [Usage](#usage)
-    - [Create and register DID and DID Document](#create-and-register-did-and-did-document)
+    - [Create and Register DID and DID Document](#create-and-register-did-and-did-document)
     - [Resolve DID](#resolve-did)
     - [Update DID Document](#update-did-document)
     - [Update DID Controller Account](#update-did-controller-account)
-    - [deactivate DID](#deactivate-did)
+    - [Deactivate DID](#deactivate-did)
     - [Error Handling](#error-handling)
   - [API](#api)
   - [Contributing](#contributing)
@@ -37,7 +37,7 @@ npm install @blobaa/did-resolver-ts
 
 ## Usage
 
-### Create and register DID and DID Document
+### Create and Register DID and DID Document
 
 ````typescript
 import { DIDDocKey, DIDDocRelationship, DIDDocRelationshipType, DIDDocument } from "@blobaa/did-document-ts";
@@ -269,7 +269,7 @@ updateDIDController();
 ````
 
 
-### deactivate DID
+### Deactivate DID
 
 ````typescript
 import { DeactivateDIDParams, resolver } from "@blobaa/did-resolver-ts";
@@ -323,7 +323,7 @@ const errorHandlingExample = async(): Promise<void> => {
 
         /* every error has an error code that corresponds to the ErrorCode enum */
         if (error.code === ErrorCode.DID_DEACTIVATED) {
-            //  handle connection error here
+            //  handle did deactivated error here
         }
 
         console.log(error.code);
