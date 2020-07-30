@@ -5,6 +5,7 @@ import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import Attestation from "../../lib/Attestation";
 import DID from "../../lib/DID";
 import ErrorHelper from "../../lib/ErrorHelper";
+import PreparedDocument from "../../lib/PreparedDocument";
 
 
 export default class ResolutionService implements IDIDResolutionService {
@@ -31,12 +32,17 @@ export default class ResolutionService implements IDIDResolutionService {
         if (info.dataFields.documentStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
             documentStorage = new ArdorCloudStorage(this.request, ChainId.IGNIS, url, info.accounts);
         }
-
-
         const data = await documentStorage.retrieveData(info.dataFields.documentReference);
+
+
         try {
             const document = JSON.parse(data);
-            return { didDocument: document, did: params.did };
+
+            const preparedDocument = new PreparedDocument(document);
+            preparedDocument.clean();
+            preparedDocument.addDID(params.did);
+
+            return { didDocument: preparedDocument.getDocument(), did: params.did };
         } catch (e) {
             return Promise.reject(ErrorHelper.createError(ErrorCode.INVALID_DIDDOC));
         }

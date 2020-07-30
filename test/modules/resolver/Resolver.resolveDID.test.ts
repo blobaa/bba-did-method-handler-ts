@@ -33,7 +33,7 @@ if (config.test.resolveDID) {
                     expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
 
                     transaction.attachment = {
-                        data: JSON.stringify(config.didDocument.doc1),
+                        data: JSON.stringify(config.didDocument.doc1.cleaned),
                         name: "blobaa-did-document-payload"
                     };
                     transaction.senderRS = config.account.alice.address;
@@ -66,7 +66,7 @@ if (config.test.resolveDID) {
             };
 
             const response = await testResolver.resolveDID(config.node.url.testnet, didParams);
-            expect(response.didDocument).toEqual(config.didDocument.doc1);
+            expect(response.didDocument).toEqual(config.didDocument.doc1.resolved);
             expect(response.did).toEqual("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
             expect(checkedForUpdate).toBeTruthy();
         });
@@ -93,7 +93,7 @@ if (config.test.resolveDID) {
                     expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
 
                     transaction.attachment = {
-                        data: JSON.stringify(config.didDocument.doc1),
+                        data: JSON.stringify(config.didDocument.doc1.cleaned),
                         name: "blobaa-did-document-payload"
                     };
                     transaction.senderRS = config.account.alice.address;
@@ -173,7 +173,8 @@ if (config.test.resolveDID) {
             };
 
             const response = await testResolver.resolveDID(config.node.url.testnet, didParams);
-            expect(response.didDocument).toEqual(config.didDocument.doc1);
+
+            expect(response.didDocument).toEqual(config.didDocument.doc1.resolved);
             expect(checkedForUpdate).toBeTruthy();
         });
 

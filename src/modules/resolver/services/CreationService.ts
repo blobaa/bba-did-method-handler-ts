@@ -4,6 +4,7 @@ import { CreateDIDParams, CreateDIDResponse, DIDDocStorageType, DIDNetworkType, 
 import { IDataStorage, IDIDCreationService } from "../../internal-types";
 import ArdorCloudStorage from "../../lib/ArdorCloudStorage";
 import DID from "../../lib/DID";
+import PreparedDocument from "../../lib/PreparedDocument";
 import DataFields from "./../../lib/DataField";
 import Nonce from "./../../lib/Nonce";
 
@@ -18,13 +19,17 @@ export default class CreationService implements IDIDCreationService {
 
 
     public async run(url: string, params: CreateDIDParams): Promise<CreateDIDResponse> {
-        const payloadStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
+        const preparedDocument = new PreparedDocument(params.didDocument);
+        preparedDocument.clean();
+
 
         let documentStorage = {} as IDataStorage;
+        const payloadStorageType = DIDDocStorageType.ARDOR_CLOUD_STORAGE;
         if (payloadStorageType === DIDDocStorageType.ARDOR_CLOUD_STORAGE) {
             documentStorage = new ArdorCloudStorage(this.request, params.passphrase, ChainId.IGNIS, url, params.feeNQT);
         }
-        const reference = await documentStorage.storeData(JSON.stringify(params.didDocument));
+
+        const reference = await documentStorage.storeData(JSON.stringify(preparedDocument.getDocument()));
 
 
         const dataFields = new DataFields();
@@ -49,6 +54,8 @@ export default class CreationService implements IDIDCreationService {
         didFields.fullHash = propertyResponse.fullHash;
         const did = didFields.createDidString();
 
-        return { did, didDocument: params.didDocument };
+
+        preparedDocument.addDID(did);
+        return { did, didDocument: preparedDocument.getDocument() };
     }
 }

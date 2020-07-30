@@ -9,8 +9,7 @@ if (config.test.updateDIDDocument) {
     describe("Resolver updateDIDDocument method tests", () => {
 
         test("updateDIDDocument success", async () => {
-            const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
-                // 1. get account property
+            const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => { // 1. get account property
                 const transaction = DefaultTransaction.create();
                 expect(params.chain).toBe(ChainId.IGNIS);
                 expect(params.fullHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
@@ -30,7 +29,7 @@ if (config.test.updateDIDDocument) {
 
             const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => { // 2. set new did document
                 expect(params.chain).toBe(ChainId.IGNIS);
-                expect(params.data).toBe(JSON.stringify(config.didDocument.doc2));
+                expect(params.data).toBe(JSON.stringify(config.didDocument.doc2.cleaned));
                 expect(params.name).toBe("blobaa-did-document-payload");
                 expect(params.secretPhrase).toBe(config.account.alice.secret);
 
@@ -55,13 +54,13 @@ if (config.test.updateDIDDocument) {
             const didParams: UpdateDIDDocumentParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 passphrase: config.account.alice.secret,
-                newDidDocument: config.didDocument.doc2
+                newDidDocument: config.didDocument.doc2.cleaned
             };
 
             const response = await testResolver.updateDIDDocument(config.node.url.testnet, didParams);
 
             expect(response.did).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
-            expect(response.newDidDocument).toEqual(config.didDocument.doc2);
+            expect(response.newDidDocument).toEqual(config.didDocument.doc2.resolved);
         });
 
 
@@ -91,7 +90,7 @@ if (config.test.updateDIDDocument) {
             const didParams: UpdateDIDDocumentParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 passphrase: config.account.alice.secret,
-                newDidDocument: config.didDocument.doc2
+                newDidDocument: config.didDocument.doc2.cleaned
             };
 
             try {

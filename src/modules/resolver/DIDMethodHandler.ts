@@ -13,7 +13,7 @@ import ControllerUpdateService from "./services/ControllerUpdateService";
 import DocumentUpdateService from "./services/DocumentUpdateService";
 
 
-export default class MethodHandler implements IResolution {
+export default class DIDMethodHandler implements IResolution {
     private readonly request: IRequest;
 
 
