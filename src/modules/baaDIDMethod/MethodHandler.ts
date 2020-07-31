@@ -1,5 +1,5 @@
 import { IRequest, Request } from "@blobaa/ardor-ts";
-import { CreateDIDParams, CreateDIDResponse, IResolution, ResolveDIDParams, ResolveDIDResponse, DeactivateDIDParams, DeactivateDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../types";
+import { CreateDIDParams, CreateDIDResponse, IBaaMethodHandler, ResolveDIDParams, ResolveDIDResponse, DeactivateDIDParams, DeactivateDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../types";
 import RequestWrapper from "../lib/RequestWrapper";
 import DIDControllerUpdateController from "./controllers/DIDControllerUpdateController";
 import DIDCreateController from "./controllers/DIDCreateController";
@@ -13,7 +13,7 @@ import ControllerUpdateService from "./services/ControllerUpdateService";
 import DocumentUpdateService from "./services/DocumentUpdateService";
 
 
-export default class DIDMethodHandler implements IResolution {
+export default class MethodHandler implements IBaaMethodHandler {
     private readonly request: IRequest;
 
 

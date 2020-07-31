@@ -128,7 +128,7 @@ export type ResolveDIDResponse = {
     didDocument: objectAny;
 }
 
-export interface IResolution {
+export interface IBaaMethodHandler {
     createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>;
     updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse>;
     updateDIDController(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse>;

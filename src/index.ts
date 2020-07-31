@@ -1,6 +1,6 @@
-import DIDMethodHandler from "./modules/resolver/DIDMethodHandler";
+import MethodHandler from "./modules/baaDIDMethod/MethodHandler";
 
 export * from "./types";
 
-export const resolver = new DIDMethodHandler();
-export class Resolver extends DIDMethodHandler {}
+export const baaDIDMethod = new MethodHandler();
+export class BaaDIDMethod extends MethodHandler {}

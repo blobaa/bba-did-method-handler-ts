@@ -1,14 +1,14 @@
-import { ChainId, GetTransactionParams, SetAccountPropertyParams } from "@blobaa/ardor-ts";
-import { DeactivateDIDParams, Error, ErrorCode, Resolver } from "../../../src/index";
+import { ChainId, GetTransactionParams, SetAccountPropertyParams, UploadTaggedDataParams } from "@blobaa/ardor-ts";
+import { Error, ErrorCode, BaaDIDMethod, UpdateDIDDocumentParams } from "../../../src/index";
 import config from "../../config";
-import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback } from "../../mocks/RequestMock";
+import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback, UploadTaggedDataCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
-if (config.test.deactivateDID) {
-    describe("Resolver deactivateDID method tests", () => {
+if (config.test.updateDIDDocument) {
+    describe("BaaDIDMethod updateDIDDocument method tests", () => {
 
-        test("deactivateDID success", async () => {
+        test("updateDIDDocument success", async () => {
             const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => { // 1. get account property
                 const transaction = DefaultTransaction.create();
                 expect(params.chain).toBe(ChainId.IGNIS);
@@ -27,28 +27,40 @@ if (config.test.deactivateDID) {
             };
 
 
-            const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => { // 2. update attestation
+            const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => { // 2. set new did document
+                expect(params.chain).toBe(ChainId.IGNIS);
+                expect(params.data).toBe(JSON.stringify(config.didDocument.doc2.cleaned));
+                expect(params.name).toBe("blobaa-did-document-payload");
+                expect(params.secretPhrase).toBe(config.account.alice.secret);
+
+                return "3648ae8aa18516650a24054ecfe8c29d6b5698907629c552e296fdbda49abb82";
+            };
+
+
+            const setAccountPropertyCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => { // 3. update attestation
                 expect(params.chain).toBe(ChainId.IGNIS);
                 expect(params.secretPhrase).toBe(config.account.alice.secret);
                 expect(params.recipient).toBe(config.account.alice.address);
                 expect(params.property).toBe("did://dUZPPiukfaKyLuAaGUcZ");
-                expect(params.value).toBe("001|i|0000-0000-0000-00000|c|1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
+                expect(params.value).toBe("001|a|0000-0000-0000-00000|c|3648ae8aa18516650a24054ecfe8c29d6b5698907629c552e296fdbda49abb82");
 
                 return "5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             };
 
 
-            const testResolver = new Resolver(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
+            const testMethod = new BaaDIDMethod(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback, getTransactionCallback ));
 
 
-            const didParams: DeactivateDIDParams = {
+            const didParams: UpdateDIDDocumentParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
-                passphrase: config.account.alice.secret
+                passphrase: config.account.alice.secret,
+                newDidDocumentTemplate: config.didDocument.doc2.cleaned
             };
 
-            const response = await testResolver.deactivateDID(config.node.url.testnet, didParams);
+            const response = await testMethod.updateDIDDocument(config.node.url.testnet, didParams);
 
-            expect(response.deactivatedDid).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
+            expect(response.did).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
+            expect(response.newDidDocument).toEqual(config.didDocument.doc2.resolved);
         });
 
 
@@ -72,16 +84,17 @@ if (config.test.deactivateDID) {
             };
 
 
-            const testResolver = new Resolver(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testMethod = new BaaDIDMethod(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
-            const didParams: DeactivateDIDParams = {
+            const didParams: UpdateDIDDocumentParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
-                passphrase: config.account.alice.secret
+                passphrase: config.account.alice.secret,
+                newDidDocumentTemplate: config.didDocument.doc2.cleaned
             };
 
             try {
-                await testResolver.deactivateDID(config.node.url.testnet, didParams);
+                await testMethod.updateDIDDocument(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;

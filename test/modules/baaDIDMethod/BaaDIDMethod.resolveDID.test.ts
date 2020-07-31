@@ -1,13 +1,13 @@
 import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, GetTransactionParams, Transaction } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX, TRANSACTION_TIME_WINDOW } from "../../../src/constants";
-import { Error, ErrorCode, ResolveDIDParams, Resolver, resolver } from "../../../src/index";
+import { Error, ErrorCode, ResolveDIDParams, BaaDIDMethod, baaDIDMethod } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetBlockchainTransactionCallback, GetTransactionCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
 if (config.test.resolveDID) {
-    describe("Resolver resolveDID method tests", () => {
+    describe("BaaDIDMethod resolveDID method tests", () => {
 
         test("resolveDID success", async () => {
             let getTransactionCounter = 0;
@@ -58,14 +58,14 @@ if (config.test.resolveDID) {
             };
 
 
-            const testResolver = new Resolver(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
+            const testMethod = new BaaDIDMethod(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
 
 
             const didParams: ResolveDIDParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
-            const response = await testResolver.resolveDID(config.node.url.testnet, didParams);
+            const response = await testMethod.resolveDID(config.node.url.testnet, didParams);
             expect(response.didDocument).toEqual(config.didDocument.doc1.resolved);
             expect(response.did).toEqual("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
             expect(checkedForUpdate).toBeTruthy();
@@ -165,14 +165,14 @@ if (config.test.resolveDID) {
             };
 
 
-            const testResolver = new Resolver(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback ));
+            const testMethod = new BaaDIDMethod(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback ));
 
 
             const didParams: ResolveDIDParams = {
                 did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
-            const response = await testResolver.resolveDID(config.node.url.testnet, didParams);
+            const response = await testMethod.resolveDID(config.node.url.testnet, didParams);
 
             expect(response.didDocument).toEqual(config.didDocument.doc1.resolved);
             expect(checkedForUpdate).toBeTruthy();
@@ -244,7 +244,7 @@ if (config.test.resolveDID) {
             };
 
 
-            const testResolver = new Resolver(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
+            const testMethod = new BaaDIDMethod(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
 
 
             const didParams: ResolveDIDParams = {
@@ -252,7 +252,7 @@ if (config.test.resolveDID) {
             };
 
             try {
-                await testResolver.resolveDID(config.node.url.testnet, didParams);
+                await testMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -267,7 +267,7 @@ if (config.test.resolveDID) {
                 did: "dd:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
             try {
-                await resolver.resolveDID(config.node.url.testnet, didParams);
+                await baaDIDMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -278,7 +278,7 @@ if (config.test.resolveDID) {
 
             didParams.did = "did:aa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
-                await resolver.resolveDID(config.node.url.testnet, didParams);
+                await baaDIDMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -289,7 +289,7 @@ if (config.test.resolveDID) {
 
             didParams.did = "did:baa:i:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
-                await resolver.resolveDID(config.node.url.testnet, didParams);
+                await baaDIDMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -300,7 +300,7 @@ if (config.test.resolveDID) {
 
             didParams.did = "did:baa:t:ica5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
-                await resolver.resolveDID(config.node.url.testnet, didParams);
+                await baaDIDMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -311,7 +311,7 @@ if (config.test.resolveDID) {
 
             didParams.did = "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565";
             try {
-                await resolver.resolveDID(config.node.url.testnet, didParams);
+                await baaDIDMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -322,7 +322,7 @@ if (config.test.resolveDID) {
 
             didParams.did = "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565fe";
             try {
-                await resolver.resolveDID(config.node.url.testnet, didParams);
+                await baaDIDMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -339,7 +339,7 @@ if (config.test.resolveDID) {
                 return transaction;
             };
 
-            const testResolver = new Resolver(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testMethod = new BaaDIDMethod(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
             const didParams: ResolveDIDParams = {
@@ -347,7 +347,7 @@ if (config.test.resolveDID) {
             };
 
             try {
-                await testResolver.resolveDID(config.node.url.testnet, didParams);
+                await testMethod.resolveDID(config.node.url.testnet, didParams);
                 fail("should not success");
             } catch (e) {
                 const error = e as Error;
