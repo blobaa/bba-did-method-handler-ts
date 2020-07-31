@@ -1,13 +1,13 @@
 import { ChainId, GetTransactionParams, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX } from "../../../src/constants";
-import { Error, BaaDIDMethod, UpdateDIDControllerParams, ErrorCode } from "../../../src/index";
+import { Error, BaaMethod, UpdateDIDControllerParams, ErrorCode } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
 if (config.test.updateDIDController) {
-    describe("BaaDIDMethod updateDIDController method tests", () => {
+    describe("BaaMethod updateDIDController method tests", () => {
 
         test("updateDIDController success", async () => {
             let getTransactionCounter = 0;
@@ -63,7 +63,7 @@ if (config.test.updateDIDController) {
             };
 
 
-            const testMethod = new BaaDIDMethod(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
+            const testMethod = new BaaMethod(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
 
 
             const didParams: UpdateDIDControllerParams = {
@@ -99,7 +99,7 @@ if (config.test.updateDIDController) {
             };
 
 
-            const testMethod = new BaaDIDMethod(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testMethod = new BaaMethod(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
             const didParams: UpdateDIDControllerParams = {
