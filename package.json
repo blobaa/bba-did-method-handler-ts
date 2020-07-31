@@ -1,12 +1,12 @@
 {
-  "name": "@blobaa/did-resolver-ts",
+  "name": "@blobaa/baa-did-resolver-ts",
   "version": "1.0.0",
   "description": "An implementation of the baa DID method written in TypeScript",
   "author": "atz3n",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blobaa/did-resolver-ts"
+    "url": "https://github.com/blobaa/baa-did-resolver-ts"
   },
   "main": "dist/src/index.js",
   "scripts": {

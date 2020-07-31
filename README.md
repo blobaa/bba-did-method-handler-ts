@@ -1,13 +1,13 @@
-# did-resolver-ts
+# baa-did-resolver-ts
 
-A DID resolver for the baa DID method.
+A resolver for the baa DID method.
 
 This library implements the blobaa (baa) DID method [specification](https://github.com/blobaa/did-resolver-ts/blob/master/docs/blobaa-did-spec.md).
 
 
 ## Table of Contents
 
-- [did-resolver-ts](#did-resolver-ts)
+- [baa-did-resolver-ts](#baa-did-resolver-ts)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
   - [Install](#install)
@@ -31,7 +31,7 @@ This library implements a resolver for the baa DID method to enable the [Ardor](
 ## Install
 
 ```
-npm install @blobaa/did-resolver-ts
+npm install @blobaa/baa-did-resolver-ts
 ```
 
 
@@ -41,7 +41,7 @@ npm install @blobaa/did-resolver-ts
 
 ````typescript
 import { DIDDocKey, DIDDocRelationship, DIDDocRelationshipType, DIDDocument } from "@blobaa/did-document-ts";
-import { CreateDIDParams, resolver } from "@blobaa/did-resolver-ts";
+import { CreateDIDParams, resolver } from "@blobaa/baa-did-resolver-ts";
 
 
 const createDID = async(): Promise<void> => {
@@ -123,7 +123,7 @@ createDID();
 ### Resolve DID
 
 ````typescript
-import { ResolveDIDParams, resolver } from "@blobaa/did-resolver-ts";
+import { ResolveDIDParams, resolver } from "@blobaa/baa-did-resolver-ts";
 
 
 const resolveDID = async(): Promise<void> => {
@@ -168,7 +168,7 @@ resolveDID();
 
 ````typescript
 import { DIDDocKey, DIDDocRelationship, DIDDocRelationshipType, DIDDocument } from "@blobaa/did-document-ts";
-import { resolver, UpdateDIDDocumentParams } from "@blobaa/did-resolver-ts";
+import { resolver, UpdateDIDDocumentParams } from "@blobaa/baa-did-resolver-ts";
 
 
 const updateDIDDocument = async(): Promise<void> => {
@@ -242,7 +242,7 @@ updateDIDDocument();
 ### Update DID Controller Account
 
 ````typescript
-import { resolver, UpdateDIDControllerParams } from "@blobaa/did-resolver-ts";
+import { resolver, UpdateDIDControllerParams } from "@blobaa/baa-did-resolver-ts";
 
 
 const updateDIDController = async(): Promise<void> => {
@@ -273,7 +273,7 @@ updateDIDController();
 ### Deactivate DID
 
 ````typescript
-import { DeactivateDIDParams, resolver } from "@blobaa/did-resolver-ts";
+import { DeactivateDIDParams, resolver } from "@blobaa/baa-did-resolver-ts";
 
 
 const deactivateDID = async(): Promise<void> => {
@@ -303,7 +303,7 @@ deactivateDID();
 There is an unified error handling for all APIs. Every API throws an error in case of any failures or unmet conditions. Every error implements the 'Error' interface of this library. The interface consist of two data fields. The code field contains a value of the 'ErrorCode' enum to indicate the error reason. The description field contains a human readable description of the error reason.
 
 ````typescript
-import { resolver, Error, ErrorCode, ResolveDIDParams } from "@blobaa/did-resolver-ts";
+import { resolver, Error, ErrorCode, ResolveDIDParams } from "@blobaa/baa-did-resolver-ts";
 
 
 const errorHandlingExample = async(): Promise<void> => {
