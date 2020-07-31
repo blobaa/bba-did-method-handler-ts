@@ -16,6 +16,7 @@ A handler for the baa DID [method](https://github.com/blobaa/baa-did-method-spec
     - [Update DID Controller Account](#update-did-controller-account)
     - [Deactivate DID](#deactivate-did)
     - [Error Handling](#error-handling)
+    - [Module Instantiation](#module-instantiation)
   - [API](#api)
   - [Contributing](#contributing)
   - [License](#license)
@@ -331,6 +332,38 @@ const errorHandlingExample = async(): Promise<void> => {
 };
 
 errorHandlingExample();
+````
+
+
+### Module Instantiation
+
+The handler module is pre instantiated and importable via the lower case module name. If you need the class definition, import it via the upper case name.
+
+````typescript
+import { baaMethodHandler, BaaMethodHandler, ResolveDIDParams } from "@blobaa/baa-did-method-handler-ts";
+
+
+const moduleInstantiationExample = async (): Promise<void> => {
+
+    const params: ResolveDIDParams = {
+        did:"did:baa:t:0b1c85a9759eb90a576aeb3be80f76b21d95a0251396b147caa9a5f941a87d82#z6MkqSkgHX9yBBSsmpABk2wgyjE2SpDJTYtWKfo2HSgY4Ymm"
+    };
+
+    try {
+
+        /* use the default instance */
+        const response = await baaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
+        console.log(response);
+
+        /* use your own instance */
+        const myBaaMethodHandler = new BaaMethodHandler();
+        const response = await myBaaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
+        console.log(response);
+
+    } catch (e) { /* error handling */}
+};
+
+moduleInstantiationExample();
 ````
 
 
