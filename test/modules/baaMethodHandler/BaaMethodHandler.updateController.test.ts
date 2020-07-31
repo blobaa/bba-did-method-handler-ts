@@ -1,13 +1,13 @@
 import { ChainId, GetTransactionParams, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX } from "../../../src/constants";
-import { Error, BaaMethod, UpdateDIDControllerParams, ErrorCode } from "../../../src/index";
+import { BaaMethodHandler, Error, ErrorCode, UpdateDIDControllerParams } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
 if (config.test.updateDIDController) {
-    describe("BaaMethod updateDIDController method tests", () => {
+    describe("BaaMethodHandler updateDIDController method tests", () => {
 
         test("updateDIDController success", async () => {
             let getTransactionCounter = 0;
@@ -63,7 +63,7 @@ if (config.test.updateDIDController) {
             };
 
 
-            const testMethod = new BaaMethod(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
+            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
 
 
             const didParams: UpdateDIDControllerParams = {
@@ -72,7 +72,7 @@ if (config.test.updateDIDController) {
                 newPassphrase: config.account.bob.secret
             };
 
-            const response = await testMethod.updateDIDController(config.node.url.testnet, didParams);
+            const response = await testHandler.updateDIDController(config.node.url.testnet, didParams);
             expect(response.newControllerAccount).toBe(config.account.bob.address);
             expect(response.oldControllerAccount).toBe(config.account.alice.address);
             expect(response.did).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
@@ -99,7 +99,7 @@ if (config.test.updateDIDController) {
             };
 
 
-            const testMethod = new BaaMethod(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
             const didParams: UpdateDIDControllerParams = {
@@ -109,7 +109,7 @@ if (config.test.updateDIDController) {
             };
 
             try {
-                await testMethod.updateDIDController(config.node.url.testnet, didParams);
+                await testHandler.updateDIDController(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;

@@ -39,7 +39,7 @@ npm install @blobaa/baa-did-method-handler-ts
 
 ````typescript
 import { DIDDocKey, DIDDocRelationship, DIDDocRelationshipType, DIDDocument } from "@blobaa/did-document-ts";
-import { CreateDIDParams, baaMethod } from "@blobaa/baa-did-method-handler-ts";
+import { CreateDIDParams, baaMethodHandler } from "@blobaa/baa-did-method-handler-ts";
 
 
 const createDID = async(): Promise<void> => {
@@ -90,7 +90,7 @@ const createDID = async(): Promise<void> => {
     try {
 
         /* create and register DID and DID Document */
-        const response = await baaMethod.createDID("https://testardor.jelurida.com", params);
+        const response = await baaMethodHandler.createDID("https://testardor.jelurida.com", params);
 
         console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
         console.log("DID Document:", JSON.stringify(response.didDocument, undefined, 4));
@@ -121,7 +121,7 @@ createDID();
 ### Resolve DID
 
 ````typescript
-import { ResolveDIDParams, baaMethod } from "@blobaa/baa-did-method-handler-ts";
+import { ResolveDIDParams, baaMethodHandler } from "@blobaa/baa-did-method-handler-ts";
 
 
 const resolveDID = async(): Promise<void> => {
@@ -134,7 +134,7 @@ const resolveDID = async(): Promise<void> => {
     try {
 
         /* resolve DID */
-        const response = await baaMethod.resolveDID("https://testardor.jelurida.com", params);
+        const response = await baaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
 
         console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
         console.log("DID Document", JSON.stringify(response.didDocument, undefined, 4));
@@ -166,7 +166,7 @@ resolveDID();
 
 ````typescript
 import { DIDDocKey, DIDDocRelationship, DIDDocRelationshipType, DIDDocument } from "@blobaa/did-document-ts";
-import { baaMethod, UpdateDIDDocumentParams } from "@blobaa/baa-did-method-handler-ts";
+import { baaMethodHandler, UpdateDIDDocumentParams } from "@blobaa/baa-did-method-handler-ts";
 
 
 const updateDIDDocument = async(): Promise<void> => {
@@ -204,7 +204,7 @@ const updateDIDDocument = async(): Promise<void> => {
     try {
 
         /* update DID Document */
-        const response = await baaMethod.updateDIDDocument("https://testardor.jelurida.com", params);
+        const response = await baaMethodHandler.updateDIDDocument("https://testardor.jelurida.com", params);
 
         console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
         console.log("new DID Document", JSON.stringify(response.newDidDocument, undefined, 4));
@@ -240,7 +240,7 @@ updateDIDDocument();
 ### Update DID Controller Account
 
 ````typescript
-import { baaMethod, UpdateDIDControllerParams } from "@blobaa/baa-did-method-handler-ts";
+import { baaMethodHandler, UpdateDIDControllerParams } from "@blobaa/baa-did-method-handler-ts";
 
 
 const updateDIDController = async(): Promise<void> => {
@@ -255,7 +255,7 @@ const updateDIDController = async(): Promise<void> => {
     try {
 
         /* update DID Controller Account */
-        const response = await baaMethod.updateDIDController("https://testardor.jelurida.com", params);
+        const response = await baaMethodHandler.updateDIDController("https://testardor.jelurida.com", params);
 
         console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
         console.log("old Account:", response.oldControllerAccount); // "ARDOR-S27P-EHWT-8D2L-937R7"
@@ -271,7 +271,7 @@ updateDIDController();
 ### Deactivate DID
 
 ````typescript
-import { DeactivateDIDParams, baaMethod } from "@blobaa/baa-did-method-handler-ts";
+import { DeactivateDIDParams, baaMethodHandler } from "@blobaa/baa-did-method-handler-ts";
 
 
 const deactivateDID = async(): Promise<void> => {
@@ -285,7 +285,7 @@ const deactivateDID = async(): Promise<void> => {
     try {
 
         /* deactivate DID */
-        const response = await baaMethod.deactivateDID("https://testardor.jelurida.com", params);
+        const response = await baaMethodHandler.deactivateDID("https://testardor.jelurida.com", params);
 
         console.log("deactivated DID:", response.deactivatedDid); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
 
@@ -301,7 +301,7 @@ deactivateDID();
 There is an unified error handling for all APIs. Every API throws an error in case of any failures or unmet conditions. Every error implements the 'Error' interface of this library. The interface consist of two data fields. The code field contains a value of the 'ErrorCode' enum to indicate the error reason. The description field contains a human readable description of the error reason.
 
 ````typescript
-import { baaMethod, Error, ErrorCode, ResolveDIDParams } from "@blobaa/baa-did-method-handler-ts";
+import { baaMethodHandler, Error, ErrorCode, ResolveDIDParams } from "@blobaa/baa-did-method-handler-ts";
 
 
 const errorHandlingExample = async(): Promise<void> => {
@@ -313,7 +313,7 @@ const errorHandlingExample = async(): Promise<void> => {
     try {
 
         /* resolve DID */
-        await baaMethod.resolveDID("https://testardor.jelurida.com", params);
+        await baaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
 
     } catch (e) {
 

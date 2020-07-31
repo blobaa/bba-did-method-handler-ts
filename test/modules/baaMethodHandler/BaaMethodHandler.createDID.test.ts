@@ -1,11 +1,11 @@
 import { ChainId, SetAccountPropertyParams, UploadTaggedDataParams } from "@blobaa/ardor-ts";
-import { CreateDIDParams, BaaMethod } from "../../../src/index";
+import { BaaMethodHandler, CreateDIDParams } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { SetAccountPropertyCallback, UploadTaggedDataCallback } from "../../mocks/RequestMock";
 
 
 if (config.test.createDID) {
-    describe("BaaMethod createDID method tests", () => {
+    describe("BaaMethodHandler createDID method tests", () => {
 
         test("createDID testnet success", async () => {
             const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => { // 1. set did document
@@ -33,7 +33,7 @@ if (config.test.createDID) {
             };
 
 
-            const testMethod = new BaaMethod(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
+            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
 
 
             const didParams: CreateDIDParams = {
@@ -42,7 +42,7 @@ if (config.test.createDID) {
                 isTestnetDid: true
             };
 
-            const response = await testMethod.createDID(config.node.url.testnet, didParams);
+            const response = await testHandler.createDID(config.node.url.testnet, didParams);
 
             const didElements = response.did.split(":");
             const didPrefix = didElements[0];
@@ -68,7 +68,7 @@ if (config.test.createDID) {
                 return "5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             };
 
-            const testMethod = new BaaMethod(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
+            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
 
 
             const didParams: CreateDIDParams = {
@@ -76,7 +76,7 @@ if (config.test.createDID) {
                 passphrase: config.account.alice.secret
             };
 
-            const response = await testMethod.createDID(config.node.url.testnet, didParams);
+            const response = await testHandler.createDID(config.node.url.testnet, didParams);
             const didElements = response.did.split(":");
             const didPrefix = didElements[0];
             const didMethod = didElements[1];

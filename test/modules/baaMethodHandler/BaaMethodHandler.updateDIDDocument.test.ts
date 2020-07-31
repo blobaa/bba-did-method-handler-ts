@@ -1,12 +1,12 @@
 import { ChainId, GetTransactionParams, SetAccountPropertyParams, UploadTaggedDataParams } from "@blobaa/ardor-ts";
-import { Error, ErrorCode, BaaMethod, UpdateDIDDocumentParams } from "../../../src/index";
+import { BaaMethodHandler, Error, ErrorCode, UpdateDIDDocumentParams } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback, UploadTaggedDataCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
 if (config.test.updateDIDDocument) {
-    describe("BaaMethod updateDIDDocument method tests", () => {
+    describe("BaaMethodHandler updateDIDDocument method tests", () => {
 
         test("updateDIDDocument success", async () => {
             const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => { // 1. get account property
@@ -48,7 +48,7 @@ if (config.test.updateDIDDocument) {
             };
 
 
-            const testMethod = new BaaMethod(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback, getTransactionCallback ));
+            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback, getTransactionCallback ));
 
 
             const didParams: UpdateDIDDocumentParams = {
@@ -57,7 +57,7 @@ if (config.test.updateDIDDocument) {
                 newDidDocumentTemplate: config.didDocument.doc2.cleaned
             };
 
-            const response = await testMethod.updateDIDDocument(config.node.url.testnet, didParams);
+            const response = await testHandler.updateDIDDocument(config.node.url.testnet, didParams);
 
             expect(response.did).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
             expect(response.newDidDocument).toEqual(config.didDocument.doc2.resolved);
@@ -84,7 +84,7 @@ if (config.test.updateDIDDocument) {
             };
 
 
-            const testMethod = new BaaMethod(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
             const didParams: UpdateDIDDocumentParams = {
@@ -94,7 +94,7 @@ if (config.test.updateDIDDocument) {
             };
 
             try {
-                await testMethod.updateDIDDocument(config.node.url.testnet, didParams);
+                await testHandler.updateDIDDocument(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;

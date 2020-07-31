@@ -1,12 +1,12 @@
 import { ChainId, GetTransactionParams, SetAccountPropertyParams } from "@blobaa/ardor-ts";
-import { DeactivateDIDParams, Error, ErrorCode, BaaMethod } from "../../../src/index";
+import { BaaMethodHandler, DeactivateDIDParams, Error, ErrorCode } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
 if (config.test.deactivateDID) {
-    describe("BaaMethod deactivateDID method tests", () => {
+    describe("BaaMethodHandler deactivateDID method tests", () => {
 
         test("deactivateDID success", async () => {
             const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => { // 1. get account property
@@ -38,7 +38,7 @@ if (config.test.deactivateDID) {
             };
 
 
-            const testMethod = new BaaMethod(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
+            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
 
 
             const didParams: DeactivateDIDParams = {
@@ -46,7 +46,7 @@ if (config.test.deactivateDID) {
                 passphrase: config.account.alice.secret
             };
 
-            const response = await testMethod.deactivateDID(config.node.url.testnet, didParams);
+            const response = await testHandler.deactivateDID(config.node.url.testnet, didParams);
 
             expect(response.deactivatedDid).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
         });
@@ -72,7 +72,7 @@ if (config.test.deactivateDID) {
             };
 
 
-            const testMethod = new BaaMethod(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
             const didParams: DeactivateDIDParams = {
@@ -81,7 +81,7 @@ if (config.test.deactivateDID) {
             };
 
             try {
-                await testMethod.deactivateDID(config.node.url.testnet, didParams);
+                await testHandler.deactivateDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
