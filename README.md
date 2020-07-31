@@ -2,7 +2,7 @@
 
 A resolver for the baa DID method.
 
-This library implements the blobaa (baa) DID method [specification](https://github.com/blobaa/did-resolver-ts/blob/master/docs/blobaa-did-spec.md).
+This library implements the blobaa (baa) DID method [specification](https://github.com/blobaa/baa-did-specification).
 
 
 ## Table of Contents
@@ -25,7 +25,7 @@ This library implements the blobaa (baa) DID method [specification](https://gith
 
 ## Background
 
-This library implements a resolver for the baa DID method to enable the [Ardor](https://ardorplatform.org) Blockchain to act as a [DPKI](https://www.weboftrust.info/downloads/dpki.pdf) (Public Utility) within the [Trust over IP](https://trustoverip.org/wp-content/uploads/sites/98/2020/05/toip_introduction_050520.pdf) Stack for Self-Sovereign Identity ([SSI](https://www.manning.com/books/self-sovereign-identity)).
+This library implements a resolver for the baa DID [method](https://github.com/blobaa/baa-did-specification) to enable the [Ardor](https://ardorplatform.org) Blockchain to act as a [DPKI](https://www.weboftrust.info/downloads/dpki.pdf) (Public Utility) within the [Trust over IP](https://trustoverip.org/wp-content/uploads/sites/98/2020/05/toip_introduction_050520.pdf) Stack for Self-Sovereign Identity ([SSI](https://www.manning.com/books/self-sovereign-identity)).
 
 
 ## Install
