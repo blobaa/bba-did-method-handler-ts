@@ -25,7 +25,7 @@ This library implements the blobaa (baa) DID method [specification](https://gith
 
 ## Background
 
-TBD
+This library implements a resolver for the baa DID method to enable the [Ardor](https://ardorplatform.org) Blockchain to act as a [DPKI](https://www.weboftrust.info/downloads/dpki.pdf) (Public Utility) within the [Trust over IP](https://trustoverip.org/wp-content/uploads/sites/98/2020/05/toip_introduction_050520.pdf) Stack for Self-Sovereign Identity ([SSI](https://www.manning.com/books/self-sovereign-identity)).
 
 
 ## Install
@@ -55,6 +55,7 @@ const createDID = async(): Promise<void> => {
     await key.generate();
     const publicKey = key.publish();
 
+    /* create verification relationships */
     const authentication = new DIDDocRelationship({
         relationshipType: DIDDocRelationshipType.AUTHENTICATION,
         publicKeys: [ publicKey ]
@@ -91,10 +92,10 @@ const createDID = async(): Promise<void> => {
     try {
 
         /* create and register DID and DID Document */
-        const resp = await resolver.createDID("https://testardor.jelurida.com", params);
+        const response = await resolver.createDID("https://testardor.jelurida.com", params);
 
-        console.log("DID:", resp.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
-        console.log("DID Document:", JSON.stringify(resp.didDocument, undefined, 4));
+        console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("DID Document:", JSON.stringify(response.didDocument, undefined, 4));
         /*
         {
             "@context": [
@@ -205,10 +206,10 @@ const updateDIDDocument = async(): Promise<void> => {
     try {
 
         /* update DID Document */
-        const resp = await resolver.updateDIDDocument("https://testardor.jelurida.com", params);
+        const response = await resolver.updateDIDDocument("https://testardor.jelurida.com", params);
 
-        console.log("DID:", resp.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
-        console.log("new DID Document", JSON.stringify(resp.newDidDocument, undefined, 4));
+        console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("new DID Document", JSON.stringify(response.newDidDocument, undefined, 4));
         /*
         {
             "@context": [
@@ -256,11 +257,11 @@ const updateDIDController = async(): Promise<void> => {
     try {
 
         /* update DID Controller Account */
-        const resp = await resolver.updateDIDController("https://testardor.jelurida.com", params);
+        const response = await resolver.updateDIDController("https://testardor.jelurida.com", params);
 
-        console.log("DID:", resp.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
-        console.log("old Account:", resp.oldControllerAccount); // "ARDOR-S27P-EHWT-8D2L-937R7"
-        console.log("new Account:", resp.newControllerAccount); // "ARDOR-YQ26-W5RK-6ATW-G9HRT"
+        console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("old Account:", response.oldControllerAccount); // "ARDOR-S27P-EHWT-8D2L-937R7"
+        console.log("new Account:", response.newControllerAccount); // "ARDOR-YQ26-W5RK-6ATW-G9HRT"
 
     } catch (e) { /* see error handling */ }
 };
@@ -286,9 +287,9 @@ const deactivateDID = async(): Promise<void> => {
     try {
 
         /* deactivate DID */
-        const resp = await resolver.deactivateDID("https://testardor.jelurida.com", params);
+        const response = await resolver.deactivateDID("https://testardor.jelurida.com", params);
 
-        console.log("deactivated DID:", resp.deactivatedDid); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("deactivated DID:", response.deactivatedDid); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
 
     } catch (e) { /* see error handling */ }
 };
