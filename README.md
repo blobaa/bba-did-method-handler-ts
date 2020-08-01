@@ -51,7 +51,7 @@ import { CreateDIDParams, bbaMethodHandler } from "@blobaa/bba-did-method-handle
 
 const createDID = async(): Promise<void> => {
 
-    /* Even though not necessary, it is recommended to create a DID Document template with
+    /* Even though not necessary, it is recommended to create a DID Document Template with
       the @blobaa/did-document-ts package.
     */
 
@@ -66,6 +66,7 @@ const createDID = async(): Promise<void> => {
         publicKeys: [ publicKey ]
     });
 
+    /* create document template */
     const document = new DIDDocument({
         relationships: [ authentication ]
     });
