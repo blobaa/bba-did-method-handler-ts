@@ -1,11 +1,11 @@
-# baa-did-method-handler-ts
+# bba-did-method-handler-ts
 
-A handler for the baa DID [method](https://github.com/blobaa/baa-did-method-specification) written in TypeScript.
+A handler for the bba DID [method](https://github.com/blobaa/bba-did-method-specification) written in TypeScript.
 
 
 ## Table of Contents
 
-- [baa-did-method-handler-ts](#baa-did-method-handler-ts)
+- [bba-did-method-handler-ts](#bba-did-method-handler-ts)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
   - [Install](#install)
@@ -24,13 +24,13 @@ A handler for the baa DID [method](https://github.com/blobaa/baa-did-method-spec
 
 ## Background
 
-This library implements a handler for the baa DID [method](https://github.com/blobaa/baa-did-method-specification) to enable the [Ardor](https://ardorplatform.org) Blockchain to act as a [DPKI](https://www.weboftrust.info/downloads/dpki.pdf) (Public Utility) within the [Trust over IP](https://trustoverip.org/wp-content/uploads/sites/98/2020/05/toip_introduction_050520.pdf) Stack for Self-Sovereign Identity ([SSI](https://www.manning.com/books/self-sovereign-identity)).
+This library implements a handler for the bba DID [method](https://github.com/blobaa/bba-did-method-specification) to enable the [Ardor](https://ardorplatform.org) Blockchain to act as a [DPKI](https://www.weboftrust.info/downloads/dpki.pdf) (Public Utility) within the [Trust over IP](https://trustoverip.org/wp-content/uploads/sites/98/2020/05/toip_introduction_050520.pdf) Stack for Self-Sovereign Identity ([SSI](https://www.manning.com/books/self-sovereign-identity)).
 
 
 ## Install
 
 ```
-npm install @blobaa/baa-did-method-handler-ts
+npm install @blobaa/bba-did-method-handler-ts
 ```
 
 
@@ -40,7 +40,7 @@ npm install @blobaa/baa-did-method-handler-ts
 
 ````typescript
 import { DIDDocKey, DIDDocRelationship, DIDDocRelationshipType, DIDDocument } from "@blobaa/did-document-ts";
-import { CreateDIDParams, baaMethodHandler } from "@blobaa/baa-did-method-handler-ts";
+import { CreateDIDParams, bbaMethodHandler } from "@blobaa/bba-did-method-handler-ts";
 
 
 const createDID = async(): Promise<void> => {
@@ -91,9 +91,9 @@ const createDID = async(): Promise<void> => {
     try {
 
         /* create and register DID and DID Document */
-        const response = await baaMethodHandler.createDID("https://testardor.jelurida.com", params);
+        const response = await bbaMethodHandler.createDID("https://testardor.jelurida.com", params);
 
-        console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("DID:", response.did); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
         console.log("DID Document:", JSON.stringify(response.didDocument, undefined, 4));
         /*
         {
@@ -101,10 +101,10 @@ const createDID = async(): Promise<void> => {
                 "https://www.w3.org/ns/did/v1",
                 "https://w3id.org/security/v1"
             ],
-            "id": "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe",
+            "id": "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e",
             "authentication": [
                 {
-                    "id": "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe#z6Mkq9uAju2ezpgoT8q88pqMDLcZ4wJQXZiNKpT4SyJ8xCDQ",
+                    "id": "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e#z6Mkq9uAju2ezpgoT8q88pqMDLcZ4wJQXZiNKpT4SyJ8xCDQ",
                     "type": "Ed25519VerificationKey2018",
                     "publicKeyBase58": "Bhe89enDfHCLLdzRTFsWNF4ZFN2Z7gU1doY8chL82yS2"
                 }
@@ -122,22 +122,22 @@ createDID();
 ### Resolve DID
 
 ````typescript
-import { ResolveDIDParams, baaMethodHandler } from "@blobaa/baa-did-method-handler-ts";
+import { ResolveDIDParams, bbaMethodHandler } from "@blobaa/bba-did-method-handler-ts";
 
 
 const resolveDID = async(): Promise<void> => {
 
     /* set parameters */
     const params: ResolveDIDParams = {
-        did:"did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe"
+        did:"did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e"
     };
 
     try {
 
         /* resolve DID */
-        const response = await baaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
+        const response = await bbaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
 
-        console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("DID:", response.did); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
         console.log("DID Document", JSON.stringify(response.didDocument, undefined, 4));
         /*
         {
@@ -145,10 +145,10 @@ const resolveDID = async(): Promise<void> => {
                 "https://www.w3.org/ns/did/v1",
                 "https://w3id.org/security/v1"
             ],
-            "id": "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe",
+            "id": "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e",
             "authentication": [
                 {
-                    "id": "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe#z6Mkq9uAju2ezpgoT8q88pqMDLcZ4wJQXZiNKpT4SyJ8xCDQ",
+                    "id": "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e#z6Mkq9uAju2ezpgoT8q88pqMDLcZ4wJQXZiNKpT4SyJ8xCDQ",
                     "type": "Ed25519VerificationKey2018",
                     "publicKeyBase58": "Bhe89enDfHCLLdzRTFsWNF4ZFN2Z7gU1doY8chL82yS2"
                 }
@@ -167,7 +167,7 @@ resolveDID();
 
 ````typescript
 import { DIDDocKey, DIDDocRelationship, DIDDocRelationshipType, DIDDocument } from "@blobaa/did-document-ts";
-import { baaMethodHandler, UpdateDIDDocumentParams } from "@blobaa/baa-did-method-handler-ts";
+import { bbaMethodHandler, UpdateDIDDocumentParams } from "@blobaa/bba-did-method-handler-ts";
 
 
 const updateDIDDocument = async(): Promise<void> => {
@@ -197,17 +197,17 @@ const updateDIDDocument = async(): Promise<void> => {
 
     /* set parameters */
     const params: UpdateDIDDocumentParams = {
-        did:"did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe",
+        did:"did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e",
         newDidDocumentTemplate: didDocTsTemplate,
-        passphrase: "<controller account passphrase"
+        passphrase: "<controller account passphrase>"
     };
 
     try {
 
         /* update DID Document */
-        const response = await baaMethodHandler.updateDIDDocument("https://testardor.jelurida.com", params);
+        const response = await bbaMethodHandler.updateDIDDocument("https://testardor.jelurida.com", params);
 
-        console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("DID:", response.did); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
         console.log("new DID Document", JSON.stringify(response.newDidDocument, undefined, 4));
         /*
         {
@@ -215,19 +215,19 @@ const updateDIDDocument = async(): Promise<void> => {
                 "https://www.w3.org/ns/did/v1",
                 "https://w3id.org/security/v1"
             ],
-            "id": "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe",
+            "id": "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e",
             "publicKey": [
                 {
-                    "id": "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe#z6MkqSkgHX9yBBSsmpABk2wgyjE2SpDJTYtWKfo2HSgY4Ymm",
+                    "id": "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e#z6MkpM57tyJhB47CwL5mPE8T7C87Sj35dQ1mWZvRyw4TKt3B",
                     "type": "Ed25519VerificationKey2018",
-                    "publicKeyBase58": "BzVdhGuXqdxQfKKV4Tyr8dg2dEwT3fe9det6TAiX9KzP"
+                    "publicKeyBase58": "Atp5Jj4FqWcjpqF4hfAcG6a7d9mEDWmQpZ1W9f6SQfFo"
                 }
             ],
             "authentication": [
-                "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe#z6MkqSkgHX9yBBSsmpABk2wgyjE2SpDJTYtWKfo2HSgY4Ymm"
+                "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e#z6MkpM57tyJhB47CwL5mPE8T7C87Sj35dQ1mWZvRyw4TKt3B"
             ],
             "assertionMethod": [
-                "did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe#z6MkqSkgHX9yBBSsmpABk2wgyjE2SpDJTYtWKfo2HSgY4Ymm"
+                "did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e#z6MkpM57tyJhB47CwL5mPE8T7C87Sj35dQ1mWZvRyw4TKt3B"
             ]
         }
         */
@@ -241,14 +241,14 @@ updateDIDDocument();
 ### Update DID Controller Account
 
 ````typescript
-import { baaMethodHandler, UpdateDIDControllerParams } from "@blobaa/baa-did-method-handler-ts";
+import { bbaMethodHandler, UpdateDIDControllerParams } from "@blobaa/bba-did-method-handler-ts";
 
 
 const updateDIDController = async(): Promise<void> => {
 
     /* set parameters */
     const params: UpdateDIDControllerParams = {
-        did:"did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe",
+        did:"did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e",
         passphrase: "<old controller account passphrase>",
         newPassphrase: "<new controller account passphrase>"
     };
@@ -256,9 +256,9 @@ const updateDIDController = async(): Promise<void> => {
     try {
 
         /* update DID Controller Account */
-        const response = await baaMethodHandler.updateDIDController("https://testardor.jelurida.com", params);
+        const response = await bbaMethodHandler.updateDIDController("https://testardor.jelurida.com", params);
 
-        console.log("DID:", response.did); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("DID:", response.did); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
         console.log("old Account:", response.oldControllerAccount); // "ARDOR-S27P-EHWT-8D2L-937R7"
         console.log("new Account:", response.newControllerAccount); // "ARDOR-YQ26-W5RK-6ATW-G9HRT"
 
@@ -272,23 +272,23 @@ updateDIDController();
 ### Deactivate DID
 
 ````typescript
-import { DeactivateDIDParams, baaMethodHandler } from "@blobaa/baa-did-method-handler-ts";
+import { DeactivateDIDParams, bbaMethodHandler } from "@blobaa/bba-did-method-handler-ts";
 
 
 const deactivateDID = async(): Promise<void> => {
 
     /* set parameters */
     const params: DeactivateDIDParams = {
-        did:"did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe",
-        passphrase: account.bob.secret,
+        did:"did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e",
+        passphrase: "<controller account passphrase>",
     };
 
     try {
 
         /* deactivate DID */
-        const response = await baaMethodHandler.deactivateDID("https://testardor.jelurida.com", params);
+        const response = await bbaMethodHandler.deactivateDID("https://testardor.jelurida.com", params);
 
-        console.log("deactivated DID:", response.deactivatedDid); // did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe
+        console.log("deactivated DID:", response.deactivatedDid); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
 
     } catch (e) { /* see error handling */ }
 };
@@ -302,19 +302,19 @@ deactivateDID();
 There is an unified error handling for all APIs. Every API throws an error in case of any failures or unmet conditions. Every error implements the 'Error' interface of this library. The interface consist of two data fields. The code field contains a value of the 'ErrorCode' enum to indicate the error reason. The description field contains a human readable description of the error reason.
 
 ````typescript
-import { baaMethodHandler, Error, ErrorCode, ResolveDIDParams } from "@blobaa/baa-did-method-handler-ts";
+import { bbaMethodHandler, Error, ErrorCode, ResolveDIDParams } from "@blobaa/bba-did-method-handler-ts";
 
 
 const errorHandlingExample = async(): Promise<void> => {
 
     const params: ResolveDIDParams = {
-        did:"did:baa:t:0cfe0be67dc0d4e1162fa2e9ccec798d83f8fd5d78a8a36ccd71e194abc60efe"
+        did:"did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e"
     };
 
     try {
 
         /* resolve DID */
-        await baaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
+        await bbaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
 
     } catch (e) {
 
@@ -340,24 +340,24 @@ errorHandlingExample();
 The handler module is pre instantiated and importable via the lower case module name. If you need the class definition, import it via the upper case name.
 
 ````typescript
-import { baaMethodHandler, BaaMethodHandler, ResolveDIDParams } from "@blobaa/baa-did-method-handler-ts";
+import { bbaMethodHandler, BBAMethodHandler, ResolveDIDParams } from "@blobaa/bba-did-method-handler-ts";
 
 
 const moduleInstantiationExample = async (): Promise<void> => {
 
     const params: ResolveDIDParams = {
-        did:"did:baa:t:0b1c85a9759eb90a576aeb3be80f76b21d95a0251396b147caa9a5f941a87d82#z6MkqSkgHX9yBBSsmpABk2wgyjE2SpDJTYtWKfo2HSgY4Ymm"
+        did:"did:bba:t:fd8127c808552656bf3986a42884bd9ffc459fb5d71aec48e7535336a6191bf6"
     };
 
     try {
 
         /* use the default instance */
-        const response = await baaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
+        const response = await bbaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
         console.log(response);
 
         /* use your own instance */
-        const myBaaMethodHandler = new BaaMethodHandler();
-        const response = await myBaaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
+        const myBBAMethodHandler = new BBAMethodHandler();
+        const response = await myBBAMethodHandler.resolveDID("https://testardor.jelurida.com", params);
         console.log(response);
 
     } catch (e) { /* error handling */}

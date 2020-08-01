@@ -47,51 +47,51 @@ const config = {
                     "https://w3id.org/security/v1",
                     "https://my-new.awesome-context.com/my/context"
                 ],
-                id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 publicKey: [
                     {
-                        id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc",
+                        id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc",
                         type: "Ed25519VerificationKey2018",
-                        controller: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                        controller: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                         publicKeyBase58: "44rmMvJKkWPZarqPnSHhYvhVTPuoif7uNz5x491dqPgE"
                     },
                     {
-                        id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkvGDwhDSDTzKgd2ZZadirpVUaSxCMdVabeXgGRyCmmVGb",
+                        id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkvGDwhDSDTzKgd2ZZadirpVUaSxCMdVabeXgGRyCmmVGb",
                         type: "Ed25519VerificationKey2018",
-                        controller: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                        controller: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                         publicKeyBase58: "Goxu6yBn8SqDWXiru4m1yPvadNvWDcLExWmLbhEkrGVD"
                     }
                 ],
                 authentication: [
-                    "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc",
-                    "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkvGDwhDSDTzKgd2ZZadirpVUaSxCMdVabeXgGRyCmmVGb",
+                    "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc",
+                    "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkvGDwhDSDTzKgd2ZZadirpVUaSxCMdVabeXgGRyCmmVGb",
                     {
-                        id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6Mkkc4SViBwcGSd6NqCKpUCBC6XTAL2G51EZAwFpf32iBL8",
+                        id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6Mkkc4SViBwcGSd6NqCKpUCBC6XTAL2G51EZAwFpf32iBL8",
                         type: "Ed25519VerificationKey2018",
-                        controller: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                        controller: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                         publicKeyBase58: "79oPuTwWGix9yszVeFWML6YXdb4ArBkssA2KzP51nxYk"
                     }
                 ],
                 assertionMethod: [
-                    "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc",
-                    "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc"
+                    "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc",
+                    "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MkhX7oxAYm63t2hMg6U1FYQ2FVGyBf8YNG4zzstQyekcTc"
                 ],
                 capabilityInvocation: [
                     {
-                        id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MktheJs184FyRTwFrEcvqjiB9DocrHfSKHrTYqVefTrVvV",
+                        id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6MktheJs184FyRTwFrEcvqjiB9DocrHfSKHrTYqVefTrVvV",
                         type: "Ed25519VerificationKey2018",
-                        controller: "did:baa:0335f47981b5524ec7e441392961e383ec2cf2381c12fb0119a6782a00387868",
+                        controller: "did:bba:0335f47981b5524ec7e441392961e383ec2cf2381c12fb0119a6782a00387868",
                         publicKeyBase58: "FFPGGkscvRvzpm1XwMsts5bDz3aSFZ4wASdufNhSwH97"
                     }
                 ],
                 service: [
                     {
-                        id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#vcs",
+                        id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#vcs",
                         type: "VerifiableCredentialService",
                         serviceEndpoint: "https://example.com/vc/"
                     },
                     {
-                        id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#mys",
+                        id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#mys",
                         type: "MyService",
                         serviceEndpoint: "https://my.domain.com/mys/",
                         prop: "an additional custom property"
@@ -137,7 +137,7 @@ const config = {
                     {
                         id: "#z6MktheJs184FyRTwFrEcvqjiB9DocrHfSKHrTYqVefTrVvV",
                         type: "Ed25519VerificationKey2018",
-                        controller: "did:baa:0335f47981b5524ec7e441392961e383ec2cf2381c12fb0119a6782a00387868",
+                        controller: "did:bba:0335f47981b5524ec7e441392961e383ec2cf2381c12fb0119a6782a00387868",
                         publicKeyBase58: "FFPGGkscvRvzpm1XwMsts5bDz3aSFZ4wASdufNhSwH97"
                     }
                 ],
@@ -163,12 +163,12 @@ const config = {
                     "https://w3id.org/security/v1",
                     "https://my-new.awesome-context.com/my/context"
                 ],
-                id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 authentication: [
                     {
-                        id: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6Mkq9xgFG4xrukSK83GpR6TgMnWKfxXkDu97G3xBv5rGnyR",
+                        id: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6Mkq9xgFG4xrukSK83GpR6TgMnWKfxXkDu97G3xBv5rGnyR",
                         type: "Ed25519VerificationKey2018",
-                        controller: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                        controller: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                         publicKeyBase58: "Bhhdf1pXXNFyCdCa8r8cqGEWW6ggLLenRF92Me7qMaC3"
                     }
                 ]
@@ -179,12 +179,12 @@ const config = {
                     "https://w3id.org/security/v1",
                     "https://my-new.awesome-context.com/my/context"
                 ],
-                id: "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                id: "did:bba:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 authentication: [
                     {
-                        id: "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6Mkq9xgFG4xrukSK83GpR6TgMnWKfxXkDu97G3xBv5rGnyR",
+                        id: "did:bba:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f#z6Mkq9xgFG4xrukSK83GpR6TgMnWKfxXkDu97G3xBv5rGnyR",
                         type: "Ed25519VerificationKey2018",
-                        controller: "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                        controller: "did:bba:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                         publicKeyBase58: "Bhhdf1pXXNFyCdCa8r8cqGEWW6ggLLenRF92Me7qMaC3"
                     }
                 ]

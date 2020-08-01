@@ -1,13 +1,13 @@
 import { ChainId, GetTransactionParams, SetAccountPropertyParams } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX } from "../../../src/constants";
-import { BaaMethodHandler, Error, ErrorCode, UpdateDIDControllerParams } from "../../../src/index";
+import { BBAMethodHandler, Error, ErrorCode, UpdateDIDControllerParams } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetTransactionCallback, SetAccountPropertyCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
 if (config.test.updateDIDController) {
-    describe("BaaMethodHandler updateDIDController method tests", () => {
+    describe("BBAMethodHandler updateDIDController method tests", () => {
 
         test("updateDIDController success", async () => {
             let getTransactionCounter = 0;
@@ -63,11 +63,11 @@ if (config.test.updateDIDController) {
             };
 
 
-            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
+            const testHandler = new BBAMethodHandler(new RequestMock(setAccountPropertyCallback, undefined, getTransactionCallback));
 
 
             const didParams: UpdateDIDControllerParams = {
-                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                did: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 passphrase: config.account.alice.secret,
                 newPassphrase: config.account.bob.secret
             };
@@ -75,7 +75,7 @@ if (config.test.updateDIDController) {
             const response = await testHandler.updateDIDController(config.node.url.testnet, didParams);
             expect(response.newControllerAccount).toBe(config.account.bob.address);
             expect(response.oldControllerAccount).toBe(config.account.alice.address);
-            expect(response.did).toBe("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
+            expect(response.did).toBe("did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
         });
 
 
@@ -99,11 +99,11 @@ if (config.test.updateDIDController) {
             };
 
 
-            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testHandler = new BBAMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
             const didParams: UpdateDIDControllerParams = {
-                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
+                did: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f",
                 passphrase: config.account.alice.secret,
                 newPassphrase: config.account.bob.secret
             };

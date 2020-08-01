@@ -1,6 +1,6 @@
-import MethodHandler from "./modules/baaMethodHandler/MethodHandler";
+import MethodHandler from "./modules/bbaMethodHandler/MethodHandler";
 
 export * from "./types";
 
-export const baaMethodHandler = new MethodHandler();
-export class BaaMethodHandler extends MethodHandler {}
+export const bbaMethodHandler = new MethodHandler();
+export class BBAMethodHandler extends MethodHandler {}

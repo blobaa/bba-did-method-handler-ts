@@ -1,13 +1,13 @@
 import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, GetTransactionParams, Transaction } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX, TRANSACTION_TIME_WINDOW } from "../../../src/constants";
-import { BaaMethodHandler, baaMethodHandler, Error, ErrorCode, ResolveDIDParams } from "../../../src/index";
+import { BBAMethodHandler, bbaMethodHandler, Error, ErrorCode, ResolveDIDParams } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { GetBlockchainTransactionCallback, GetTransactionCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
 if (config.test.resolveDID) {
-    describe("BaaMethodHandler resolveDID method tests", () => {
+    describe("BAAMethodHandler resolveDID method tests", () => {
 
         test("resolveDID success", async () => {
             let getTransactionCounter = 0;
@@ -34,7 +34,7 @@ if (config.test.resolveDID) {
 
                     transaction.attachment = {
                         data: JSON.stringify(config.didDocument.doc1.cleaned),
-                        name: "blobaa-did-document-payload"
+                        name: "bba-did-document-template"
                     };
                     transaction.senderRS = config.account.alice.address;
                 }
@@ -58,16 +58,16 @@ if (config.test.resolveDID) {
             };
 
 
-            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
+            const testHandler = new BBAMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
 
 
             const didParams: ResolveDIDParams = {
-                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
+                did: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
             const response = await testHandler.resolveDID(config.node.url.testnet, didParams);
             expect(response.didDocument).toEqual(config.didDocument.doc1.resolved);
-            expect(response.did).toEqual("did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
+            expect(response.did).toEqual("did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
             expect(checkedForUpdate).toBeTruthy();
         });
 
@@ -94,7 +94,7 @@ if (config.test.resolveDID) {
 
                     transaction.attachment = {
                         data: JSON.stringify(config.didDocument.doc1.cleaned),
-                        name: "blobaa-did-document-payload"
+                        name: "bba-did-document-template"
                     };
                     transaction.senderRS = config.account.alice.address;
                 }
@@ -165,11 +165,11 @@ if (config.test.resolveDID) {
             };
 
 
-            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback ));
+            const testHandler = new BBAMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback ));
 
 
             const didParams: ResolveDIDParams = {
-                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
+                did: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
             const response = await testHandler.resolveDID(config.node.url.testnet, didParams);
@@ -244,11 +244,11 @@ if (config.test.resolveDID) {
             };
 
 
-            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
+            const testHandler = new BBAMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
 
 
             const didParams: ResolveDIDParams = {
-                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
+                did: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
             try {
@@ -264,10 +264,10 @@ if (config.test.resolveDID) {
 
         test("resolveDID DID string format errors", async () => {
             const didParams: ResolveDIDParams = {
-                did: "dd:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
+                did: "dd:bba:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
             try {
-                await baaMethodHandler.resolveDID(config.node.url.testnet, didParams);
+                await bbaMethodHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -276,9 +276,9 @@ if (config.test.resolveDID) {
             }
 
 
-            didParams.did = "did:aa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
+            didParams.did = "did:ba:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
-                await baaMethodHandler.resolveDID(config.node.url.testnet, didParams);
+                await bbaMethodHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -287,9 +287,9 @@ if (config.test.resolveDID) {
             }
 
 
-            didParams.did = "did:baa:i:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
+            didParams.did = "did:bba:i:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
-                await baaMethodHandler.resolveDID(config.node.url.testnet, didParams);
+                await bbaMethodHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -298,9 +298,9 @@ if (config.test.resolveDID) {
             }
 
 
-            didParams.did = "did:baa:t:ica5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
+            didParams.did = "did:bba:t:ica5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             try {
-                await baaMethodHandler.resolveDID(config.node.url.testnet, didParams);
+                await bbaMethodHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -309,9 +309,9 @@ if (config.test.resolveDID) {
             }
 
 
-            didParams.did = "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565";
+            didParams.did = "did:bba:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565";
             try {
-                await baaMethodHandler.resolveDID(config.node.url.testnet, didParams);
+                await bbaMethodHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -320,9 +320,9 @@ if (config.test.resolveDID) {
             }
 
 
-            didParams.did = "did:baa:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565fe";
+            didParams.did = "did:bba:t:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565fe";
             try {
-                await baaMethodHandler.resolveDID(config.node.url.testnet, didParams);
+                await bbaMethodHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
             } catch (e) {
                 const error = e as Error;
@@ -333,17 +333,17 @@ if (config.test.resolveDID) {
         });
 
 
-        test("resolveDID no baa method property error", async () => {
+        test("resolveDID no bba method property error", async () => {
              const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
                 const transaction = DefaultTransaction.create();
                 return transaction;
             };
 
-            const testHandler = new BaaMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback));
+            const testHandler = new BBAMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback));
 
 
             const didParams: ResolveDIDParams = {
-                did: "did:baa:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
+                did: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
             try {

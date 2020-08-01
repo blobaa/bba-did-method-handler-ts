@@ -1,17 +1,17 @@
 import { ChainId, SetAccountPropertyParams, UploadTaggedDataParams } from "@blobaa/ardor-ts";
-import { BaaMethodHandler, CreateDIDParams } from "../../../src/index";
+import { BBAMethodHandler, CreateDIDParams } from "../../../src/index";
 import config from "../../config";
 import RequestMock, { SetAccountPropertyCallback, UploadTaggedDataCallback } from "../../mocks/RequestMock";
 
 
 if (config.test.createDID) {
-    describe("BaaMethodHandler createDID method tests", () => {
+    describe("BBAMethodHandler createDID method tests", () => {
 
         test("createDID testnet success", async () => {
             const uploadTaggedDataCallback: UploadTaggedDataCallback = (params: UploadTaggedDataParams) => { // 1. set did document
                 expect(params.chain).toBe(ChainId.IGNIS);
                 expect(params.data).toBe(JSON.stringify(config.didDocument.doc2.cleaned));
-                expect(params.name).toBe("blobaa-did-document-payload");
+                expect(params.name).toBe("bba-did-document-template");
                 expect(params.secretPhrase).toBe(config.account.alice.secret);
 
                 return "1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340";
@@ -33,7 +33,7 @@ if (config.test.createDID) {
             };
 
 
-            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
+            const testHandler = new BBAMethodHandler(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
 
 
             const didParams: CreateDIDParams = {
@@ -51,7 +51,7 @@ if (config.test.createDID) {
             const didTxHash = didElements[3];
 
             expect(didPrefix).toBe("did");
-            expect(didMethod).toBe("baa");
+            expect(didMethod).toBe("bba");
             expect(didNetwork).toBe("t");
             expect(didTxHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
 
@@ -68,7 +68,7 @@ if (config.test.createDID) {
                 return "5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f";
             };
 
-            const testHandler = new BaaMethodHandler(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
+            const testHandler = new BBAMethodHandler(new RequestMock(setAccountPropertyCallback, uploadTaggedDataCallback ));
 
 
             const didParams: CreateDIDParams = {
@@ -83,7 +83,7 @@ if (config.test.createDID) {
             const didTxHash = didElements[2];
 
             expect(didPrefix).toBe("did");
-            expect(didMethod).toBe("baa");
+            expect(didMethod).toBe("bba");
             expect(didTxHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
 
             expect(response.didDocument).toEqual(config.didDocument.doc1.resolved);

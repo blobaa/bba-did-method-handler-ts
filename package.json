@@ -1,12 +1,12 @@
 {
-  "name": "@blobaa/baa-did-method-handler-ts",
+  "name": "@blobaa/bba-did-method-handler-ts",
   "version": "1.0.0",
-  "description": "A handler for the baa DID method written in TypeScript",
+  "description": "A handler for the bba DID method written in TypeScript",
   "author": "atz3n",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blobaa/baa-did-method-handler-ts"
+    "url": "https://github.com/blobaa/bba-did-method-handler-ts"
   },
   "main": "dist/src/index.js",
   "scripts": {
@@ -35,6 +35,7 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@blobaa/ardor-ts": "^2.6.4"
+    "@blobaa/ardor-ts": "^2.6.4",
+    "@blobaa/did-document-ts": "^0.1.4"
   }
 }
