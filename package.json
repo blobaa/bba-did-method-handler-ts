@@ -35,7 +35,6 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@blobaa/ardor-ts": "^2.6.4",
-    "@blobaa/did-document-ts": "^0.1.4"
+    "@blobaa/ardor-ts": "^2.6.4"
   }
 }
