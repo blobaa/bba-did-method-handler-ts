@@ -1,6 +1,6 @@
 # bba-did-method-handler-ts
 
-A handler for the bba DID [method](https://github.com/blobaa/bba-did-method-specification) written in TypeScript.
+A handler for the `bba` DID [method](https://github.com/blobaa/bba-did-method-specification) written in TypeScript.
 
 
 ## Table of Contents
@@ -24,7 +24,7 @@ A handler for the bba DID [method](https://github.com/blobaa/bba-did-method-spec
 
 ## Background
 
-This library implements a handler for the bba DID [method](https://github.com/blobaa/bba-did-method-specification) to enable the [Ardor](https://ardorplatform.org) Blockchain to act as a [DPKI](https://www.weboftrust.info/downloads/dpki.pdf) (Public Utility) within the [Trust over IP](https://trustoverip.org/wp-content/uploads/sites/98/2020/05/toip_introduction_050520.pdf) Stack for Self-Sovereign Identity ([SSI](https://www.manning.com/books/self-sovereign-identity)).
+This library implements a handler for the `bba` DID [method](https://github.com/blobaa/bba-did-method-specification) to enable the [Ardor](https://ardorplatform.org) Blockchain to act as a [DPKI](https://www.weboftrust.info/downloads/dpki.pdf) (Public Utility) within the [Trust over IP](https://trustoverip.org/wp-content/uploads/sites/98/2020/05/toip_introduction_050520.pdf) Stack for Self-Sovereign Identity ([SSI](https://www.manning.com/books/self-sovereign-identity)).
 
 
 ## Install
