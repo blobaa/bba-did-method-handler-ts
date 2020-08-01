@@ -5,6 +5,9 @@ A handler for the `bba` DID [method](https://github.com/blobaa/bba-did-method-sp
 
 ## Table of Contents
 
+<details><summary><i>click to expand</i></summary>
+<p><br/>
+
 - [bba-did-method-handler-ts](#bba-did-method-handler-ts)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
@@ -20,6 +23,9 @@ A handler for the `bba` DID [method](https://github.com/blobaa/bba-did-method-sp
   - [API](#api)
   - [Contributing](#contributing)
   - [License](#license)
+
+</p>
+</details>
 
 
 ## Background
