@@ -1,6 +1,6 @@
 import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, IRequest, Transaction } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX, MAX_ROTATION_HOPS, TRANSACTION_TIME_WINDOW } from "../../constants";
-import { ErrorCode, State } from "../../types";
+import { ErrorCode, State, Error } from "../../types";
 import DataFields from "./DataField";
 import ErrorHelper from "./ErrorHelper";
 
@@ -61,7 +61,16 @@ export default class Attestation {
     }
 
     private async getDIDCreatorAttestationTransaction(url: string, chain: ChainId, fullHash: string): Promise<Transaction>  {
-        return await this.request.getTransaction(url, { chain, fullHash });
+        try {
+            return await this.request.getTransaction(url, { chain, fullHash });
+        } catch (e) {
+            const error = e as Error;
+            if (error.code === 502) {
+                return Promise.reject(ErrorHelper.createError(ErrorCode.DID_NOT_FOUND));
+            } else {
+                return Promise.reject(error);
+            }
+        }
     }
 
     private async getDIDKeyRotatedAttestationTransaction( url: string, chainId: ChainId, account: string,

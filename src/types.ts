@@ -40,10 +40,11 @@ export enum ErrorCode {
     DID_DEACTIVATED,                    // 521
 
     DIDDOC_NOT_FOUND,                   // 522
-    INVALID_DIDDOC,                     // 523
+    DID_NOT_FOUND,                      // 523
+    INVALID_DIDDOC,                     // 524
 
-    WRONG_CONTROLLER_ACCOUNT,           // 524
-    SAME_CONTROLLER_ACCOUNTS            // 525
+    WRONG_CONTROLLER_ACCOUNT,           // 525
+    SAME_CONTROLLER_ACCOUNTS            // 526
 }
 
 

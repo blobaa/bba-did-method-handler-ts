@@ -110,6 +110,10 @@ export default class ErrorHelper {
                 error.description = "DID is deactivated.";
                 return error;
             }
+            case ErrorCode.DID_NOT_FOUND: {
+                error.description = "DID is not found.";
+                return error;
+            }
             default:
                 return { code: ErrorCode.UNKNOWN, description: "An unknown error occurred." };
         }
