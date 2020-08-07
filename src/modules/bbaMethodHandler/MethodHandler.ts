@@ -1,16 +1,16 @@
 import { IRequest, Request } from "@blobaa/ardor-ts";
-import { CreateDIDParams, CreateDIDResponse, IBBAMethodHandler, ResolveDIDParams, ResolveDIDResponse, DeactivateDIDParams, DeactivateDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../types";
+import { CreateDIDParams, CreateDIDResponse, DeactivateDIDParams, DeactivateDIDResponse, IBBAMethodHandler, ResolveDIDParams, ResolveDIDResponse, UpdateDIDControllerParams, UpdateDIDControllerResponse, UpdateDIDDocumentParams, UpdateDIDDocumentResponse } from "../../types";
 import RequestWrapper from "../lib/RequestWrapper";
 import DIDControllerUpdateController from "./controllers/DIDControllerUpdateController";
 import DIDCreateController from "./controllers/DIDCreateController";
+import DIDDeactivateController from "./controllers/DIDDeactivateController";
 import DIDDocumentUpdateController from "./controllers/DIDDocumentUpdateController";
 import DIDResolveController from "./controllers/DIDResolveController";
-import DIDRevokeController from "./controllers/DIDRevokeController";
-import CreationService from "./services/CreationService";
-import ResolutionService from "./services/ResolutionService";
-import RevocationService from "./services/RevocationService";
 import ControllerUpdateService from "./services/ControllerUpdateService";
+import CreationService from "./services/CreationService";
 import DocumentUpdateService from "./services/DocumentUpdateService";
+import ResolutionService from "./services/ResolutionService";
+import DeactivationService from "./services/DeactivationService";
 
 
 export default class MethodHandler implements IBBAMethodHandler {
@@ -47,7 +47,7 @@ export default class MethodHandler implements IBBAMethodHandler {
 
 
     public async deactivateDID(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse> {
-        const controller = new DIDRevokeController(new RevocationService(this.request));
+        const controller = new DIDDeactivateController(new DeactivationService(this.request));
         return await controller.run(url, params);
     }
 }

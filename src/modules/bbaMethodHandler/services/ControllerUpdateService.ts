@@ -25,7 +25,7 @@ export default class ControllerUpdateService implements IDIDControllerUpdateServ
 
 
         const attestation = new Attestation(this.request);
-        const info = await attestation.parseTrustChain(url, ChainId.IGNIS, did.fullHash);
+        const info = await attestation.parseAttestationPath(url, ChainId.IGNIS, did.fullHash);
 
 
         const currentControllerAccount = info.accounts[info.accounts.length - 1];

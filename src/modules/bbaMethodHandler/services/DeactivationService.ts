@@ -7,7 +7,7 @@ import DID from "../../lib/DID";
 import ErrorHelper from "../../lib/ErrorHelper";
 
 
-export default class RevocationService implements IDIDRevocationService {
+export default class DeactivationService implements IDIDRevocationService {
     private readonly request: IRequest;
 
 
@@ -26,7 +26,7 @@ export default class RevocationService implements IDIDRevocationService {
 
 
         const attestation = new Attestation(this.request);
-        const info = await attestation.parseTrustChain(url, ChainId.IGNIS, did.fullHash);
+        const info = await attestation.parseAttestationPath(url, ChainId.IGNIS, did.fullHash);
 
 
         const currentControllerAccount = info.accounts[info.accounts.length - 1];

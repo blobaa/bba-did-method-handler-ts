@@ -25,7 +25,7 @@ export default class ResolutionService implements IDIDResolutionService {
         }
 
         const attestation = new Attestation(this.request);
-        const info = await attestation.parseTrustChain(url, ChainId.IGNIS, did.fullHash);
+        const info = await attestation.parseAttestationPath(url, ChainId.IGNIS, did.fullHash);
 
 
         let documentStorage = {} as IDataStorage;

@@ -3,7 +3,7 @@ import { DeactivateDIDParams, DeactivateDIDResponse } from "../../../types";
 import { IDIDRevocationService } from "../../internal-types";
 
 
-export default class DIDRevokeController {
+export default class DIDDeactivateController {
     private readonly service: IDIDRevocationService;
 
 

@@ -20,7 +20,7 @@ export default class Attestation {
     }
 
 
-    public async parseTrustChain(url: string, chainId: ChainId, txFullHash: string): Promise<AttestationInfo> {
+    public async parseAttestationPath(url: string, chainId: ChainId, txFullHash: string): Promise<AttestationInfo> {
         let isFirstIteration = true;
         let dataFields = new DataFields();
         let transaction: Transaction;
