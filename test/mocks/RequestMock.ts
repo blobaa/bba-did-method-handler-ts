@@ -1,4 +1,4 @@
-import { GetBlockchainTransactionsParams, GetTransactionParams, GetTransactionResponse, Request, SetAccountPropertyParams, SetAccountPropertyResponse, Transaction, UploadTaggedDataParams, UploadTaggedDataResponse, GetBlockchainTransactionsResponse } from "@blobaa/ardor-ts";
+import { GetBlockchainTransactionsParams, GetTransactionParams, GetTransactionResponse, Request, SetAccountPropertyParams, SetAccountPropertyResponse, Transaction, UploadTaggedDataParams, UploadTaggedDataResponse, GetBlockchainTransactionsResponse, DownloadTaggedDataParams, DownloadTaggedDataResponse } from "@blobaa/ardor-ts";
 import DefaultTransaction from "../modules/lib/DefaultTransaction";
 
 
@@ -6,6 +6,7 @@ export type SetAccountPropertyCallback = (params: SetAccountPropertyParams) => s
 export type UploadTaggedDataCallback = (params: UploadTaggedDataParams) => string;
 export type GetTransactionCallback = (params: GetTransactionParams) => Transaction;
 export type GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => Transaction[];
+export type DownloadTaggedDataCallback = (params: DownloadTaggedDataParams) => string;
 
 
 export default class RequestMock extends Request {
@@ -13,17 +14,22 @@ export default class RequestMock extends Request {
     private uploadDataCallback: UploadTaggedDataCallback;
     private getTransactionCallback: GetTransactionCallback;
     private getBcTransactionsCallback: GetBlockchainTransactionCallback;
+    private downloadDataCallback: DownloadTaggedDataCallback;
 
 
-    constructor(setAccPropCallback?: SetAccountPropertyCallback,
-                uploadTaggedDataCallback?: UploadTaggedDataCallback,
-                getTransactionCallback?: GetTransactionCallback,
-                getBcTransactionsCallback?: GetBlockchainTransactionCallback) {
+    constructor(
+        setAccPropCallback?: SetAccountPropertyCallback,
+        uploadTaggedDataCallback?: UploadTaggedDataCallback,
+        getTransactionCallback?: GetTransactionCallback,
+        getBcTransactionsCallback?: GetBlockchainTransactionCallback,
+        downloadDataCallback?: DownloadTaggedDataCallback
+    ) {
         super();
         this.setAccPropCallback = setAccPropCallback || this.defaultSetAccPropCallback;
         this.uploadDataCallback = uploadTaggedDataCallback || this.defaultUploadDataCallback;
         this.getTransactionCallback = getTransactionCallback || this.defaultGetTransactionCallback;
         this.getBcTransactionsCallback = getBcTransactionsCallback || this.defaultGetBcTransactionsCallback;
+        this.downloadDataCallback = downloadDataCallback || this.defaultDownloadDataCallback;
     }
 
     private defaultSetAccPropCallback: SetAccountPropertyCallback = (params: SetAccountPropertyParams) => {
@@ -40,6 +46,10 @@ export default class RequestMock extends Request {
 
     private defaultGetBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {
         return [];
+    }
+
+    private defaultDownloadDataCallback: DownloadTaggedDataCallback = (params: DownloadTaggedDataParams) => {
+        return "";
     }
 
 
@@ -68,5 +78,11 @@ export default class RequestMock extends Request {
     public getBlockchainTransactions(url: string, params: GetBlockchainTransactionsParams): Promise<GetBlockchainTransactionsResponse> {
         const callbackReturn = this.getBcTransactionsCallback(params);
         return Promise.resolve({ transactions: callbackReturn, requestProcessingTime: 0 });
+    }
+
+
+    public downloadTaggedData(url: string, params: DownloadTaggedDataParams): Promise<DownloadTaggedDataResponse> {
+        const callbackReturn = this.downloadDataCallback(params);
+        return  Promise.resolve(callbackReturn);
     }
 }

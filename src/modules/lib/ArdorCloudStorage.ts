@@ -1,4 +1,4 @@
-import { ChainId, GetTransactionParams, GetTransactionResponse, IRequest, UploadTaggedDataParams } from "@blobaa/ardor-ts";
+import { ChainId, DownloadTaggedDataResponse, GetTransactionResponse, IRequest, UploadTaggedDataParams } from "@blobaa/ardor-ts";
 import { DATA_CLOUD_NAME } from "../../constants";
 import { ErrorCode } from "../../types";
 import { IDataStorage } from "../internal-types";
@@ -47,21 +47,24 @@ export default class ArdorCloudStorage implements IDataStorage {
 
 
     public async retrieveData(reference: string): Promise<string> {
-        const params: GetTransactionParams = {
+        const txInfo = await this.request.getTransaction(this.url, {
             chain: this.chainId,
             fullHash: reference
-        };
+        });
 
-        const response = await this.request.getTransaction(this.url, params);
-        return this.extractData(response);
+        const data = await this.request.downloadTaggedData(this.url, {
+            chain: this.chainId,
+            fullHash: reference,
+            retrieve: true
+        });
+
+        return this.extractData(txInfo, data);
     }
 
-    private extractData(response: GetTransactionResponse): Promise<string> {
-        const data = response.attachment.data;
-        const name = response.attachment.name;
-        const issuer = response.senderRS;
+    private extractData(txInfo: GetTransactionResponse, data: DownloadTaggedDataResponse): Promise<string> {
+        const issuer = txInfo.senderRS;
 
-        if (!this.isMethodData(data, name)) {
+        if (!this.isDataAvailable(data)) {
             const error = ErrorHelper.createError(ErrorCode.DIDDOC_NOT_FOUND);
             return Promise.reject(error);
         }
@@ -71,11 +74,11 @@ export default class ArdorCloudStorage implements IDataStorage {
             return Promise.reject(error);
         }
 
-        return data;
+        return Promise.resolve(data);
     }
 
-    private isMethodData(data: string | undefined, name: string | undefined): boolean {
-        return (data && name && name === DATA_CLOUD_NAME) ? true : false;
+    private isDataAvailable(data: string | undefined): boolean {
+        return data ? true : false;
     }
 
     private isDataSelfSet(accounts: string[], issuer: string): boolean {

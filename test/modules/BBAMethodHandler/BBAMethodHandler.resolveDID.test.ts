@@ -1,8 +1,8 @@
-import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, GetTransactionParams, Transaction } from "@blobaa/ardor-ts";
+import { ChainId, ChildTransactionSubtype, ChildTransactionType, GetBlockchainTransactionsParams, GetTransactionParams, Transaction, DownloadTaggedDataParams } from "@blobaa/ardor-ts";
 import { ACCOUNT_PREFIX, TRANSACTION_TIME_WINDOW } from "../../../src/constants";
 import { BBAMethodHandler, bbaMethodHandler, Error, ErrorCode, ResolveDIDParams } from "../../../src/index";
 import config from "../../config";
-import RequestMock, { GetBlockchainTransactionCallback, GetTransactionCallback } from "../../mocks/RequestMock";
+import RequestMock, { GetBlockchainTransactionCallback, GetTransactionCallback, DownloadTaggedDataCallback } from "../../mocks/RequestMock";
 import DefaultTransaction from "../lib/DefaultTransaction";
 
 
@@ -28,14 +28,10 @@ if (config.test.resolveDID) {
                     transaction.blockTimestamp = 1000;
                 }
 
-                if (getTransactionCounter === 1) { // 3. get did document
+                if (getTransactionCounter === 1) { // 3. get did document metadata
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
 
-                    transaction.attachment = {
-                        data: JSON.stringify(config.didDocument.doc1.cleaned),
-                        name: "bba-did-document-template"
-                    };
                     transaction.senderRS = config.account.alice.address;
                 }
 
@@ -58,7 +54,22 @@ if (config.test.resolveDID) {
             };
 
 
-            const testHandler = new BBAMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback));
+            const downloadDataCallback: DownloadTaggedDataCallback = (params: DownloadTaggedDataParams) => { // 4. get did document data
+                expect(params.chain).toBe(ChainId.IGNIS);
+                expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
+                expect(params.retrieve).toBeTruthy();
+
+                return JSON.stringify(config.didDocument.doc1.cleaned);
+            };
+
+
+            const testHandler = new BBAMethodHandler(new RequestMock(
+                undefined,
+                undefined,
+                getTransactionCallback,
+                getBcTransactionsCallback,
+                downloadDataCallback
+            ));
 
 
             const didParams: ResolveDIDParams = {
@@ -88,14 +99,10 @@ if (config.test.resolveDID) {
                     transaction.blockTimestamp = 1000;
                 }
 
-                if (getTransactionCounter === 1) { // 5. get did document
+                if (getTransactionCounter === 1) { // 5. get did metadata
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
 
-                    transaction.attachment = {
-                        data: JSON.stringify(config.didDocument.doc1.cleaned),
-                        name: "bba-did-document-template"
-                    };
                     transaction.senderRS = config.account.alice.address;
                 }
 
@@ -165,7 +172,22 @@ if (config.test.resolveDID) {
             };
 
 
-            const testHandler = new BBAMethodHandler(new RequestMock(undefined, undefined, getTransactionCallback, getBcTransactionsCallback ));
+            const downloadDataCallback: DownloadTaggedDataCallback = (params: DownloadTaggedDataParams) => { // 6. get did document data
+                expect(params.chain).toBe(ChainId.IGNIS);
+                expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
+                expect(params.retrieve).toBeTruthy();
+
+                return JSON.stringify(config.didDocument.doc1.cleaned);
+            };
+
+
+            const testHandler = new BBAMethodHandler(new RequestMock(
+                undefined,
+                undefined,
+                getTransactionCallback,
+                getBcTransactionsCallback,
+                downloadDataCallback
+            ));
 
 
             const didParams: ResolveDIDParams = {
