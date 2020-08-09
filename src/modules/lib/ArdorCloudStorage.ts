@@ -74,11 +74,11 @@ export default class ArdorCloudStorage implements IDataStorage {
             return Promise.reject(error);
         }
 
-        return Promise.resolve(data);
+        return Promise.resolve(JSON.stringify(data));
     }
 
-    private isDataAvailable(data: string | undefined): boolean {
-        return data ? true : false;
+    private isDataAvailable(data: DownloadTaggedDataResponse): boolean {
+        return typeof data === "object";
     }
 
     private isDataSelfSet(accounts: string[], issuer: string): boolean {

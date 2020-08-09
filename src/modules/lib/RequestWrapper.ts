@@ -1,4 +1,4 @@
-import { BroadcastTransactionParams, BroadcastTransactionResponse, DecodeTokenParams, DecodeTokenResponse, DeleteAccountPropertyParams, GetAccountPropertiesParams, GetAccountPropertiesResponse, GetBalanceParams, GetBalanceResponse, GetBlockchainTransactionsParams, GetBlockchainTransactionsResponse, GetBundlerRatesParams, GetBundlerRatesResponse, GetTransactionParams, IRequest, objectAny, SendMessageParams, SendMoneyParams, SetAccountPropertyParams, Transaction, UploadTaggedDataParams, DownloadTaggedDataParams } from "@blobaa/ardor-ts";
+import { BroadcastTransactionParams, BroadcastTransactionResponse, DecodeTokenParams, DecodeTokenResponse, DeleteAccountPropertyParams, GetAccountPropertiesParams, GetAccountPropertiesResponse, GetBalanceParams, GetBalanceResponse, GetBlockchainTransactionsParams, GetBlockchainTransactionsResponse, GetBundlerRatesParams, GetBundlerRatesResponse, GetTransactionParams, IRequest, objectAny, SendMessageParams, SendMoneyParams, SetAccountPropertyParams, Transaction, UploadTaggedDataParams, DownloadTaggedDataParams, DownloadTaggedDataResponse } from "@blobaa/ardor-ts";
 import { Error, ErrorCode } from "../../types";
 
 
@@ -28,7 +28,7 @@ export default class RequestWrapper implements IRequest {
     }
 
 
-    public async downloadTaggedData(url: string, params: DownloadTaggedDataParams): Promise<string> {
+    public async downloadTaggedData(url: string, params: DownloadTaggedDataParams): Promise<DownloadTaggedDataResponse> {
          try {
             return await this.request.downloadTaggedData(url, params);
         } catch (error) {

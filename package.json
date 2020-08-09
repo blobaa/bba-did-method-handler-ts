@@ -18,7 +18,7 @@
     "test-build-browser": "jest --rootDir=dist --testEnvironment=jsdom",
     "lint": "eslint ./ --ext .ts",
     "fix-lint": "eslint ./ --fix --ext .ts",
-    "testrun": "npm run build && node dist/playground/index.js"
+    "play-run": "npm run build && node dist/playground/index.js"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
@@ -35,6 +35,6 @@
     "typescript": "^3.7.3"
   },
   "dependencies": {
-    "@blobaa/ardor-ts": "^2.7.0"
+    "@blobaa/ardor-ts": "^2.7.1"
   }
 }

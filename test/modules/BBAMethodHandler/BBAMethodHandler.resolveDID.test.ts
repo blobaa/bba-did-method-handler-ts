@@ -59,7 +59,7 @@ if (config.test.resolveDID) {
                 expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
                 expect(params.retrieve).toBeTruthy();
 
-                return JSON.stringify(config.didDocument.doc1.cleaned);
+                return config.didDocument.doc1.cleaned;
             };
 
 
@@ -177,7 +177,7 @@ if (config.test.resolveDID) {
                 expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
                 expect(params.retrieve).toBeTruthy();
 
-                return JSON.stringify(config.didDocument.doc1.cleaned);
+                return config.didDocument.doc1.cleaned;
             };
 
 

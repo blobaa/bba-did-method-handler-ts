@@ -1,4 +1,4 @@
-import { GetBlockchainTransactionsParams, GetTransactionParams, GetTransactionResponse, Request, SetAccountPropertyParams, SetAccountPropertyResponse, Transaction, UploadTaggedDataParams, UploadTaggedDataResponse, GetBlockchainTransactionsResponse, DownloadTaggedDataParams, DownloadTaggedDataResponse } from "@blobaa/ardor-ts";
+import { DownloadTaggedDataParams, DownloadTaggedDataResponse, GetBlockchainTransactionsParams, GetBlockchainTransactionsResponse, GetTransactionParams, GetTransactionResponse, Request, SetAccountPropertyParams, SetAccountPropertyResponse, Transaction, UploadTaggedDataParams, UploadTaggedDataResponse } from "@blobaa/ardor-ts";
 import DefaultTransaction from "../modules/lib/DefaultTransaction";
 
 
@@ -6,7 +6,7 @@ export type SetAccountPropertyCallback = (params: SetAccountPropertyParams) => s
 export type UploadTaggedDataCallback = (params: UploadTaggedDataParams) => string;
 export type GetTransactionCallback = (params: GetTransactionParams) => Transaction;
 export type GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => Transaction[];
-export type DownloadTaggedDataCallback = (params: DownloadTaggedDataParams) => string;
+export type DownloadTaggedDataCallback = (params: DownloadTaggedDataParams) => DownloadTaggedDataResponse;
 
 
 export default class RequestMock extends Request {
