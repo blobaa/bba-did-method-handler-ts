@@ -21,6 +21,11 @@ A handler for the `bba` DID [method](https://github.com/blobaa/bba-did-method-sp
     - [Error Handling](#error-handling)
     - [Module Instantiation](#module-instantiation)
   - [API](#api)
+    - [createDID](#createdid)
+    - [resolveDID](#resolvedid)
+    - [updateDIDDocument](#updatediddocument)
+    - [updateDIDController](#updatedidcontroller)
+    - [deactivateDID](#deactivatedid)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -344,7 +349,7 @@ errorHandlingExample();
 
 ### Module Instantiation
 
-The handler module is pre instantiated and importable via the lower case module name. If you need the class definition, import it via the upper case name.
+The handler module is pre-instantiated and importable via the lower case module name. If you need the class definition, import it via the upper case name.
 
 ````typescript
 import { bbaMethodHandler, BBAMethodHandler, ResolveDIDParams } from "@blobaa/bba-did-method-handler-ts";
@@ -376,7 +381,121 @@ moduleInstantiationExample();
 
 ## API
 
-TBD
+The library provides a bba method handler module for handling the CRUD operations. You can import the class definition with the upper case notation `BBAMethodHandler` or use the pre-instantiated `bbaMethodHandler` object. It provides the following five asynchronous functions:
+
+
+### createDID
+
+The `createDID` function lets you create a bba DID. It provides the following interface:
+
+
+````typescript
+type CreateDIDParams = {
+    didDocumentTemplate: objectAny; // DDOT used for the DID Document
+    passphrase: string; // DID controller passphrase
+    isTestnetDid?: boolean; // network type selector
+    fee?: number; // fees in IGNIS
+    feeNQT?: number; // fees in IGNIS NQT
+    // automatic fee calculation is used if no fee is specified
+}
+
+type CreateDIDResponse = {
+    did: string; // created DID
+    didDocument: objectAny; // DID Document linked to the DID
+}
+
+async createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>
+````
+
+
+### resolveDID
+
+The `resolveDID` function lets you resolve a bba DID. It provides the following interface:
+
+
+````typescript
+type ResolveDIDParams = {
+    did: string; // DID to be resolved
+}
+
+type ResolveDIDResponse = {
+    did: string; // resolved DID
+    didDocument: objectAny; // resolved DID Document
+}
+
+async resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse>
+````
+
+
+### updateDIDDocument
+
+The `updateDIDDocument` function lets you update a DID Document. It provides the following interface:
+
+
+````typescript
+type UpdateDIDDocumentParams = {
+    newDidDocumentTemplate: objectAny; // new DDOT
+    passphrase: string; // DID controller passphrase
+    did: string; // DID to be updated
+    fee?: number; // fees in IGNIS
+    feeNQT?: number; // fees in IGNIS NQT
+    // automatic fee calculation is used if no fee is specified
+}
+
+type UpdateDIDDocumentResponse = {
+    did: string; // updated DID
+    newDidDocument: objectAny; // updated DID Document
+}
+
+async updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse>
+````
+
+
+### updateDIDController
+
+The `updateDIDController` function lets you update a DID controller. It provides the following interface:
+
+
+````typescript
+type UpdateDIDControllerParams = {
+    passphrase: string; // current DID controller passphrase
+    newPassphrase: string; // new DID controller passphrase
+    did: string; // DID to be updated
+    fee?: number; // fees in IGNIS
+    feeNQT?: number; // fees in IGNIS NQT
+    // automatic fee calculation is used if no fee is specified
+}
+
+type UpdateDIDControllerResponse = {
+    did: string; // DID to be updated
+    newControllerAccount: string; // new DID controller account
+    oldControllerAccount: string; // old DID controller account
+}
+
+async updateDIDController(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse>
+````
+
+
+### deactivateDID
+
+The `deactivateDID` function lets you deactivate a DID. It provides the following interface:
+
+
+````typescript
+type DeactivateDIDParams = {
+    did: string; // DID to be deactivated
+    passphrase: string; // DID controller passphrase
+    fee?: number; // fees in IGNIS
+    feeNQT?: number; // fees in IGNIS NQT
+    // automatic fee calculation is used if no fee is specified
+}
+
+type DeactivateDIDResponse = {
+    deactivatedDid: string;
+};
+
+async deactivateDID(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse>
+````
 
 
 ## Contributing
