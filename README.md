@@ -491,7 +491,7 @@ type DeactivateDIDParams = {
 }
 
 type DeactivateDIDResponse = {
-    deactivatedDid: string;
+    deactivatedDid: string; // deactivated DID
 };
 
 async deactivateDID(url: string, params: DeactivateDIDParams): Promise<DeactivateDIDResponse>
