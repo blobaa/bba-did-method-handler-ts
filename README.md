@@ -386,7 +386,7 @@ The library provides a bba method handler module for handling the CRUD operation
 
 ### createDID
 
-The `createDID` function lets you create a bba DID. It provides the following interface:
+The `createDID` function lets you create a bba DID. It has the following signature:
 
 
 ````typescript
@@ -410,7 +410,7 @@ async createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse
 
 ### resolveDID
 
-The `resolveDID` function lets you resolve a bba DID. It provides the following interface:
+The `resolveDID` function lets you resolve a bba DID. It has the following signature:
 
 
 ````typescript
@@ -429,7 +429,7 @@ async resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDRespo
 
 ### updateDIDDocument
 
-The `updateDIDDocument` function lets you update a DID Document. It provides the following interface:
+The `updateDIDDocument` function lets you update a DID Document. It has the following signature:
 
 
 ````typescript
@@ -453,7 +453,7 @@ async updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<U
 
 ### updateDIDController
 
-The `updateDIDController` function lets you update a DID controller. It provides the following interface:
+The `updateDIDController` function lets you update a DID controller. It has the following signature:
 
 
 ````typescript
@@ -478,7 +478,7 @@ async updateDIDController(url: string, params: UpdateDIDControllerParams): Promi
 
 ### deactivateDID
 
-The `deactivateDID` function lets you deactivate a DID. It provides the following interface:
+The `deactivateDID` function lets you deactivate a DID. It has the following signature:
 
 
 ````typescript
