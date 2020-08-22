@@ -56,11 +56,11 @@ import { CreateDIDParams, bbaMethodHandler } from "@blobaa/bba-did-method-handle
 
 const createDID = async(): Promise<void> => {
 
-    /* Even though not necessary, it is recommended to create a DID Document Template with
+    /* Even though not necessary, it is recommended to create a DID document Template with
       the @blobaa/did-document-ts package.
     */
 
-    /* create or import DID Document public keys  */
+    /* create or import DID document public keys  */
     const key = new DIDDocKey();
     await key.generate();
     const publicKey = key.publish();
@@ -102,11 +102,11 @@ const createDID = async(): Promise<void> => {
 
     try {
 
-        /* create and register DID and DID Document */
+        /* create and register DID and DID document */
         const response = await bbaMethodHandler.createDID("https://testardor.jelurida.com", params);
 
         console.log("DID:", response.did); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
-        console.log("DID Document:", JSON.stringify(response.didDocument, undefined, 4));
+        console.log("DID document:", JSON.stringify(response.didDocument, undefined, 4));
         /*
         {
             "@context": [
@@ -150,7 +150,7 @@ const resolveDID = async(): Promise<void> => {
         const response = await bbaMethodHandler.resolveDID("https://testardor.jelurida.com", params);
 
         console.log("DID:", response.did); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
-        console.log("DID Document", JSON.stringify(response.didDocument, undefined, 4));
+        console.log("DID document", JSON.stringify(response.didDocument, undefined, 4));
         /*
         {
             "@context": [
@@ -184,7 +184,7 @@ import { bbaMethodHandler, UpdateDIDDocumentParams } from "@blobaa/bba-did-metho
 
 const updateDIDDocument = async(): Promise<void> => {
 
-    /* create new DID Document template */
+    /* create new DID document template */
     const key = new DIDDocKey();
     await key.generate();
     const publicKey = key.publish();
@@ -216,11 +216,11 @@ const updateDIDDocument = async(): Promise<void> => {
 
     try {
 
-        /* update DID Document */
+        /* update DID document */
         const response = await bbaMethodHandler.updateDIDDocument("https://testardor.jelurida.com", params);
 
         console.log("DID:", response.did); // did:bba:t:0239684aef4c0d597b4ca5588f69327bed1fedfd576de35e5099c32807bb520e
-        console.log("new DID Document", JSON.stringify(response.newDidDocument, undefined, 4));
+        console.log("new DID document", JSON.stringify(response.newDidDocument, undefined, 4));
         /*
         {
             "@context": [
@@ -391,7 +391,7 @@ The `createDID` function lets you create a bba DID. It has the following signatu
 
 ````typescript
 type CreateDIDParams = {
-    didDocumentTemplate: objectAny; // DDOT used for the DID Document
+    didDocumentTemplate: objectAny; // DDOT used for the DID document
     passphrase: string; // DID controller passphrase
     isTestnetDid?: boolean; // network type selector
     fee?: number; // fees in IGNIS
@@ -401,7 +401,7 @@ type CreateDIDParams = {
 
 type CreateDIDResponse = {
     did: string; // created DID
-    didDocument: objectAny; // DID Document linked to the DID
+    didDocument: objectAny; // DID document linked to the DID
 }
 
 async createDID(url: string, params: CreateDIDParams): Promise<CreateDIDResponse>
@@ -420,7 +420,7 @@ type ResolveDIDParams = {
 
 type ResolveDIDResponse = {
     did: string; // resolved DID
-    didDocument: objectAny; // resolved DID Document
+    didDocument: objectAny; // resolved DID document
 }
 
 async resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDResponse>
@@ -429,7 +429,7 @@ async resolveDID(url: string, params: ResolveDIDParams): Promise<ResolveDIDRespo
 
 ### updateDIDDocument
 
-The `updateDIDDocument` function lets you update a DID Document. It has the following signature:
+The `updateDIDDocument` function lets you update a DID document. It has the following signature:
 
 
 ````typescript
@@ -444,7 +444,7 @@ type UpdateDIDDocumentParams = {
 
 type UpdateDIDDocumentResponse = {
     did: string; // updated DID
-    newDidDocument: objectAny; // updated DID Document
+    newDidDocument: objectAny; // updated DID document
 }
 
 async updateDIDDocument(url: string, params: UpdateDIDDocumentParams): Promise<UpdateDIDDocumentResponse>
