@@ -358,7 +358,7 @@ import { bbaMethodHandler, BBAMethodHandler, ResolveDIDParams } from "@blobaa/bb
 const moduleInstantiationExample = async (): Promise<void> => {
 
     const params: ResolveDIDParams = {
-        did:"did:bba:t:fd8127c808552656bf3986a42884bd9ffc459fb5d71aec48e7535336a6191bf6"
+        did:"did:bba:t:45e6df15dc0a7d91dcccd24fda3b52c3983a214fb0eed0938321c11ec99403cf"
     };
 
     try {
