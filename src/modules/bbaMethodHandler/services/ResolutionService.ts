@@ -43,7 +43,7 @@ export default class ResolutionService implements IDIDResolutionService {
             documentPreparator.addDID(params.did);
 
             return { didDocument: documentPreparator.getDocument(), did: params.did };
-        } catch (e) {
+        } catch (e) {
             return Promise.reject(ErrorHelper.createError(ErrorCode.INVALID_DIDDOC));
         }
     }

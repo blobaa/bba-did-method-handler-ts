@@ -19,7 +19,7 @@ export default class ControllerUpdateService implements IDIDControllerUpdateServ
     public async run(url: string, params: UpdateDIDControllerParams): Promise<UpdateDIDControllerResponse> {
         const did = new DID();
         const error = did.consumeDIDString(params.did);
-        if (error.code !== ErrorCode.NO_ERROR) {
+        if (error.code !== ErrorCode.NO_ERROR) {
             return Promise.reject(error);
         }
 

@@ -20,7 +20,7 @@ export default class DeactivationService implements IDIDRevocationService {
         const did = new DID();
         const error = did.consumeDIDString(params.did);
 
-        if (error.code !== ErrorCode.NO_ERROR) {
+        if (error.code !== ErrorCode.NO_ERROR) {
             return Promise.reject(error);
         }
 

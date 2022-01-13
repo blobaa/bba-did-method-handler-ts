@@ -2,11 +2,11 @@ import { BroadcastTransactionParams, BroadcastTransactionResponse, DecodeTokenPa
 import { Error, ErrorCode } from "../../types";
 
 
-export default class RequestWrapper implements IRequest {
+export default class RequestWrapper implements IRequest {
     private request: IRequest;
 
 
-    constructor(request: IRequest) {
+    constructor(request: IRequest) {
         this.request = request;
     }
 

@@ -14,7 +14,7 @@ if (config.test.updateDIDController) {
             const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
                 const transaction = DefaultTransaction.create();
 
-                if (getTransactionCounter === 0) { // 1. get account property
+                if (getTransactionCounter === 0) { // 1. get account property
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.fullHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
 
@@ -118,7 +118,7 @@ if (config.test.updateDIDController) {
             }
         });
     });
-} else {
+} else {
     test("dummy", () => {
         expect(true).toBeTruthy();
     });

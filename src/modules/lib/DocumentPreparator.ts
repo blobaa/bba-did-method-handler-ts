@@ -5,25 +5,25 @@ export default class DocumentPreparator {
     private document: objectAny = {};
 
 
-    constructor(document: objectAny) {
+    constructor(document: objectAny) {
         this.document = { ...document };
         delete this.document.created;
         delete this.document.updated;
     }
 
 
-    public getDocument(): objectAny {
+    public getDocument(): objectAny {
         return this.document;
     }
 
 
-    public clean(): void {
+    public clean(): void {
         const id = this.document.id || "";
         const keys = Object.keys(this.document);
 
 
         keys.forEach((key) => {
-            if (key === "id") {
+            if (key === "id") {
                 this.document.id = "";
             }
 
@@ -34,7 +34,7 @@ export default class DocumentPreparator {
         });
     }
 
-    private removeIdFromArray(array: (objectAny | string)[], id: string): void {
+    private removeIdFromArray(array: (objectAny | string)[], id: string): void {
         array.forEach((elements: {} | string, idx: number) => {
             if (typeof elements === "string") {
                 const idProperty = array[idx];
@@ -44,13 +44,13 @@ export default class DocumentPreparator {
             if (typeof elements === "object") {
                 const keys = Object.keys(array[idx]);
                 keys.forEach((key) => {
-                    if (key === "id") {
+                    if (key === "id") {
                         const idProperty = (array[idx] as objectAny).id;
                         (array[idx] as objectAny).id = idProperty.replace(id, "");
                     }
                     if (key === "controller") {
                         const controllerProperty: string = (array[idx] as objectAny).controller;
-                        if (controllerProperty === id) {
+                        if (controllerProperty === id) {
                             (array[idx] as objectAny).controller = "";
                         }
                     }
@@ -60,12 +60,12 @@ export default class DocumentPreparator {
     }
 
 
-    public addDID(did: string): void {
+    public addDID(did: string): void {
         const keys = Object.keys(this.document);
 
 
         keys.forEach((key) => {
-            if (key === "id") {
+            if (key === "id") {
                 this.document.id = did;
             }
 
@@ -76,7 +76,7 @@ export default class DocumentPreparator {
         });
     }
 
-    private addIdInArray(array: (objectAny | string)[], id: string): void {
+    private addIdInArray(array: (objectAny | string)[], id: string): void {
         array.forEach((elements: {} | string, idx: number) => {
             if (typeof elements === "string") {
                 const idProperty = array[idx];
@@ -86,13 +86,13 @@ export default class DocumentPreparator {
             if (typeof elements === "object") {
                 const keys = Object.keys(array[idx]);
                 keys.forEach((key) => {
-                    if (key === "id") {
+                    if (key === "id") {
                         const idProperty = (array[idx] as objectAny).id;
                         (array[idx] as objectAny).id = id + idProperty;
                     }
                     if (key === "controller") {
                         const controllerProperty: string = (array[idx] as objectAny).controller;
-                        if (controllerProperty === "") {
+                        if (controllerProperty === "") {
                             (array[idx] as objectAny).controller = id;
                         }
                     }
@@ -102,12 +102,12 @@ export default class DocumentPreparator {
     }
 
 
-    public addCreationDate(date: string): void {
+    public addCreationDate(date: string): void {
         this.document.created = date;
     }
 
 
-    public addUpdateDate(date: string): void {
+    public addUpdateDate(date: string): void {
         this.document.updated = date;
     }
 }

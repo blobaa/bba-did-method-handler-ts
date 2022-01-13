@@ -61,11 +61,11 @@ export default class Attestation {
     }
 
     private async getDIDCreatorAttestationTransaction(url: string, chain: ChainId, fullHash: string): Promise<Transaction>  {
-        try {
+        try {
             return await this.request.getTransaction(url, { chain, fullHash });
         } catch (e) {
             const error = e as Error;
-            if (error.code === 502) {
+            if (error.code === 502) {
                 return Promise.reject(ErrorHelper.createError(ErrorCode.DID_NOT_FOUND));
             } else {
                 return Promise.reject(error);
@@ -106,11 +106,11 @@ export default class Attestation {
     }
 
     private getSelfAttestationDataFields(transaction: Transaction): DataFields {
-        if (!this.isSetPropertyTransactionType(transaction.type,transaction.subtype)) {
+        if (!this.isSetPropertyTransactionType(transaction.type,transaction.subtype)) {
             throw ErrorHelper.createError(ErrorCode.DID_RESOLUTION_ERROR);
         }
 
-        if (!this.isSelfAttestation(transaction.sender, transaction.recipient)) {
+        if (!this.isSelfAttestation(transaction.sender, transaction.recipient)) {
             throw ErrorHelper.createError(ErrorCode.DID_RESOLUTION_ERROR);
         }
 
@@ -119,17 +119,17 @@ export default class Attestation {
 
         const dataFields = new DataFields();
         let error = dataFields.checkDidId(attestation.property);
-        if (error.code !== ErrorCode.NO_ERROR) {
+        if (error.code !== ErrorCode.NO_ERROR) {
             throw error;
         }
         dataFields.didId = attestation.property;
 
         error = dataFields.consumeDataFieldString(attestation.value);
-        if (error.code !== ErrorCode.NO_ERROR) {
+        if (error.code !== ErrorCode.NO_ERROR) {
             throw error;
         }
 
-        if (!this.isAttestationActive(dataFields.state)) {
+        if (!this.isAttestationActive(dataFields.state)) {
             throw ErrorHelper.createError(ErrorCode.DID_DEACTIVATED);
         }
 
@@ -140,7 +140,7 @@ export default class Attestation {
         return (type === ChildTransactionType.ACCOUNT_PROPERTY && subType === ChildTransactionSubtype.ACCOUNT_PROPERTY__SET);
     }
 
-    private isSelfAttestation(sender: string, receiver: string): boolean {
+    private isSelfAttestation(sender: string, receiver: string): boolean {
         return (sender === receiver);
     }
 
@@ -148,10 +148,15 @@ export default class Attestation {
         return (state === State.ACTIVE);
     }
 
-    private async getLastValidDataFieldsAndTimestamp(url: string, transaction: Transaction, dataFields: DataFields): Promise<{
-                                                                                                                        dataFields: DataFields;
-                                                                                                                        txTimestamp: number;
-                                                                                                                    }> {
+    private async getLastValidDataFieldsAndTimestamp(
+        url: string,
+        transaction:
+        Transaction,
+        dataFields: DataFields
+    ): Promise<{
+        dataFields: DataFields;
+        txTimestamp: number;
+    }> {
         const params: GetBlockchainTransactionsParams = {
             chain: ChainId.IGNIS,
             account: transaction.senderRS,
@@ -174,12 +179,12 @@ export default class Attestation {
             const _dataFields = new DataFields();
 
             const error = _dataFields.consumeDataFieldString(transaction.attachment.value);
-            if (error.code === ErrorCode.NO_ERROR) {
+            if (error.code === ErrorCode.NO_ERROR) {
                 newDataFields = new DataFields(_dataFields);
                 newDataFields.didId = dataFields.didId;
                 txTimestamp = transaction.timestamp;
 
-                if (newDataFields.state === State.INACTIVE || newDataFields.state === State.DEPRECATED) {
+                if (newDataFields.state === State.INACTIVE || newDataFields.state === State.DEPRECATED) {
                     break;
                 }
             }

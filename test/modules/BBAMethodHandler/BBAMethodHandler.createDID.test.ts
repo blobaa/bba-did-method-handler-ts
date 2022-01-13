@@ -4,7 +4,7 @@ import config from "../../config";
 import RequestMock, { SetAccountPropertyCallback, UploadTaggedDataCallback } from "../../mocks/RequestMock";
 
 
-if (config.test.createDID) {
+if (config.test.createDID) {
     describe("BBAMethodHandler createDID method tests", () => {
 
         test("createDID testnet success", async () => {

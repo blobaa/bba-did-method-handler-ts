@@ -183,7 +183,7 @@ export default class DataFields {
     public checkDidId(didId: string): Error {
         const _didId = didId.split("//");
 
-        if (_didId.length !== 2 || _didId[0] !== DID_PREFIX + ":") {
+        if (_didId.length !== 2 || _didId[0] !== DID_PREFIX + ":") {
             const error = ErrorHelper.createError(ErrorCode.INVALID_PROPERTY_NAME);
             return error;
         }

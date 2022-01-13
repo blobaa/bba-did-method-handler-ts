@@ -14,7 +14,7 @@ if (config.test.resolveDID) {
             const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
                 const transaction = DefaultTransaction.create();
 
-                if (getTransactionCounter === 0) { // 1. get account property
+                if (getTransactionCounter === 0) { // 1. get account property
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.fullHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
 
@@ -28,7 +28,7 @@ if (config.test.resolveDID) {
                     transaction.blockTimestamp = 1000;
                 }
 
-                if (getTransactionCounter === 1) { // 3. get did document metadata
+                if (getTransactionCounter === 1) { // 3. get did document metadata
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
 
@@ -88,7 +88,7 @@ if (config.test.resolveDID) {
             const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
                 const transaction = DefaultTransaction.create();
 
-                if (getTransactionCounter === 0) { // 1. get account property
+                if (getTransactionCounter === 0) { // 1. get account property
                     transaction.attachment = {
                         property: "did://dUZPPiukfaKyLuAaGUcZ",
                         value: "001|a|0000-0000-0000-00000|c|1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340"
@@ -99,7 +99,7 @@ if (config.test.resolveDID) {
                     transaction.blockTimestamp = 1000;
                 }
 
-                if (getTransactionCounter === 1) { // 5. get did metadata
+                if (getTransactionCounter === 1) { // 5. get did metadata
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.fullHash).toBe("1ec58d15c6fa43de48fee4702cec26c2ac96002c2a114b06e87fdef72e795340");
 
@@ -116,7 +116,7 @@ if (config.test.resolveDID) {
             const getBcTransactionsCallback: GetBlockchainTransactionCallback = (params: GetBlockchainTransactionsParams) => {
                 const transactions: Transaction[] = [];
 
-                if (getBcTransactionsCounter === 0) { // 2. get updated did attestations
+                if (getBcTransactionsCounter === 0) { // 2. get updated did attestations
                     transactions.push(DefaultTransaction.create());
 
                     const transaction = DefaultTransaction.create();
@@ -133,7 +133,7 @@ if (config.test.resolveDID) {
                     transactions.push(transaction);
                 }
 
-                if (getBcTransactionsCounter === 1) { // 3. get first valid transaction from referenced account
+                if (getBcTransactionsCounter === 1) { // 3. get first valid transaction from referenced account
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.account).toBe(config.account.bob.address);
                     expect(params.timestamp).toBe(2000 - TRANSACTION_TIME_WINDOW);
@@ -206,7 +206,7 @@ if (config.test.resolveDID) {
             const getTransactionCallback: GetTransactionCallback = (params: GetTransactionParams) => {
                 const transaction = DefaultTransaction.create();
 
-                if (getTransactionCounter === 0) { // 1. get account property
+                if (getTransactionCounter === 0) { // 1. get account property
                     expect(params.chain).toBe(ChainId.IGNIS);
                     expect(params.fullHash).toBe("5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f");
 
@@ -220,7 +220,7 @@ if (config.test.resolveDID) {
                     transaction.blockTimestamp = 1000;
                 }
 
-                if (getTransactionCounter === 1) { // 3. get did document
+                if (getTransactionCounter === 1) { // 3. get did document
                     fail("should not reach here");
                 }
 
@@ -276,7 +276,7 @@ if (config.test.resolveDID) {
             try {
                 await testHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not reach here");
-            } catch (e) {
+            } catch (e) {
                 const error = e as Error;
                 expect(error.code).toBe(ErrorCode.DID_DEACTIVATED);
                 expect(error.description).toBeTruthy();
@@ -368,10 +368,10 @@ if (config.test.resolveDID) {
                 did: "did:bba:5ca5fb0b6c59f126f674eb504b7302c69ede9cf431d01dba07809314302e565f"
             };
 
-            try {
+            try {
                 await testHandler.resolveDID(config.node.url.testnet, didParams);
                 fail("should not success");
-            } catch (e) {
+            } catch (e) {
                 const error = e as Error;
                 expect(error.code).toBe(ErrorCode.INVALID_PROPERTY_NAME);
                 expect(error.description).toBeTruthy();
@@ -382,7 +382,7 @@ if (config.test.resolveDID) {
         /* TODO: add more failing tests */
 
     });
-} else {
+} else {
     test("dummy", () => {
         expect(true).toBeTruthy();
     });

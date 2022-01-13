@@ -41,7 +41,7 @@ const config = {
     },
     didDocument: {
         doc1: {
-            resolved: {
+            resolved: {
                 "@context": [
                     "https://www.w3.org/ns/did/v1",
                     "https://w3id.org/security/v1",

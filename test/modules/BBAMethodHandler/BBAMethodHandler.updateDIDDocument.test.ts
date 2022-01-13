@@ -103,7 +103,7 @@ if (config.test.updateDIDDocument) {
             }
         });
     });
-} else {
+} else {
     test("dummy", () => {
         expect(true).toBeTruthy();
     });

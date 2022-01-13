@@ -69,7 +69,7 @@ export default class ArdorCloudStorage implements IDataStorage {
             return Promise.reject(error);
         }
 
-        if (!this.isDataSelfSet(this.accounts, issuer)) {
+        if (!this.isDataSelfSet(this.accounts, issuer)) {
             const error = ErrorHelper.createError(ErrorCode.INVALID_DIDDOC);
             return Promise.reject(error);
         }
@@ -77,14 +77,14 @@ export default class ArdorCloudStorage implements IDataStorage {
         return Promise.resolve(JSON.stringify(data));
     }
 
-    private isDataAvailable(data: DownloadTaggedDataResponse): boolean {
+    private isDataAvailable(data: DownloadTaggedDataResponse): boolean {
         return typeof data === "object";
     }
 
-    private isDataSelfSet(accounts: string[], issuer: string): boolean {
+    private isDataSelfSet(accounts: string[], issuer: string): boolean {
         let isSelfSet = false;
         this.accounts.forEach((account) => {
-            if (account === issuer) {
+            if (account === issuer) {
                 isSelfSet = true;
             }
         });

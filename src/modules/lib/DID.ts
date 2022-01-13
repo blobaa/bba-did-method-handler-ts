@@ -27,7 +27,7 @@ export default class DID {
 
         this.prefix = didFields[0];
         this.method = didFields[1];
-        if (didFields.length === NUMBER_OF_DID_LONG_FIELDS) {
+        if (didFields.length === NUMBER_OF_DID_LONG_FIELDS) {
             this.networkType = didFields[2] as DIDNetworkType;
             didFields.splice(2, 1);
         } else {
@@ -84,7 +84,7 @@ export default class DID {
 
 
     public checkPrefix(prefix: string): Error {
-        if (prefix !== DID_PREFIX) {
+        if (prefix !== DID_PREFIX) {
             const error = ErrorHelper.createError(ErrorCode.INVALID_DID_IDENTIFIER);
             return error;
         }
@@ -104,7 +104,7 @@ export default class DID {
     public checkTxHash(txHash: string): Error {
         const isHex = /[0-9A-Fa-f]{64}/g;
 
-        if (txHash.length !== 64 || !isHex.test(txHash)) {
+        if (txHash.length !== 64 || !isHex.test(txHash)) {
             const error = ErrorHelper.createError(ErrorCode.INVALID_DID_METHOD_SPECIFIC_IDENTIFIER);
             return error;
         }
